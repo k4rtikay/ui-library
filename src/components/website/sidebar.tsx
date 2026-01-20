@@ -60,7 +60,7 @@ export function Sidebar({...props}){
     ]
 
     return(
-        <aside className="w-64 px-8 py-8 h-full text-sm overflow-y-auto">   
+        <aside className="w-64 pt-8 pb-16 px-8 lg:pt-12 h-full text-sm overflow-y-auto">   
                 <ul className="flex flex-col gap-8">
                     {
                         comps.map((comp)=>{
