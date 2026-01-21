@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import CardStack from "./card-stack";
+import { CardStack,CardStackIndicator } from "./card-stack";
+import { useState } from "react";
 
 import {
   Card,
@@ -12,13 +13,18 @@ import {
 } from "@/components/ui/card";
 
 export default function CardStackDemo() {
+
+  const [index, setIndex ] = useState<number>(0);
+
   return (
-    <div className="flex min-h-[10rem] w-full items-center justify-center">
+    <div className="flex flex-col min-h-[10rem] w-full items-center justify-center">
       <CardStack
         className="h-64 w-[32rem]"
         autoAdvance
         autoAdvanceInterval={5000}
         pauseOnHover
+        activeIndex={index}
+        onIndexChange={setIndex}
         offsets={[
           { scale: 1, y: 0, opacity: 1 },
           { scale: 0.92, y: 20, opacity: 0.8 },
@@ -71,6 +77,10 @@ export default function CardStackDemo() {
           </Card>
         ))}
       </CardStack>
+      <CardStackIndicator
+        totalCards={TESTIMONIALS.length}
+        activeIndex={index}
+      />
     </div>
   );
 }

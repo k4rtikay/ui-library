@@ -13,25 +13,25 @@ type CardOffset = {
 interface CardStackProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
-  
+
   // Customization
   offsets?: CardOffset[];
   maxVisibleCards?: number;
-  
+
   // Animation
   transition?: Transition;
   exitOffset?: number;
   exitBlur?: number;
-  
+
   // Behavior
   autoAdvance?: boolean;
   autoAdvanceInterval?: number;
   pauseOnHover?: boolean;
-  
+
   // Control
   activeIndex?: number;
   onIndexChange?: (index: number) => void;
-  
+
   // Interaction
   clickable?: boolean;
   keyboardNavigable?: boolean;
@@ -43,7 +43,7 @@ const DEFAULT_OFFSETS: CardOffset[] = [
   { scale: 0.9, y: 24, opacity: 1 },   // third card
 ];
 
-export default function CardStack({
+export function CardStack({
   children,
   className,
   offsets = DEFAULT_OFFSETS,
@@ -62,15 +62,15 @@ export default function CardStack({
 }: CardStackProps) {
   const cards = Children.toArray(children);
   const totalCards = cards.length;
-  
+
   // Internal state for uncontrolled mode
   const [internalIndex, setInternalIndex] = useState(0);
   const [hasInteracted, setHasInteracted] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  
+
   const isControlled = controlledIndex !== undefined;
   const activeIndex = isControlled ? controlledIndex : internalIndex;
-  
+
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const isKeyRef = useRef(false);
   const autoAdvanceTimerRef = useRef<NodeJS.Timeout>(null);
@@ -85,22 +85,27 @@ export default function CardStack({
     );
   }
 
+  const maxOffset = Math.max(
+    0,
+    ...offsets.slice(0, maxVisibleCards).map(offset => offset.y)
+  );
+
   const lastIndex = (activeIndex - 1 + totalCards) % totalCards;
 
   const handleNext = useCallback(() => {
     const newIndex = (activeIndex + 1) % totalCards;
-    
+
     if (!isControlled) {
       setInternalIndex(newIndex);
     }
-    
+
     onIndexChange?.(newIndex);
     setHasInteracted(true);
   }, [activeIndex, totalCards, isControlled, onIndexChange]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (!keyboardNavigable) return;
-    
+
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       isKeyRef.current = true;
@@ -113,7 +118,7 @@ export default function CardStack({
       e.preventDefault();
       isKeyRef.current = true;
       const prevIndex = (activeIndex - 1 + totalCards) % totalCards;
-      
+
       if (!isControlled) {
         setInternalIndex(prevIndex);
       }
@@ -153,7 +158,7 @@ export default function CardStack({
   const getCardVariant = (index: number) => {
     const isTop = index === activeIndex;
     const isExiting = index === lastIndex && hasInteracted;
-    
+
     if (isExiting) {
       return {
         y: exitOffset,
@@ -164,7 +169,7 @@ export default function CardStack({
         transition: { duration: 0.2 },
       };
     }
-    
+
     if (isTop) {
       return {
         ...offsets[0],
@@ -172,13 +177,13 @@ export default function CardStack({
         zIndex: 30,
       };
     }
-    
+
     const stackPosition = (index - activeIndex + totalCards) % totalCards;
-    
+
     if (stackPosition > 0 && stackPosition <= maxVisibleCards) {
       const offsetIndex = Math.min(stackPosition, offsets.length - 1);
       const offset = offsets[offsetIndex] || offsets[offsets.length - 1];
-      
+
       return {
         scale: offset.scale,
         y: offset.y,
@@ -186,7 +191,7 @@ export default function CardStack({
         zIndex: 30 - stackPosition * 10,
       };
     }
-    
+
     // Hidden cards
     const lastOffset = offsets[offsets.length - 1];
     return {
@@ -211,7 +216,10 @@ export default function CardStack({
 
   return (
     <div
-      className={cn("relative", className)}
+      className={cn("relative flex flex-col justify-end", className)}
+      style={{
+        marginBottom: maxOffset,
+      }}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       role="region"
@@ -255,11 +263,33 @@ export default function CardStack({
           </motion.div>
         );
       })}
-      
+
       {/* Screen reader announcement */}
       <div className="sr-only" aria-live="polite" aria-atomic="true">
         Showing card {activeIndex + 1} of {totalCards}
       </div>
+    </div>
+  );
+}
+
+export function CardStackIndicator({
+  totalCards,
+  activeIndex,
+}: {
+  totalCards: number;
+  activeIndex: number;
+}) {
+  return (
+    <div className="flex items-center gap-2">
+      {Array.from({ length: totalCards }).map((_, index) => (
+        <div
+          key={index}
+          className={cn(
+            "h-2 w-2 rounded-full transition-all duration-300",
+            index === activeIndex ? "bg-primary w-6" : "bg-neutral-300 dark:bg-neutral-700"
+          )}
+        />
+      ))}
     </div>
   );
 }
