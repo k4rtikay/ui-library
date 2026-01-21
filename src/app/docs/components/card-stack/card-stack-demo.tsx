@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { CardStack,CardStackIndicator } from "./card-stack";
+import { CardStack, CardStackIndicator } from "./card-stack";
 import { useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   Card,
@@ -14,22 +14,12 @@ import {
 
 export default function CardStackDemo() {
 
-  const [index, setIndex ] = useState<number>(0);
+  const [index, setIndex] = useState<number>(0);
 
   return (
     <div className="flex flex-col min-h-[10rem] w-full items-center justify-center">
       <CardStack
         className="h-64 w-[32rem]"
-        autoAdvance
-        autoAdvanceInterval={5000}
-        pauseOnHover
-        activeIndex={index}
-        onIndexChange={setIndex}
-        offsets={[
-          { scale: 1, y: 0, opacity: 1 },
-          { scale: 0.92, y: 20, opacity: 0.8 },
-          { scale: 0.84, y: 40, opacity: 0.6 },
-        ]}
       >
         {TESTIMONIALS.map((testimonial) => (
           <Card
@@ -40,16 +30,11 @@ export default function CardStackDemo() {
             )}
           >
             <CardHeader className="gap-1">
-              {/* Image Placeholder */}
-              <div className="relative h-12 w-12 overflow-hidden rounded-full border border-neutral-100 shadow-inner">
-                <Image
-                  src={testimonial.avatar}
-                  alt={testimonial.name}
-                  fill
-                  className="object-cover"
-                  sizes="48px"
-                />
-              </div>
+              {/* Avatar Component */}
+              <Avatar className="h-12 w-12 border border-neutral-100 shadow-inner">
+                <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="object-cover" />
+                <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
+              </Avatar>
 
               <div className="flex flex-col">
                 <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
@@ -62,7 +47,7 @@ export default function CardStackDemo() {
             </CardHeader>
 
             <CardContent className="">
-              <p className="text-base text-neutral-600 dark:text-neutral-300">
+              <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
                 "{testimonial.content}"
               </p>
             </CardContent>
@@ -77,10 +62,6 @@ export default function CardStackDemo() {
           </Card>
         ))}
       </CardStack>
-      <CardStackIndicator
-        totalCards={TESTIMONIALS.length}
-        activeIndex={index}
-      />
     </div>
   );
 }
@@ -93,7 +74,7 @@ const TESTIMONIALS = [
     name: "Alex Rivera",
     role: "CTO",
     company: "InnovateLabs",
-    avatar: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=100&h=100&fit=crop&q=80",
+    avatar: "https://i.pravatar.cc/150?u=1",
     content: "The animation primitives provided by this library are simply outstanding. We rewrote our entire onboarding flow using the CardStack component, and user retention went up by 15% in the first week.",
   },
   {
@@ -101,7 +82,7 @@ const TESTIMONIALS = [
     name: "Sarah Chen",
     role: "Product Designer",
     company: "Figma",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&q=80",
+    avatar: "https://i.pravatar.cc/150?u=2",
     content: "I've always struggled to get developers to implement my motion designs correctly. With Motion UI, I just point them to the docs. The physics are buttery smooth and the attention to detail is top-notch.",
   },
   {
@@ -109,7 +90,7 @@ const TESTIMONIALS = [
     name: "James Wilson",
     role: "Indie Hacker",
     company: "ShipFast",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80",
+    avatar: "https://i.pravatar.cc/150?u=3",
     content: "I built my MVP in a weekend using these components. The fact that it's just copy-paste code means I have full control, but I didn't have to waste time reinventing the wheel. Absolutely essential toolkit.",
   },
   {
@@ -117,7 +98,7 @@ const TESTIMONIALS = [
     name: "James Wilson",
     role: "Indie Hacker",
     company: "ShipFast",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80",
+    avatar: "https://i.pravatar.cc/150?u=4",
     content: "I built my MVP in a weekend using these components. The fact that it's just copy-paste code means I have full control, but I didn't have to waste time reinventing the wheel. Absolutely essential toolkit.",
   },
 ];
