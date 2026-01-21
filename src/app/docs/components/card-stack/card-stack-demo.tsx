@@ -4,8 +4,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import CardStack from "./card-stack";
 
-// If you have shadcn installed, import these. 
-// If not, I've provided a fallback styled <div> version below.
 import {
   Card,
   CardContent,
@@ -16,19 +14,29 @@ import {
 export default function CardStackDemo() {
   return (
     <div className="flex min-h-[10rem] w-full items-center justify-center">
-      <CardStack className="h-64 w-80 md:h-72 md:w-[32rem]">
+      <CardStack
+        className="h-64 w-[32rem]"
+        autoAdvance
+        autoAdvanceInterval={5000}
+        pauseOnHover
+        offsets={[
+          { scale: 1, y: 0, opacity: 1 },
+          { scale: 0.92, y: 20, opacity: 0.8 },
+          { scale: 0.84, y: 40, opacity: 0.6 },
+        ]}
+      >
         {TESTIMONIALS.map((testimonial) => (
           <Card
             key={testimonial.id}
             className={cn(
-              "h-full w-full border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900",
-              "gap-4"
+              "h-full w-full border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900 py-4",
+              "gap-2"
             )}
           >
-            <CardHeader className="gap-0">
+            <CardHeader className="gap-1">
               {/* Image Placeholder */}
               <div className="relative h-12 w-12 overflow-hidden rounded-full border border-neutral-100 shadow-inner">
-                <Image  
+                <Image
                   src={testimonial.avatar}
                   alt={testimonial.name}
                   fill
@@ -36,7 +44,7 @@ export default function CardStackDemo() {
                   sizes="48px"
                 />
               </div>
-              
+
               <div className="flex flex-col">
                 <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100">
                   {testimonial.name}
@@ -48,7 +56,7 @@ export default function CardStackDemo() {
             </CardHeader>
 
             <CardContent className="">
-              <p className="text-base leading-relaxed text-neutral-600 dark:text-neutral-300">
+              <p className="text-base text-neutral-600 dark:text-neutral-300">
                 "{testimonial.content}"
               </p>
             </CardContent>
@@ -56,7 +64,7 @@ export default function CardStackDemo() {
             <CardFooter className="">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                    <StarIcon key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <StarIcon key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
                 ))}
               </div>
             </CardFooter>
@@ -88,6 +96,14 @@ const TESTIMONIALS = [
   },
   {
     id: 3,
+    name: "James Wilson",
+    role: "Indie Hacker",
+    company: "ShipFast",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&q=80",
+    content: "I built my MVP in a weekend using these components. The fact that it's just copy-paste code means I have full control, but I didn't have to waste time reinventing the wheel. Absolutely essential toolkit.",
+  },
+  {
+    id: 4,
     name: "James Wilson",
     role: "Indie Hacker",
     company: "ShipFast",
