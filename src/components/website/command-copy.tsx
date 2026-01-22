@@ -45,9 +45,11 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
 
             <Tabs
                 defaultValue="cli"
-                className="relative w-full gap-0"
+                className="relative"
             >
-                <TabsList>
+                <TabsList
+                    variant="line"
+                >
                     <TabsTrigger key={"cli"} value="cli">CLI</TabsTrigger>
                     <TabsTrigger key={"manual"} value="manual">Manual</TabsTrigger>
                 </TabsList>
@@ -59,12 +61,12 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
                         className="relative w-full gap-0"
                     >
                         <div className="flex items-center justify-between px-4 bg-zinc-100 dark:bg-zinc-900 rounded-t-lg border border-b-0">
-                            <TabsList className="p-0">
+                            <TabsList className="p-0 bg-transparent">
                                 {(["npm", "pnpm", "bun", "yarn"] as const).map((pm) => (
                                     <TabsTrigger
                                         key={pm}
                                         value={pm}
-                                        className="h-10 border-b-2 border-transparent px-4 bg-transparent text-muted-foreground data-[state=active]:border-primary data-[state=active]:text-foreground data-[state=active]:bg-transparent shadow-none"
+                                        className="p-2 bg-transparent"
                                     >
                                         {pm}
                                     </TabsTrigger>
@@ -99,40 +101,6 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
                     </Card>
                 </TabsContent>
             </Tabs>
-
-            {/* <Tabs
-                value={packageManager}
-                onValueChange={updatePreference}
-                className="relative w-full gap-0"
-            >
-                <div className="flex items-center justify-between px-4 bg-zinc-100 dark:bg-zinc-900 rounded-t-lg border border-b-0">
-                    <TabsList className="p-0">
-                        {(["npm", "pnpm", "bun", "yarn"] as const).map((pm) => (
-                            <TabsTrigger
-                                key={pm}
-                                value={pm}
-                                className="h-10 border-b-2 border-transparent px-4 bg-transparent text-muted-foreground data-[state=active]:border-primary data-[state=active]:text-foreground data-[state=active]:bg-transparent shadow-none"
-                            >
-                                {pm}
-                            </TabsTrigger>
-                        ))}
-                    </TabsList>
-                </div>
-
-                <div className="relative rounded-b-lg border px-4 py-4">
-                    <code className="font-mono text-sm">
-                        {command[packageManager]}
-                    </code>
-
-                    <button
-                        className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-md text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50"
-                        onClick={copyCommand}
-                    >
-                        {hasCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                        <span className="sr-only">Copy command</span>
-                    </button>
-                </div>
-            </Tabs> */}
         </div>
     )
 }
