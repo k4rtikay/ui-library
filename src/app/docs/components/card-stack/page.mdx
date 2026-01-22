@@ -34,3 +34,39 @@ A stack of cards that stack on top of each other with a satisfying fade animatio
 ```tsx file=card-stack.tsx
 ```
 </CommandCopy>
+
+## API Reference
+
+### CardStack
+
+| Prop | Type | Default |
+|------|------|---------|
+| `children` | `React.ReactNode` | Required |
+| `className` | `string` | `undefined` |
+| `offsets` | `CardOffset[]` | `[{ scale: 1, y: 0, opacity: 1 }, { scale: 0.95, y: 12, opacity: 1 }, { scale: 0.9, y: 24, opacity: 1 }]` |
+| `maxVisibleCards` | `number` | `3` |
+| `transition` | `Transition` | `{ type: "spring", damping: 21, stiffness: 180 }` |
+| `exitOffset` | `number` | `-64` |
+| `exitBlur` | `number` | `4` |
+| `autoAdvance` | `boolean` | `false` |
+| `autoAdvanceInterval` | `number` | `5000` |
+| `pauseOnHover` | `boolean` | `true` |
+| `activeIndex` | `number` | `undefined` |
+| `onIndexChange` | `(index: number) => void` | `undefined` |
+| `clickable` | `boolean` | `true` |
+| `keyboardNavigable` | `boolean` | `true` |
+
+### CardStackIndicator
+
+| Prop | Type | Default |
+|------|------|---------|
+| `totalCards` | `number` | Required |
+| `activeIndex` | `number` | Required |
+
+### CardOffset Type
+
+| Property | Type | Default |
+|----------|------|---------|
+| `scale` | `number` | Required |
+| `y` | `number` | Required |
+| `opacity` | `number` | `undefined` |
