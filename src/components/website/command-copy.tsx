@@ -94,9 +94,7 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
                             <CardTitle>Manual Installation</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <code className="font-mono text-sm">
-                                {children}
-                            </code>
+                            {children}
                         </CardContent>
                     </Card>
                 </TabsContent>
