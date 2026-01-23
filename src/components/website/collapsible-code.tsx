@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
+import CopyButton from "./copy-button";
 
 interface CollapsibleCodeProps {
     children: React.ReactNode
@@ -13,6 +14,9 @@ interface CollapsibleCodeProps {
 
 export default function CollapsibleCode({ children, maxHeight = 300, className }: CollapsibleCodeProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const codeRef = useRef<HTMLDivElement>(null);
+
+    
 
     return (
         <div className={cn("relative h-full", className)}>
@@ -21,7 +25,12 @@ export default function CollapsibleCode({ children, maxHeight = 300, className }
                 animate={{ height: isOpen ? "auto" : `${maxHeight}px` }}
                 transition={{ duration: 0.2, type: "spring", damping: 24, stiffness: 150 }}
                 className="overflow-hidden overflow-x-auto"
+                ref={codeRef}
             >
+                <CopyButton
+                    onCopy = {()=>{ return codeRef.current?.innerText || ""}}
+                    className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 rounded-sm opacity-70 hover:opacity-100"
+                />
                 {children}
             </motion.div>
             <div

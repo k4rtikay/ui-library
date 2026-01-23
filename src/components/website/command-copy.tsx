@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 import { Button } from "../ui/button"
+import CopyButton from "./copy-button"
 
 type PackageManager = "npm" | "pnpm" | "bun" | "yarn"
 
@@ -83,14 +84,11 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
                                 {command[packageManager]}
                             </code>
 
-                            <Button
+                            <CopyButton
+                                text={command[packageManager]}
                                 className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 rounded-sm opacity-70 hover:opacity-100"
-                                onClick={copyCommand}
-                                variant="ghost"
-                            >
-                                {hasCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-                                <span className="sr-only">Copy command</span>
-                            </Button>
+                            />
+                            
                         </div>
                     </Tabs>
                 </TabsContent>
