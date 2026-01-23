@@ -31,7 +31,9 @@ export default function ComponentPreview({
             </div>
           </TabsList>
         </div>
-        {children}
+        <div className="relative not-prose rounded-lg p-10 border">
+          {children}
+          </div>
       </Tabs>
     </div>
   )

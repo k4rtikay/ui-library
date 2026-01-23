@@ -14,8 +14,6 @@ import {
 
 export default function CardStackDemo() {
 
-  const [index, setIndex] = useState<number>(0);
-
   return (
     <div className="flex flex-col min-h-[10rem] w-full items-center justify-center">
       <CardStack
