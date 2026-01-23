@@ -5,6 +5,7 @@ import { Check, Copy } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { Button } from "../ui/button"
 
 type PackageManager = "npm" | "pnpm" | "bun" | "yarn"
 
@@ -45,13 +46,16 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
 
             <Tabs
                 defaultValue="cli"
-                className="relative"
+                className="relative w-full"
             >
                 <TabsList
                     variant="line"
+                    className="border-b w-full justify-start px-0"
                 >
-                    <TabsTrigger key={"cli"} value="cli">CLI</TabsTrigger>
-                    <TabsTrigger key={"manual"} value="manual">Manual</TabsTrigger>
+                    <div className="flex items-center gap-2">
+                        <TabsTrigger key={"cli"} value="cli">CLI</TabsTrigger>
+                        <TabsTrigger key={"manual"} value="manual">Manual</TabsTrigger>
+                    </div>
                 </TabsList>
 
                 <TabsContent value="cli">
@@ -79,22 +83,22 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
                                 {command[packageManager]}
                             </code>
 
-                            <button
-                                className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 items-center justify-center rounded-md text-zinc-50 hover:bg-zinc-700 hover:text-zinc-50"
+                            <Button
+                                className="absolute right-4 top-4 z-10 inline-flex h-6 w-6 rounded-sm opacity-70 hover:opacity-100"
                                 onClick={copyCommand}
+                                variant="ghost"
                             >
                                 {hasCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
                                 <span className="sr-only">Copy command</span>
-                            </button>
+                            </Button>
                         </div>
                     </Tabs>
                 </TabsContent>
 
                 <TabsContent value="manual">
+                    <p>Copy this code and paste it into a card-stack.tsx file.</p>
+                    <p>Update the imports as needed.</p>
                     <Card>
-                        <CardHeader>
-                            <CardTitle>Manual Installation</CardTitle>
-                        </CardHeader>
                         <CardContent>
                             {children}
                         </CardContent>

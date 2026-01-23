@@ -26,8 +26,8 @@ export default function CardStackControlledDemo() {
     // Let's make the stack "fan out" a bit more than the default
     const customOffsets = [
         { scale: 1, y: 0, opacity: 1 },
-        { scale: 0.92, y: 20, opacity: 0.8 },
-        { scale: 0.84, y: 40, opacity: 0.6 },
+        { scale: 0.92, y: 20, opacity: 0.9 },
+        { scale: 0.84, y: 40, opacity: 0.7 },
     ]
 
     return (
@@ -47,7 +47,7 @@ export default function CardStackControlledDemo() {
                 // Custom Styles
                 offsets={customOffsets}
                 maxVisibleCards={3}
-                className="h-[250px] w-[350px] md:h-[280px] md:w-[450px]"
+                className="h-[160px] w-[350px] md:h-[200px] md:w-[450px]"
             >
                 {TESTIMONIALS.map((item) => (
                     <Card

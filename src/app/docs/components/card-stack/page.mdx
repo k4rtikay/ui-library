@@ -2,6 +2,7 @@ import CardStackDemo from "./card-stack-demo";
 import CardStackControlledDemo from "./card-stack-controlled";
 import ComponentPreview from "@/components/website/component-preview";
 import { CommandCopy } from "@/components/website/command-copy";
+import { TabsContent } from "@/components/ui/tabs";
 
 # Card Stack
 
@@ -12,13 +13,25 @@ A stack of cards that stack on top of each other with a satisfying fade animatio
 ### Default
 
 <ComponentPreview>
-  <CardStackDemo />
+  <TabsContent value="preview" className="relative not-prose rounded-lg p-10 border flex items-center justify-center">
+    <CardStackDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx file=card-stack-demo.tsx
+    ```
+  </TabsContent>
 </ComponentPreview>
 
 ### Controlled
 
 <ComponentPreview>
-  <CardStackControlledDemo />
+  <TabsContent value="preview" className="relative not-prose rounded-lg p-10 border flex items-center justify-center">
+    <CardStackControlledDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    ```tsx file=card-stack-controlled.tsx
+    ```
+  </TabsContent>
 </ComponentPreview>
 
 ## Installation
@@ -31,6 +44,7 @@ A stack of cards that stack on top of each other with a satisfying fade animatio
     yarn: "yarn add @repo/ui@latest"
   }} 
 >
+
 ```tsx file=card-stack.tsx
 ```
 </CommandCopy>

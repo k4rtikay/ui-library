@@ -216,7 +216,7 @@ export function CardStack({
 
   return (
     <div
-      className={cn("relative flex flex-col justify-end", className)}
+      className={cn("relative flex flex-col justify-end h-64", className)}
       style={{
         marginBottom: maxOffset,
       }}
@@ -285,8 +285,8 @@ export function CardStackIndicator({
         <div
           key={index}
           className={cn(
-            "h-2 w-2 rounded-full transition-all duration-300",
-            index === activeIndex ? "bg-primary w-6" : "bg-neutral-300 dark:bg-neutral-700"
+            "h-[4px] w-[4px] rounded-full transition-all duration-300",
+            index === activeIndex ? "bg-primary w-[12px]" : "bg-neutral-300 dark:bg-neutral-700"
           )}
         />
       ))}

@@ -25,12 +25,11 @@ export default function CardStackDemo() {
           <Card
             key={testimonial.id}
             className={cn(
-              "h-full w-full border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900 py-4",
-              "gap-2"
+              "h-full w-full border-neutral-200 bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900",
+              "py-4"
             )}
           >
-            <CardHeader className="gap-1">
-              {/* Avatar Component */}
+            <CardHeader className="">
               <Avatar className="h-12 w-12 border border-neutral-100 shadow-inner">
                 <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="object-cover" />
                 <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
@@ -55,7 +54,7 @@ export default function CardStackDemo() {
             <CardFooter className="">
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <StarIcon key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  <StarIcon key={i} className="h-4 w-4 fill-blue-500 text-blue-500 dark:fill-blue-400 dark:text-blue-400" />
                 ))}
               </div>
             </CardFooter>
