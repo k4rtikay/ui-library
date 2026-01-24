@@ -60,34 +60,34 @@ A stack of cards that stack on top of each other with a satisfying fade animatio
 
 ### CardStack
 
-| Prop | Type | Default |
-|------|------|---------|
-| `children` | `React.ReactNode` | Required |
-| `className` | `string` | `undefined` |
-| `offsets` | `CardOffset[]` | `[{ scale: 1, y: 0, opacity: 1 }, { scale: 0.95, y: 12, opacity: 1 }, { scale: 0.9, y: 24, opacity: 1 }]` |
-| `maxVisibleCards` | `number` | `3` |
-| `transition` | `Transition` | `{ type: "spring", damping: 21, stiffness: 180 }` |
-| `exitOffset` | `number` | `-64` |
-| `exitBlur` | `number` | `4` |
-| `autoAdvance` | `boolean` | `false` |
-| `autoAdvanceInterval` | `number` | `5000` |
-| `pauseOnHover` | `boolean` | `true` |
-| `activeIndex` | `number` | `undefined` |
-| `onIndexChange` | `(index: number) => void` | `undefined` |
-| `clickable` | `boolean` | `true` |
-| `keyboardNavigable` | `boolean` | `true` |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | Required | The card elements to display in the stack. |
+| `className` | `string` | `undefined` | Additional CSS classes for the container. |
+| `offsets` | `CardOffset[]` | `[{ scale: 1, y: 0, opacity: 1 }, { scale: 0.95, y: 12, opacity: 1 }, { scale: 0.9, y: 24, opacity: 1 }]` | Visual offsets for stacked cards (scale, position, opacity). |
+| `maxVisibleCards` | `number` | `3` | Maximum number of cards visible in the stack. |
+| `transition` | `Transition` | `{ type: "spring", damping: 21, stiffness: 180 }` | Framer Motion transition config for animations. |
+| `exitOffset` | `number` | `-64` | Y-offset in pixels when a card exits the stack. |
+| `exitBlur` | `number` | `4` | Blur amount in pixels applied to exiting cards. |
+| `autoAdvance` | `boolean` | `false` | Enables automatic card cycling. |
+| `autoAdvanceInterval` | `number` | `5000` | Time in ms between auto-advances. |
+| `pauseOnHover` | `boolean` | `true` | Pauses auto-advance when hovering. |
+| `activeIndex` | `number` | `undefined` | Controlled index of the currently active card. |
+| `onIndexChange` | `(index: number) => void` | `undefined` | Callback fired when the active index changes. |
+| `clickable` | `boolean` | `true` | Allows clicking the top card to advance. |
+| `keyboardNavigable` | `boolean` | `true` | Enables keyboard navigation with arrow keys. |
 
 ### CardStackIndicator
 
-| Prop | Type | Default |
-|------|------|---------|
-| `totalCards` | `number` | Required |
-| `activeIndex` | `number` | Required |
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `totalCards` | `number` | Required | Total number of cards in the stack. |
+| `activeIndex` | `number` | Required | Index of the currently active card. |
 
 ### CardOffset Type
 
-| Property | Type | Default |
-|----------|------|---------|
-| `scale` | `number` | Required |
-| `y` | `number` | Required |
-| `opacity` | `number` | `undefined` |
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `scale` | `number` | Required | Scale factor applied to the card (1 = 100%). |
+| `y` | `number` | Required | Vertical offset in pixels from the top. |
+| `opacity` | `number` | `undefined` | Opacity of the card (0 to 1). |
