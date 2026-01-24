@@ -1,0 +1,22 @@
+{
+    "$schema": "https://ui.shadcn.com/schema/registry.json",
+    "name": "motion-ui",
+    "homepage": "https://motion-ui.com",
+    "items": [
+        {
+            "name": "card-stack",
+            "type": "registry:ui",
+            "title": "Card Stack",
+            "description": "A component providing a stack interaction.",
+            "files": [
+                {
+                    "path": "registry/card-stack.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": [
+                "motion"
+            ]
+        }
+    ]
+}
