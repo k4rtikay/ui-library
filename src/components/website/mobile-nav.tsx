@@ -14,7 +14,7 @@ export default function MobileNav() {
             <Sheet open={open} onOpenChange={setOpen}>
                 <SheetTrigger asChild>
                     <Button
-                        variant={"outline"}
+                        variant={"ghost"}
                         className="md:hidden"
                         size={"icon"}
                     >
