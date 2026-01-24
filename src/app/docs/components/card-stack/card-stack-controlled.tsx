@@ -1,91 +1,80 @@
 "use client";
 
 import { useState } from "react";
-import { cn } from "@/lib/utils";
 import {
     CardStack,
     CardStackIndicator
-} from "./card-stack"; // Adjust path to where you saved the component
-
-// Import Shadcn primitives
-import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from "./card-stack";
 
 export default function CardStackControlledDemo() {
-    // 1. CONTROLLED STATE
-    // We lift the state up so we can sync the stack with the indicator
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // 2. CUSTOM OFFSETS (Optional)
-    // Let's make the stack "fan out" a bit more than the default
     const customOffsets = [
         { scale: 1, y: 0, opacity: 1 },
-        { scale: 0.92, y: 20, opacity: 0.9 },
-        { scale: 0.84, y: 40, opacity: 0.7 },
+        { scale: 0.95, y: -20, opacity: 0.95 },
+        { scale: 0.90, y: -40, opacity: 0.85 },
     ]
 
     return (
-        <div className="flex flex-col items-center justify-center gap-8 py-10 w-full bg-neutral-50 dark:bg-neutral-950 rounded-xl border border-dashed">
+        <div className="flex flex-col items-center justify-center gap-8 py-4">
 
-            {/* 3. THE STACK */}
+            {/* THE STACK */}
             <CardStack
-                // State Control
                 activeIndex={activeIndex}
                 onIndexChange={setActiveIndex}
-
-                // Autoplay Behavior
                 autoAdvance={true}
                 autoAdvanceInterval={4000}
                 pauseOnHover
-
-                // Custom Styles
                 offsets={customOffsets}
                 maxVisibleCards={3}
-                className="h-[160px] w-[350px] md:h-[200px] md:w-[450px]"
+                className="h-[220px] w-[260px] sm:h-[220px] sm:w-[320px]"
             >
-                {TESTIMONIALS.map((item) => (
-                    <Card
-                        key={item.id}
-                        className="h-full w-full border-neutral-200 shadow-sm transition-colors hover:border-neutral-300 dark:border-neutral-800 dark:hover:border-neutral-700 bg-white dark:bg-neutral-900"
+                {DAILY_ACTIVITIES.map((day) => (
+                    <div
+                        key={day.id}
+                        className="h-full w-full rounded-2xl p-5 flex flex-col gap-3"
+                        style={{
+                            background: "linear-gradient(135deg, #e8eef9 0%, #d4dff2 100%)",
+                        }}
                     >
-                        <CardHeader className="flex flex-row items-center gap-4 pb-2">
-                            <Avatar>
-                                <AvatarImage src={item.avatar} alt={item.name} />
-                                <AvatarFallback>{item.name[0]}</AvatarFallback>
-                            </Avatar>
-                            <div className="flex flex-col">
-                                <CardTitle className="text-base font-semibold text-neutral-900 dark:text-white">
-                                    {item.name}
-                                </CardTitle>
-                                <CardDescription className="text-xs font-medium text-neutral-500">
-                                    {item.role}
-                                </CardDescription>
-                            </div>
-                        </CardHeader>
-                        <CardContent>
-                            <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-300">
-                                "{item.content}"
-                            </p>
-                        </CardContent>
-                    </Card>
+                        {/* Day Header */}
+                        <h2 className="text-xl font-semibold text-neutral-900 mb-1">
+                            {day.day}
+                        </h2>
+
+                        {/* Activity Groups */}
+                        <div className="flex flex-col gap-2.5 flex-1">
+                            {day.groups.map((group, groupIndex) => (
+                                <div
+                                    key={groupIndex}
+                                    className="bg-white/70 rounded-xl px-4 py-3"
+                                >
+                                    {group.activities.map((activity, actIndex) => (
+                                        <div
+                                            key={actIndex}
+                                            className="flex items-center gap-3 py-1"
+                                        >
+                                            <span className="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0" />
+                                            <span className="text-sm text-neutral-800 font-medium">
+                                                {activity}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </CardStack>
 
-            {/* 4. THE INDICATOR */}
-            {/* This syncs perfectly because it uses the same `activeIndex` */}
+            {/* THE INDICATOR */}
             <div className="flex flex-col items-center gap-2">
                 <CardStackIndicator
-                    totalCards={TESTIMONIALS.length}
+                    totalCards={DAILY_ACTIVITIES.length}
                     activeIndex={activeIndex}
                 />
-                <p className="text-xs text-muted-foreground mt-2">
-                    Autoplay active • Click card to advance manually
+                <p className="text-xs text-neutral-500 dark:text-neutral-400 mt-2">
+                    Click card to advance
                 </p>
             </div>
 
@@ -93,34 +82,46 @@ export default function CardStackControlledDemo() {
     );
 }
 
-// --- Mock Data ---
-const TESTIMONIALS = [
+// --- Daily Activities Data ---
+const DAILY_ACTIVITIES = [
     {
         id: 1,
-        name: "Emily Carter",
-        role: "UX Designer @ Adobe",
-        avatar: "https://i.pravatar.cc/150?u=1",
-        content: "The controlled API for this component is a lifesaver. Syncing the card stack with our external pagination logic was seamless.",
+        day: "Monday",
+        groups: [
+            { activities: ["Team standup"] },
+            { activities: ["Dentist appointment", "Focus time"] },
+        ],
     },
     {
         id: 2,
-        name: "Marcus Reid",
-        role: "Frontend Lead @ Vercel",
-        avatar: "https://i.pravatar.cc/150?u=2",
-        content: "Finally, a stack component that doesn't fight you on z-index context. The physics feel native and the autoplay pauses correctly on hover.",
+        day: "Tuesday",
+        groups: [
+            { activities: ["Morning yoga"] },
+            { activities: ["Client call", "Lunch with Sarah"] },
+        ],
     },
     {
         id: 3,
-        name: "Sarah Jenkins",
-        role: "Product Manager @ Linear",
-        avatar: "https://i.pravatar.cc/150?u=3",
-        content: "We used this for our 'What's New' feature widget. Engagement went up by 40% because users actually enjoy clicking through the updates.",
+        day: "Wednesday",
+        groups: [
+            { activities: ["Gym session"] },
+            { activities: ["Sprint planning", "Design review"] },
+        ],
     },
     {
         id: 4,
-        name: "David Chen",
-        role: "Founder @ TailwindUI",
-        avatar: "https://i.pravatar.cc/150?u=4",
-        content: "Simple, composable, and accessible. It respects reduced motion preferences and keyboard navigation out of the box.",
+        day: "Thursday",
+        groups: [
+            { activities: ["Morning run"] },
+            { activities: ["1:1 with manager", "Deep work"] },
+        ],
+    },
+    {
+        id: 5,
+        day: "Friday",
+        groups: [
+            { activities: ["Sleep in"] },
+            { activities: ["Weekly retro", "Team lunch"] },
+        ],
     },
 ];

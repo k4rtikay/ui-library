@@ -216,7 +216,7 @@ export function CardStack({
 
   return (
     <div
-      className={cn("relative flex flex-col justify-end h-64", className)}
+      className={cn("relative flex flex-col justify-end ", className)}
       style={{
         marginBottom: maxOffset,
       }}

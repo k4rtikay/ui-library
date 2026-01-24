@@ -17,7 +17,7 @@ export default function CardStackDemo() {
   return (
     <div className="flex flex-col min-h-[10rem] w-full items-center justify-center">
       <CardStack
-        className="h-64 w-[32rem]"
+        className="h-64 md:h-52 w-[18rem] md:w-[32rem]"
       >
         {TESTIMONIALS.map((testimonial) => (
           <Card
@@ -27,8 +27,8 @@ export default function CardStackDemo() {
               "py-4"
             )}
           >
-            <CardHeader className="">
-              <Avatar className="h-12 w-12 border border-neutral-100 shadow-inner">
+            <CardHeader className="flex items-center gap-2">
+              <Avatar className="h-6 w-6 md:h-12 md:w-12 border border-neutral-100 shadow-inner">
                 <AvatarImage src={testimonial.avatar} alt={testimonial.name} className="object-cover" />
                 <AvatarFallback>{testimonial.name[0]}</AvatarFallback>
               </Avatar>
