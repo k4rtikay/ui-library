@@ -1,11 +1,10 @@
 "use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
-import NavRoutes from "./nav-routes";
+import { usePathname } from "next/navigation"
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
-export function Sidebar({...props}){
+export default function NavRoutes() {
 
     const pathname = usePathname()
 
@@ -60,9 +59,29 @@ export function Sidebar({...props}){
         }
     ]
 
-    return(
-        <aside className="hidden md:block w-64 pt-8 pb-16 px-4 lg:pt-12 h-full text-sm overflow-y-auto">   
-                <NavRoutes/>
-        </aside>
+    return (
+        <ul className="flex flex-col gap-8">
+            {
+                comps.map((comp) => {
+                    return (
+                        <li key={comp.category} className="flex flex-col gap-4">
+                            <p className="font-medium">{comp.category}</p>
+                            <ul className="flex flex-col gap-2 border-l-2 border-l-[#C2C2C2] dark:border-l-[#525252] px-4">
+                                {comp.items.map((item) => {
+                                    return (
+                                        <li key={item.name} className={cn(
+                                            "opacity-60 hover:opacity-100",
+                                            {
+                                                "text-[#DB2B39] opacity-100": pathname === item.href
+                                            },
+                                        )}><Link href={item.href}>{item.name}</Link></li>
+                                    )
+                                })}
+                            </ul>
+                        </li>
+                    )
+                })
+            }
+        </ul>
     )
 }
