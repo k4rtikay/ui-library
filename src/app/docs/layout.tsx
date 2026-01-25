@@ -11,7 +11,7 @@ export default function DocsLayout({
         <div className="flex flex-col">
             <header className="w-full flex items-center justify-between py-1 px-2">
                 <MobileNav/>
-                <h1 className="font-semibold">Motion UI</h1>
+                <h1 className="font-semibold">Flow-Kit</h1>
                 <ModeToggle/>
             </header>
             <div className="flex py-2 px-4">

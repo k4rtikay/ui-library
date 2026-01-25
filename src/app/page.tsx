@@ -15,7 +15,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <Github/>
+          <Github className="h-6 w-6"/>
         </a>
       </header>
       <h1 className="text-4xl mb-2 xl:text-5xl">Flow-Kit</h1>
