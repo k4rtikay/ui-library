@@ -2,7 +2,7 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
   --color-background: var(--background);
@@ -125,31 +125,26 @@
   }
 }
 
-
 @layer components {
-
   .prose pre {
-    background-color: transparent !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    border: 0;
   }
 
   [data-rehype-pretty-code-figure] pre {
-    @apply bg-gray-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg;
+    @apply bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg p-4 overflow-x-auto text-sm leading-6;
   }
-
-
-  code[data-theme*=" "],
-  code[data-theme*=" "] span {
+  
+  code[data-theme*="light"],
+  code[data-theme*="light"] span {
     color: var(--shiki-light);
     background-color: var(--shiki-light-bg);
   }
 
-  .dark code[data-theme*=" "],
-  .dark code[data-theme*=" "] span {
+  .dark code[data-theme*="dark"],
+  .dark code[data-theme*="dark"] span {
     color: var(--shiki-dark);
     background-color: var(--shiki-dark-bg);
   }

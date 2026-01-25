@@ -96,11 +96,9 @@ export function CommandCopy({ command, className, children }: CommandCopyProps) 
                 <TabsContent value="manual">
                     <p>Copy this code and paste it into a card-stack.tsx file.</p>
                     <p>Update the imports as needed.</p>
-                    <Card>
-                        <CardContent>
-                            {children}
-                        </CardContent>
-                    </Card>
+                    <div className="not-prose w-full px-8 py-4 border rounded-lg">
+                        {children}
+                    </div>
                 </TabsContent>
             </Tabs>
         </div>
