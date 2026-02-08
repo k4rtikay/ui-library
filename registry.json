@@ -1,7 +1,7 @@
 {
     "$schema": "https://ui.shadcn.com/schema/registry.json",
-    "name": "motion-ui",
-    "homepage": "https://motion-ui.com",
+    "name": "flow-kit",
+    "homepage": "https://flow-kit-beta.vercel.app/",
     "items": [
         {
             "name": "card-stack",
