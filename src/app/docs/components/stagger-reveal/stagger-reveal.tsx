@@ -166,7 +166,7 @@ export function StaggerReveal({
                 <motion.div
                     key={index}
                     variants={itemVariants}
-                    className="shrink-0"
+                    className="flex"
                 >
                     {child}
                 </motion.div>
