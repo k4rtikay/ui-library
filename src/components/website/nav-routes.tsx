@@ -56,6 +56,15 @@ export default function NavRoutes() {
                     href: '/docs/components/dnd-accordion'
                 }
             ]
+        },
+        {
+            category: 'Animations',
+            items: [
+                {
+                    name: 'Stagger Reveal',
+                    href: '/docs/components/stagger-reveal'
+                }
+            ]
         }
     ]
 

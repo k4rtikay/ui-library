@@ -17,6 +17,21 @@
             "dependencies": [
                 "motion"
             ]
+        },
+        {
+            "name": "stagger-reveal",
+            "type": "registry:ui",
+            "title": "Stagger Reveal",
+            "description": "Animate children with staggered entrance/exit animations.",
+            "files": [
+                {
+                    "path": "registry/stagger-reveal.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": [
+                "motion"
+            ]
         }
     ]
 }
