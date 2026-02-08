@@ -122,13 +122,14 @@ export function StaggerReveal({
         const elements =
             by === "character"
                 ? text.split("")
-                : text.split(" ").map((word, i, arr) =>
-                    i < arr.length - 1 ? word + " " : word
-                );
+                : text.split(" ");
 
         return (
             <motion.span
-                className={cn("inline-flex flex-wrap", className)}
+                className={cn(
+                    by === "character" ? "inline-flex flex-wrap" : "inline-flex flex-wrap gap-1",
+                    className
+                )}
                 variants={containerVariants}
                 initial="hidden"
                 animate={trigger ? "visible" : "hidden"}
