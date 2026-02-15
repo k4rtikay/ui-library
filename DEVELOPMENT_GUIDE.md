@@ -1,6 +1,6 @@
 # Development Workflow Guide
 
-This guide is for you (the maintainer) to follow when building new features or fixing bugs. It simulates a team environment even when working solo.
+This guide is for you (the maintainer/contributor) to follow when building new features or fixing bugs.
 
 ## 1. Pick a Task (Issue)
 - **Idea:** Have an idea for a new component?
