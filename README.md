@@ -46,6 +46,14 @@ Visit [http://localhost:3000](http://localhost:3000) to browse components and co
 - [shadcn/ui](https://ui.shadcn.com/) – Component primitives
 - [MDX](https://mdxjs.com/) – Documentation
 
+## Contributing
+ 
+Contributions are always welcome!
+ 
+See [CONTRIBUTING.md](CONTRIBUTING.md) for ways to get started.
+ 
+Please adhere to this project's [Code of Conduct](CODE_OF_CONDUCT.md).
+ 
 ## License
 
 MIT © [Kartikeya](https://github.com/k4rtikay)
