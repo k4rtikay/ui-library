@@ -1,12 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import React, {
-    Children,
-    isValidElement,
-    useMemo,
-    ElementType,
-} from "react";
+import React, { Children, isValidElement, useMemo, ElementType } from "react";
 import { motion, Transition, useReducedMotion } from "motion/react";
 
 type Direction = "up" | "down" | "left" | "right";
@@ -95,7 +90,7 @@ export function StaggerReveal({
                 },
             },
         }),
-        [staggerDelay, staggerFrom]
+        [staggerDelay, staggerFrom],
     );
 
     const itemVariants = useMemo(
@@ -103,9 +98,9 @@ export function StaggerReveal({
             hidden: prefersReducedMotion
                 ? { opacity: 0 }
                 : {
-                    opacity: 0,
-                    ...directionOffset,
-                },
+                      opacity: 0,
+                      ...directionOffset,
+                  },
             visible: {
                 opacity: 1,
                 x: 0,
@@ -113,22 +108,21 @@ export function StaggerReveal({
                 transition,
             },
         }),
-        [prefersReducedMotion, directionOffset, transition]
+        [prefersReducedMotion, directionOffset, transition],
     );
 
     // Text variant - split into characters or words
     if (variant === "text") {
         const text = typeof children === "string" ? children : "";
-        const elements =
-            by === "character"
-                ? text.split("")
-                : text.split(" ");
+        const elements = by === "character" ? text.split("") : text.split(" ");
 
         return (
             <motion.span
                 className={cn(
-                    by === "character" ? "inline-flex flex-wrap" : "inline-flex flex-wrap gap-1",
-                    className
+                    by === "character"
+                        ? "inline-flex flex-wrap"
+                        : "inline-flex flex-wrap gap-1",
+                    className,
                 )}
                 variants={containerVariants}
                 initial="hidden"

@@ -13,7 +13,9 @@ export default function PlaygroundLayout({
             </header>
 
             <div className="m-4">
-                <h1 className="text-3xl font-semibold tracking-tight text-foreground">Component Playground</h1>
+                <h1 className="text-3xl font-semibold tracking-tight text-foreground">
+                    Component Playground
+                </h1>
                 <p className="text-muted-foreground mt-2">
                     Use this area to develop and test components in isolation.
                 </p>

@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import NavRoutes from "./nav-routes";
 
 export default function MobileNav() {
-    const [open, setOpen] = useState(false)
+    const [open, setOpen] = useState(false);
 
     return (
         <div>
@@ -25,10 +25,10 @@ export default function MobileNav() {
                 <SheetContent side="left">
                     <div className="mt-8 px-2">
                         {/* Reuse the links here! */}
-                        <NavRoutes/>
+                        <NavRoutes />
                     </div>
                 </SheetContent>
             </Sheet>
         </div>
-    )
+    );
 }
