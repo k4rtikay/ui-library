@@ -18,7 +18,7 @@ export default function StaggerRevealDemo() {
                     <a
                         key={index}
                         href="#"
-                        className="p-3 rounded-full shrink-0 bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
+                        className="inline-flex p-3 rounded-full bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 transition-colors"
                         aria-label={link.label}
                     >
                         {link.icon}
