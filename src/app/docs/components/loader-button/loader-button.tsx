@@ -1,115 +1,130 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle } from "lucide-react";
 
-type ButtonState = 'idle' | 'loading' | 'success' | 'error';
+export type ButtonState = "idle" | "loading" | "success" | "error";
 
-interface LoaderButtonProps {
-    state?: ButtonState;
-    onClick?: () => void;
+type SafeButtonProps = Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"
+>;
+
+interface LoaderButtonProps extends SafeButtonProps {
+    state: ButtonState;
+    children?: React.ReactNode;
+    successLabel?: React.ReactNode;
+    errorLabel?: React.ReactNode;
+    loader?: React.ReactNode;
+    className?: string;
 }
 
-export default function LoaderButton({ state = 'idle', onClick }: LoaderButtonProps) {
+export function LoaderButton({
+    state,
+    children = "Submit",
+    successLabel,
+    errorLabel,
+    loader,
+    className,
+    disabled,
+    ...props
+}: LoaderButtonProps) {
+    const isDisabled = disabled ?? state !== "idle";
 
-    const [buttonState, setButtonState] = useState<ButtonState>(state);
+    const defaultSuccessLabel = (
+        <span className="flex justify-center items-center gap-1">
+            <CheckCircle2 className="w-4 h-4" /> Success
+        </span>
+    );
 
-    const simulateHandleClick = (delay: number = 1500, shouldFail: boolean = false) => {
-        setButtonState('loading');
-        setTimeout(() => {
-            if (shouldFail) {
-                setButtonState('error');
-            } else {
-                setButtonState('success');
-            }
-        }, delay);
-    };
-
-    useEffect(() => {
-        if (buttonState == 'error' || buttonState == 'success') {
-            const timer = setTimeout(() => {
-                setButtonState('idle');
-            }, 2000);
-            return () => clearTimeout(timer);
-        }
-    }, [buttonState]);
+    const defaultErrorLabel = (
+        <span className="flex justify-center items-center gap-1">
+            <XCircle className="w-4 h-4" /> Error
+        </span>
+    );
 
     return (
         <motion.button
-            onClick={() => simulateHandleClick(3000, false)}
-            disabled={buttonState !== 'idle'}
+            disabled={isDisabled}
             variants={buttonVariants}
-            animate={buttonState}
-            className={cn(`min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold hover:brightness-95 transition-colors duration-30`,
-                buttonState != 'idle' && 'cursor-not-allowed',
-                'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2')}
+            animate={state}
+            className={cn(
+                "min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold",
+                "hover:brightness-95 transition-colors duration-300",
+                "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                isDisabled && "cursor-not-allowed",
+                className,
+            )}
             style={{
                 backgroundColor:
-                    buttonState === 'success' ? '#a0e2b3ff' :
-                        buttonState === 'error' ? '#efb2adff' :
-                            'var(--primary)',
+                    state === "success" ? "#a0e2b3ff" :
+                        state === "error" ? "#efb2adff" :
+                            "var(--primary)",
                 color:
-                    buttonState === 'success' ? '#1f3024ff' :
-                        buttonState === 'error' ? '#4a1b1bff' :
-                            'var(--primary-foreground)',
+                    state === "success" ? "#1f3024ff" :
+                        state === "error" ? "#4a1b1bff" :
+                            "var(--primary-foreground)",
             }}
+            aria-busy={state === "loading"}
+            {...props}
         >
-            <AnimatePresence
-                mode="wait"
-            >
-                {buttonState === 'idle' &&
+            <AnimatePresence mode="wait">
+                {state === "idle" && (
                     <motion.div
-                        key={'idle'}
+                        key="idle"
                         variants={contentVariants}
                         initial="initial"
                         animate="animate"
                         exit="exit"
                     >
-                        Submit
+                        {children}
                     </motion.div>
-                }
-                {buttonState === 'loading' &&
+                )}
+                {state === "loading" && (
                     <motion.div
-                        key={'loading'}
+                        key="loading"
                         variants={contentVariants}
                         initial="initial"
                         animate="animate"
                         exit="exit"
                         className="w-full flex items-center justify-center gap-2"
+                        aria-live="polite"
                     >
-                        <LoadingSpinner />
+                        {loader ?? <LoadingSpinner />}
                     </motion.div>
-                }
-                {buttonState === 'success' &&
+                )}
+                {state === "success" && (
                     <motion.div
-                        key={'success'}
+                        key="success"
                         variants={contentVariants}
                         initial="initial"
                         animate="animate"
                         exit="exit"
-                        className="flex justify-center items-center gap-1"
+                        aria-live="polite"
                     >
-                        <CheckCircle2 className="w-4 h-4" /> Success
+                        {successLabel ?? defaultSuccessLabel}
                     </motion.div>
-                }
-                {buttonState === 'error' &&
+                )}
+                {state === "error" && (
                     <motion.div
-                        key={'error'}
+                        key="error"
                         variants={contentVariants}
                         initial="initial"
                         animate="animate"
                         exit="exit"
-                        className="flex justify-center items-center gap-1"
+                        aria-live="polite"
                     >
-                        <XCircle className="w-4 h-4" /> Error
+                        {errorLabel ?? defaultErrorLabel}
                     </motion.div>
-                }
+                )}
             </AnimatePresence>
         </motion.button>
     );
 }
+
+// --- Animation Variants ---
 
 const buttonVariants = {
     idle: {
@@ -122,7 +137,7 @@ const buttonVariants = {
                 repeat: Infinity,
                 duration: 1.25,
                 ease: "easeInOut",
-            }
+            },
         } as const,
     },
     success: {
@@ -131,7 +146,7 @@ const buttonVariants = {
             scale: {
                 duration: 0.3,
                 ease: "easeInOut",
-            }
+            },
         } as const,
     },
     error: {
@@ -141,7 +156,7 @@ const buttonVariants = {
             x: {
                 duration: 0.3,
                 ease: "easeOut",
-            }
+            },
         } as const,
     },
 };
@@ -164,24 +179,24 @@ const contentVariants = {
             ease: "easeOut",
         } as const,
     },
-}
+};
+
+// --- Loading Spinner ---
 
 export function LoadingSpinner() {
     return (
         <div className="flex w-fit p-2 rounded-full h-full items-center justify-center">
-            {[...Array(4)].map((_, i) => {
-                return (
-                    <motion.div
-                        key={i}
-                        variants={loaderVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        custom={i}
-                        className="w-1 h-4 rounded-full mx-0.5 bg-primary-foreground"
-                    />
-                );
-            })}
+            {[...Array(4)].map((_, i) => (
+                <motion.div
+                    key={i}
+                    variants={loaderVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    custom={i}
+                    className="w-1 h-4 rounded-full mx-0.5 bg-primary-foreground"
+                />
+            ))}
         </div>
     );
 }
@@ -199,10 +214,10 @@ const loaderVariants = {
                 duration: 0.75,
                 ease: [0.45, 0, 0.55, 1],
                 delay: i * 0.1,
-            }
+            },
         } as const,
     }),
     exit: {
         opacity: 0,
     },
-}
+};
