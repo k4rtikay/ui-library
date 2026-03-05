@@ -25,10 +25,6 @@ export default function NavRoutes() {
             category: "Buttons",
             items: [
                 {
-                    name: "Expanding Pill",
-                    href: "/docs/components/expanding-pill",
-                },
-                {
                     name: "Loader Button",
                     href: "/docs/components/loader-button",
                 },
@@ -40,23 +36,6 @@ export default function NavRoutes() {
                 {
                     name: "Card Stack",
                     href: "/docs/components/card-stack",
-                },
-                {
-                    name: "Lenticular Card",
-                    href: "/docs/components/lenticular-card",
-                },
-                {
-                    name: "FAQ Section",
-                    href: "/docs/components/faq-section",
-                },
-            ],
-        },
-        {
-            category: "Interactive",
-            items: [
-                {
-                    name: "Drag and Drop Accordion",
-                    href: "/docs/components/dnd-accordion",
                 },
             ],
         },
