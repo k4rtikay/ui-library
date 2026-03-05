@@ -1,0 +1,60 @@
+import LoaderButtonDemo from "./loader-button-demo";
+import ComponentPreview from "@/components/website/component-preview";
+import { CommandCopy } from "@/components/website/command-copy";
+import { TabsContent } from "@/components/ui/tabs";
+import CollapsibleCode from "@/components/website/collapsible-code";
+
+# Loader Button
+
+A button that transitions through loading, success, and error states with smooth animations. Ideal for form submissions, async actions, and any interaction that needs visual feedback.
+
+## Preview
+
+<ComponentPreview>
+  <TabsContent value="preview" className="relative flex items-center justify-center">
+    <LoaderButtonDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    <CollapsibleCode>
+      ```tsx file=loader-button-demo.tsx
+      ```
+    </CollapsibleCode>
+  </TabsContent>
+</ComponentPreview>
+
+## Installation
+
+<CommandCopy
+  command={{
+    npm: "npm install motion lucide-react",
+    pnpm: "pnpm add motion lucide-react",
+    bun: "bun add motion lucide-react",
+    yarn: "yarn add motion lucide-react"
+  }}
+>
+
+<CollapsibleCode>
+  ```tsx file=loader-button.tsx
+  ```
+</CollapsibleCode>
+</CommandCopy>
+
+## API Reference
+
+### LoaderButton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `state` | `"idle" \| "loading" \| "success" \| "error"` | Required | Controls the current button state |
+| `children` | `React.ReactNode` | `"Submit"` | Content shown in the idle state |
+| `successLabel` | `React.ReactNode` | `✓ Success` | Content shown in the success state |
+| `errorLabel` | `React.ReactNode` | `✗ Error` | Content shown in the error state |
+| `loader` | `React.ReactNode` | `<LoadingSpinner />` | Content shown in the loading state |
+| `className` | `string` | `undefined` | Additional CSS classes |
+| `disabled` | `boolean` | `state !== "idle"` | Override disabled behavior |
+
+Also accepts all standard `button` HTML attributes via `...props`.
+
+### LoadingSpinner
+
+A standalone animated spinner with four pulsing bars. Can be used independently or as the default loader inside `LoaderButton`.

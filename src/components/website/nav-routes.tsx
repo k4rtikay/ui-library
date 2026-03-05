@@ -28,6 +28,10 @@ export default function NavRoutes() {
                     name: "Expanding Pill",
                     href: "/docs/components/expanding-pill",
                 },
+                {
+                    name: "Loader Button",
+                    href: "/docs/components/loader-button",
+                },
             ],
         },
         {
