@@ -1,0 +1,54 @@
+import HelloButtonDemo from "./hello-button-demo";
+import ComponentPreview from "@/components/website/component-preview";
+import { CommandCopy } from "@/components/website/command-copy";
+import { TabsContent } from "@/components/ui/tabs";
+import CollapsibleCode from "@/components/website/collapsible-code";
+
+# Hello Button
+
+A playful button that reveals a waving hand animation on hover — perfect for greetings, onboarding, or adding personality to your UI.
+
+## Preview
+
+<ComponentPreview>
+  <TabsContent value="preview" className="relative flex items-center justify-center">
+    <HelloButtonDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    <CollapsibleCode>
+      ```tsx file=hello-button-demo.tsx
+      ```
+    </CollapsibleCode>
+  </TabsContent>
+</ComponentPreview>
+
+## Installation
+
+<CommandCopy
+  command={{
+    npm: "npm install motion",
+    pnpm: "pnpm add motion",
+    bun: "bun add motion",
+    yarn: "yarn add motion"
+  }}
+>
+
+<CollapsibleCode>
+  ```tsx file=hello-button.tsx
+  ```
+</CollapsibleCode>
+</CommandCopy>
+
+## API Reference
+
+### HelloButton
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `React.ReactNode` | `"Say Hello"` | Button label text |
+| `className` | `string` | `undefined` | Additional CSS classes |
+
+Also accepts all standard `button` HTML attributes via `...props`.
+
+> [!NOTE]
+> This component renders as a `<button>` by default. If you're using it as a link-based CTA (e.g. `mailto:`, a contact page, or a booking link), swap `motion.button` for `motion.a` and the button HTML attributes for anchor attributes in the source. All animations work the same on `motion.a`.
