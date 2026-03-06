@@ -1,4 +1,4 @@
-import LoaderButtonDemo from "../docs/components/loader-button/loader-button-demo";
+import HelloButtonDemo from "../docs/components/hello-button/hello-button-demo";
 
 export default function DevRun() {
     return (
@@ -29,7 +29,7 @@ export default function DevRun() {
                                     </code>{" "}
                                     to start.
                                 </p> */}
-                                <LoaderButtonDemo />
+                                <HelloButtonDemo />
                             </div>
                         </div>
                     </div>

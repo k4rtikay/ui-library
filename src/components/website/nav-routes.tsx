@@ -28,6 +28,10 @@ export default function NavRoutes() {
                     name: "Loader Button",
                     href: "/docs/components/loader-button",
                 },
+                {
+                    name: "Hello Button",
+                    href: "/docs/components/hello-button",
+                },
             ],
         },
         {
