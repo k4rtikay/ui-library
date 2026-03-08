@@ -23,13 +23,13 @@ export function useMDXComponents(): MDXComponents {
         ),
         th: (props) => (
             <th
-                className="border-b border-zinc-200 bg-zinc-50 px-4 py-3 text-left font-medium text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100"
+                className="border-b border-zinc-200 bg-zinc-50 px-4 py-3 text-left font-medium text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 [&_code]:rounded [&_code]:bg-zinc-200/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-normal [&_code]:dark:bg-zinc-800"
                 {...props}
             />
         ),
         td: (props) => (
             <td
-                className="border-b border-zinc-100 px-4 py-3 text-zinc-600 dark:border-zinc-800 dark:text-zinc-400"
+                className="border-b border-zinc-100 px-4 py-3 text-zinc-600 dark:border-zinc-800 dark:text-zinc-400 [&_code]:rounded [&_code]:bg-zinc-200/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-normal [&_code]:dark:bg-zinc-800"
                 {...props}
             />
         ),

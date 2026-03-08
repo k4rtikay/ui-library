@@ -45,13 +45,13 @@ A button that transitions through loading, success, and error states with smooth
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `state` | `"idle" \| "loading" \| "success" \| "error"` | Required | Controls the current button state |
-| `children` | `React.ReactNode` | `"Submit"` | Content shown in the idle state |
-| `successLabel` | `React.ReactNode` | `✓ Success` | Content shown in the success state |
-| `errorLabel` | `React.ReactNode` | `✗ Error` | Content shown in the error state |
-| `loader` | `React.ReactNode` | `<LoadingSpinner />` | Content shown in the loading state |
-| `className` | `string` | `undefined` | Additional CSS classes |
-| `disabled` | `boolean` | `state !== "idle"` | Override disabled behavior |
+| state | "idle" \| "loading" \| "success" \| "error" | Required | Controls the current button state |
+| children | React.ReactNode | `"Submit"` | Content shown in the idle state |
+| successLabel | React.ReactNode | `✓ Success` | Content shown in the success state |
+| errorLabel | React.ReactNode | `✗ Error` | Content shown in the error state |
+| loader | React.ReactNode | `<LoadingSpinner />` | Content shown in the loading state |
+| className | string | `undefined` | Additional CSS classes |
+| disabled | boolean | `state !== "idle"` | Override disabled behavior |
 
 Also accepts all standard `button` HTML attributes via `...props`.
 

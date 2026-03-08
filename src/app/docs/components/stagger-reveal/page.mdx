@@ -62,14 +62,14 @@ Animate children with staggered entrance animations. Perfect for lists, navigati
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `variant` | `"items" \| "text"` | `"items"` | Animation mode - items wraps children, text splits string |
-| `by` | `"character" \| "word"` | `"character"` | (text variant) How to split the text |
-| `direction` | `"up" \| "down" \| "left" \| "right"` | `"up"` | Direction elements animate from |
-| `staggerDelay` | `number` | `0.05` | Delay in seconds between each element |
-| `staggerFrom` | `"first" \| "last" \| "center"` | `"first"` | Which element animates first |
-| `trigger` | `boolean` | `true` | Controls when animation starts |
-| `transition` | `Transition` | spring config | Motion transition configuration |
-| `as` | `ElementType` | `"div"` | Wrapper element type |
+| variant | "items" \| "text" | `"items"` | Animation mode - items wraps children, text splits string |
+| by | "character" \| "word" | `"character"` | (text variant) How to split the text |
+| direction | "up" \| "down" \| "left" \| "right" | `"up"` | Direction elements animate from |
+| staggerDelay | number | `0.05` | Delay in seconds between each element |
+| staggerFrom | "first" \| "last" \| "center" | `"first"` | Which element animates first |
+| trigger | boolean | `true` | Controls when animation starts |
+| transition | Transition | spring config | Motion transition configuration |
+| as | ElementType | `"div"` | Wrapper element type |
 
 ### StaggerRevealItem
 
@@ -77,5 +77,5 @@ A sub-component for custom item control within the stagger animation.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `children` | `React.ReactNode` | Required | Content to animate |
-| `className` | `string` | `undefined` | Additional CSS classes |
+| children | React.ReactNode | Required | Content to animate |
+| className | string | `undefined` | Additional CSS classes |
