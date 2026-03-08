@@ -37,7 +37,7 @@ export default function CollapsibleCode({ children, maxHeight = 300, className }
                 className={cn("absolute inset-x-0 bottom-0 flex justify-center items-center w-full pb-4 pt-12 transition-all duration-300",
                     isOpen ? "bg-transparent h-auto pointer-events-none"
                         :
-                        "bg-gradient-to-t from-background via-background/80 to-transparent h-32"
+                        "bg-linear-to-t from-background via-background/80 to-transparent h-32"
                 )}
             >
                 <Button

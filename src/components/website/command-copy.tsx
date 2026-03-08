@@ -101,7 +101,7 @@ export function CommandCopy({
 
                 <TabsContent value="manual">
                     <p>
-                        Copy this code and paste it into a card-stack.tsx file.
+                        Copy this code and paste it into a .tsx file.
                     </p>
                     <p>Update the imports as needed.</p>
                     <div className="not-prose w-full px-8 py-4 border rounded-lg">
