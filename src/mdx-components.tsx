@@ -4,7 +4,6 @@ const components: MDXComponents = {};
 
 export function useMDXComponents(): MDXComponents {
     return {
-        // Allows you to customize standard markdown elements
         table: (props) => (
             <div className="not-prose my-6 w-full overflow-y-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
                 <table className="w-full text-sm" {...props} />
