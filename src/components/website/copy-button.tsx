@@ -36,10 +36,10 @@ export default function CopyButton({ text, className, onCopy }: CopyButtonProps)
         <Button
             onClick={handleCopy}
             variant="ghost"
+            aria-label="Copy to clipboard"
             className={cn("inline-flex h-6 w-6 rounded-sm opacity-70 hover:opacity-100", className)}
         >
             {hasCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
-            <span className="sr-only">Copy command</span>
         </Button>
     )
 }
