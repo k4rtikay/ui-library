@@ -1,26 +1,21 @@
 "use client";
 
 import React from "react";
-import { motion } from "motion/react";
+import { motion, HTMLMotionProps } from "motion/react";
 import { cn } from "@/lib/utils";
 
-type SafeButtonProps = Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"
->;
-
-interface HelloButtonProps extends SafeButtonProps {
+interface HelloButtonProps extends HTMLMotionProps<"button"> {
     children?: React.ReactNode;
-    className?: string;
 }
 
-export function HelloButton({
-    children = "Say Hello",
+export const HelloButton = React.forwardRef<HTMLButtonElement, HelloButtonProps>(
+    ({children = "Say Hello",
     className,
     ...props
-}: HelloButtonProps) {
+}, ref) => {
     return (
         <motion.button
+            ref={ref}
             className={cn(
                 "bg-primary text-primary-foreground py-2 px-4 rounded-full flex items-center",
                 className,
@@ -45,7 +40,9 @@ export function HelloButton({
             </motion.span>
         </motion.button>
     );
-}
+});
+
+HelloButton.displayName = "HelloButton";
 
 //motion variants
 

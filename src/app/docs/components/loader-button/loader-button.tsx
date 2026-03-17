@@ -9,6 +9,7 @@ export type ButtonState = "idle" | "loading" | "success" | "error";
 
 interface LoaderButtonProps extends HTMLMotionProps<"button"> {
     state: ButtonState;
+    children?: React.ReactNode;
     successLabel?: React.ReactNode;
     errorLabel?: React.ReactNode;
     loader?: React.ReactNode;
