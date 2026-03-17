@@ -1,36 +1,32 @@
 "use client";
 
 import React from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, HTMLMotionProps } from "motion/react";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle } from "lucide-react";
 
 export type ButtonState = "idle" | "loading" | "success" | "error";
 
-type SafeButtonProps = Omit<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    "onDrag" | "onDragStart" | "onDragEnd" | "onAnimationStart"
->;
-
-interface LoaderButtonProps extends SafeButtonProps {
+interface LoaderButtonProps extends HTMLMotionProps<"button"> {
     state: ButtonState;
-    children?: React.ReactNode;
     successLabel?: React.ReactNode;
     errorLabel?: React.ReactNode;
     loader?: React.ReactNode;
-    className?: string;
 }
 
-export function LoaderButton({
-    state,
-    children = "Submit",
-    successLabel,
-    errorLabel,
-    loader,
-    className,
-    disabled,
-    ...props
-}: LoaderButtonProps) {
+export const LoaderButton = React.forwardRef<HTMLButtonElement, LoaderButtonProps>((
+    {
+        state,
+        children = "Submit",
+        successLabel,
+        errorLabel,
+        loader,
+        className,
+        disabled,
+        ...props
+    },
+    ref,
+) => {
     const isDisabled = disabled ?? state !== "idle";
 
     const defaultSuccessLabel = (
@@ -47,6 +43,7 @@ export function LoaderButton({
 
     return (
         <motion.button
+            ref={ref}
             disabled={isDisabled}
             variants={buttonVariants}
             animate={state}
@@ -122,7 +119,9 @@ export function LoaderButton({
             </AnimatePresence>
         </motion.button>
     );
-}
+});
+
+LoaderButton.displayName = "LoaderButton";
 
 // --- Animation Variants ---
 
