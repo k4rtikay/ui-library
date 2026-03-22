@@ -28,7 +28,11 @@ export function PinnedList({ items, onTogglePin, className }: PinnedListProps) {
         >
             {pinnedItems.length > 0 && (
                 <motion.section layout>
-                    <motion.h3 layout="position"
+                    <motion.h3
+                        layout="position"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ ease: "easeOut" }}
                         className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2 px-1">
                         Pinned
                     </motion.h3>
@@ -45,7 +49,8 @@ export function PinnedList({ items, onTogglePin, className }: PinnedListProps) {
             )}
 
             <motion.section layout>
-                <motion.h3 layout="position"
+                <motion.h3
+                    layout="position"
                     className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2 px-1">
                     {pinnedItems.length > 0 ? "Everything else" : "All items"}
                 </motion.h3>
@@ -73,9 +78,8 @@ function PinnedListRow({
     return (
         <motion.li
             layoutId={item.id}
-            transition={{ type: 'spring', stiffness: 240, damping: 25 }}
-            layout="position"
-            className="group flex items-center bg-card border border-2 border-border/50 gap-3 rounded-lg px-3 py-2.5 hover:bg-muted/50 transition-colors">
+            transition={{ type: 'spring', stiffness: 280, damping: 25 }}
+            className="relative group flex items-center bg-card border-2 border-border/50 gap-3 rounded-lg px-3 py-2.5 hover:bg-muted/50 transition-colors">
             <div className="min-w-0 flex flex-col flex-1">
                 <p className="text-sm font-medium text-foreground truncate">
                     {item.label}
