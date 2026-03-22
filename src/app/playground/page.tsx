@@ -1,4 +1,4 @@
-import HelloButtonDemo from "../docs/components/hello-button/hello-button-demo";
+import PinnedListDemo from "../docs/components/pinned-list/pinned-list-demo";
 
 export default function DevRun() {
     return (
@@ -21,7 +21,7 @@ export default function DevRun() {
 
                         <div className="flex-1 p-8 flex items-center justify-center relative bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [background-size:16px_16px] overflow-auto">
                             {/* NOTE: Import and place your component here for testing */}
-                            <div className="text-center space-y-2">
+                            <div className="flex items-center justify-center">
                                 {/* <p className="text-muted-foreground text-sm">
                                     Import a component into{" "}
                                     <code className="text-foreground">
@@ -29,7 +29,7 @@ export default function DevRun() {
                                     </code>{" "}
                                     to start.
                                 </p> */}
-                                <HelloButtonDemo />
+                                <PinnedListDemo />
                             </div>
                         </div>
                     </div>
