@@ -1,4 +1,5 @@
 import PinnedListDemo from "../docs/components/pinned-list/pinned-list-demo";
+import SharedMenuDemo from "../docs/components/shared-menu/shared-menu-demo";
 
 export default function DevRun() {
     return (
@@ -29,6 +30,8 @@ export default function DevRun() {
                                     </code>{" "}
                                     to start.
                                 </p> */}
+                                {/* <PinnedListDemo /> */}
+                                {/* <SharedMenuDemo /> */}
                                 <PinnedListDemo />
                             </div>
                         </div>

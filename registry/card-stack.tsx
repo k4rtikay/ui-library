@@ -81,22 +81,6 @@ export function CardStack({
     const isKeyRef = useRef(false);
     const autoAdvanceTimerRef = useRef<NodeJS.Timeout>(null);
 
-    // Edge cases
-    if (totalCards === 0) return null;
-    if (totalCards === 1) {
-        return (
-            <div className={cn("relative", className)} {...props}>
-                <div className="relative">{cards[0]}</div>
-            </div>
-        );
-    }
-
-    const maxOffset = Math.max(
-        0,
-        ...offsets.slice(0, maxVisibleCards).map((offset) => offset.y),
-    );
-
-    const lastIndex = (activeIndex - 1 + totalCards) % totalCards;
 
     const handleNext = useCallback(() => {
         const newIndex = (activeIndex + 1) % totalCards;
@@ -109,29 +93,6 @@ export function CardStack({
         setHasInteracted(true);
     }, [activeIndex, totalCards, isControlled, onIndexChange]);
 
-    const handleKeyDown = (e: React.KeyboardEvent) => {
-        if (!keyboardNavigable) return;
-
-        if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            isKeyRef.current = true;
-            handleNext();
-        } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
-            e.preventDefault();
-            isKeyRef.current = true;
-            handleNext();
-        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
-            e.preventDefault();
-            isKeyRef.current = true;
-            const prevIndex = (activeIndex - 1 + totalCards) % totalCards;
-
-            if (!isControlled) {
-                setInternalIndex(prevIndex);
-            }
-            onIndexChange?.(prevIndex);
-            setHasInteracted(true);
-        }
-    };
 
     useEffect(() => {
         if (!autoAdvance || isPaused) {
@@ -160,6 +121,48 @@ export function CardStack({
             isKeyRef.current = false;
         }
     }, [activeIndex]);
+
+    // Edge cases
+    if (totalCards === 0) return null;
+    if (totalCards === 1) {
+        return (
+            <div className={cn("relative", className)} {...props}>
+                <div className="relative">{cards[0]}</div>
+            </div>
+        );
+    }
+
+
+    const maxOffset = Math.max(
+        0,
+        ...offsets.slice(0, maxVisibleCards).map((offset) => offset.y),
+    );
+
+    const lastIndex = (activeIndex - 1 + totalCards) % totalCards;
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (!keyboardNavigable) return;
+
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            isKeyRef.current = true;
+            handleNext();
+        } else if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+            e.preventDefault();
+            isKeyRef.current = true;
+            handleNext();
+        } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+            e.preventDefault();
+            isKeyRef.current = true;
+            const prevIndex = (activeIndex - 1 + totalCards) % totalCards;
+
+            if (!isControlled) {
+                setInternalIndex(prevIndex);
+            }
+            onIndexChange?.(prevIndex);
+            setHasInteracted(true);
+        }
+    };
 
     const getCardVariant = (index: number) => {
         const isTop = index === activeIndex;

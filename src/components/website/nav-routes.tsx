@@ -11,78 +11,70 @@ export default function NavRoutes() {
         {
             category: "Getting Started",
             items: [
-                {
-                    name: "Introduction",
-                    href: "/docs",
-                },
-                {
-                    name: "Setup",
-                    href: "/docs/setup",
-                },
+                { name: "Introduction", href: "/docs" },
+                { name: "Setup", href: "/docs/setup" },
             ],
         },
         {
             category: "Buttons",
             items: [
-                {
-                    name: "Loader Button",
-                    href: "/docs/components/loader-button",
-                },
-                {
-                    name: "Hello Button",
-                    href: "/docs/components/hello-button",
-                },
+                { name: "Loader Button", href: "/docs/components/loader-button" },
+                { name: "Hello Button", href: "/docs/components/hello-button" },
             ],
         },
         {
             category: "Cards",
             items: [
-                {
-                    name: "Card Stack",
-                    href: "/docs/components/card-stack",
-                },
+                { name: "Card Stack", href: "/docs/components/card-stack" },
+            ],
+        },
+        {
+            category: "Menus",
+            items: [
+                { name: "Shared Menu", href: "/docs/components/shared-menu" },
             ],
         },
         {
             category: "Animations",
             items: [
-                {
-                    name: "Stagger Reveal",
-                    href: "/docs/components/stagger-reveal",
-                },
+                { name: "Stagger Reveal", href: "/docs/components/stagger-reveal" },
             ],
         },
     ];
 
     return (
-        <ul className="flex flex-col gap-8">
-            {comps.map((comp) => {
-                return (
-                    <li key={comp.category} className="flex flex-col gap-4">
-                        <p className="font-semibold text-md">{comp.category}</p>
-                        <ul className="flex flex-col gap-2 border-l-2 border-l-[#C2C2C2] dark:border-l-[#525252] px-4">
-                            {comp.items.map((item) => {
-                                return (
-                                    <li
-                                        key={item.name}
+        <ul className="flex flex-col gap-4">
+            {comps.map((comp) => (
+                <li key={comp.category} className="flex flex-col gap-1">
+                    <p className="font-bold text-xs text-zinc-500 dark:text-zinc-100 uppercase tracking-wider pb-2">
+                        {comp.category}
+                    </p>
+                    <ul className="flex flex-col gap-1 w-[94%] mx-auto border-l border-l-zinc-500 relative">
+                        {comp.items.map((item) => {
+                            const isActive = pathname === item.href;
+
+                            return (
+                                <li key={item.name} className="relative">
+                                    <Link
+                                        href={item.href}
                                         className={cn(
-                                            "opacity-60 hover:opacity-100",
+                                            "block px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-r-[15px] [corner-shape:squircle]",
                                             {
-                                                "text-[#698BFA] opacity-100 font-semibold":
-                                                    pathname === item.href,
-                                            },
+                                                "text-white bg-linear-to-r from-[#171717] to-zinc-700":
+                                                    isActive,
+                                                "text-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800":
+                                                    !isActive,
+                                            }
                                         )}
                                     >
-                                        <Link href={item.href}>
-                                            {item.name}
-                                        </Link>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </li>
-                );
-            })}
+                                        {item.name}
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                </li>
+            ))}
         </ul>
     );
 }

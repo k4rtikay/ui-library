@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import BgImage from "../../public/hero-section-bg.png";
+import BgImage from "../../public/hero-section-bg.jpg";
 import { ChevronRight, Github } from "lucide-react";
 import { Instrument_Serif } from "next/font/google";
 
@@ -41,7 +41,7 @@ export default function Home() {
                         src={BgImage}
                         alt="Background"
                         placeholder="blur"
-                        quality={100}
+                        quality={75}
                         fill
                         priority
                         className="animate-hero-zoom object-cover -z-10 brightness-[0.65] contrast-[1.1]"
@@ -77,10 +77,10 @@ export default function Home() {
 
                         <Link
                             href="/docs"
-                            className="group font-medium ring-2 ring-white/10 bg-foreground text-background px-6 py-4 rounded-full flex gap-2 items-center justify-center text-base hover:opacity-90 transition-all duration-300 shadow-xl hover:shadow-2xl"
+                            className="group font-medium ring-2 ring-white/10 bg-foreground text-background px-6 py-4 rounded-[50px] [corner-shape:squircle] flex gap-2 items-center justify-center text-base hover:opacity-90 transition-all duration-300 shadow-xl hover:shadow-2xl"
                         >
                             Browse Components
-                            <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                            <ChevronRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
                         </Link>
                     </div>
                 </div>
