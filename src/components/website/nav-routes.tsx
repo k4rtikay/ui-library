@@ -60,7 +60,7 @@ export default function NavRoutes() {
                                         className={cn(
                                             "block px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-r-[15px] [corner-shape:squircle]",
                                             {
-                                                "text-white bg-linear-to-r from-[#171717] to-zinc-700":
+                                                "bg-linear-to-r from-zinc-200 to-zinc-300 text-zinc-900 dark:from-[#171717] dark:to-zinc-700 dark:text-white":
                                                     isActive,
                                                 "text-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800":
                                                     !isActive,

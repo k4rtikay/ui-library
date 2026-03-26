@@ -45,7 +45,18 @@ A flexible component that displays items in multiple layouts — list, card, and
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| N/A | — | — | Component manages internal state |
+| `items` | `any[]` | `[]` | The list of items to display |
+| `children` | `(item: any, index: number, viewType: ViewType) => ReactNode` | — | Render function for each item |
+| `initialView` | `"list" \| "card" \| "compact"` | `"list"` | The initial view mode |
+| `onViewChange` | `(view: ViewType) => void` | — | Callback when view changes |
+| `className` | `string` | — | Additional CSS classes |
+
+### Sub-components
+
+- **SharedMenuItem**: Base wrapper for an item (handles layoutId and provides context)
+- **SharedMenuImage**: Animated wrapper for images (shared across views)
+- **SharedMenuContent**: Animated wrapper for text content
+- **SharedMenuNumber**: Animated wrapper for labels or numbers
 
 ## Features
 
