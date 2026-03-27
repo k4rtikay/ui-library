@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PinnedList } from "./pinned-list";
+import { PinnedList, PinnedListItem } from "./pinned-list";
 import {
     Palette,
     Lock,
@@ -13,95 +13,127 @@ import {
     BarChart3,
 } from "lucide-react";
 
-interface DemoItem {
-    id: string;
-    icon: React.ReactNode;
-    label: string;
-    description: string;
-}
-
-const ITEMS: DemoItem[] = [
+const INITIAL_ITEMS: PinnedListItem[] = [
     {
         id: "1",
-        icon: <Palette className="w-4 h-4 text-pink-400" />,
-        label: "Design System Tokens",
-        description: "Color, spacing, and typography primitives",
+        content: (
+            <>
+                <Palette className="w-4 h-4 shrink-0 text-pink-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">Design System Tokens</p>
+                    <p className="text-xs text-muted-foreground truncate">Color, spacing, and typography primitives</p>
+                </div>
+            </>
+        ),
+        pinned: true,
     },
     {
         id: "2",
-        icon: <Lock className="w-4 h-4 text-amber-400" />,
-        label: "Auth Flow",
-        description: "Login, signup, and password reset",
+        content: (
+            <>
+                <Lock className="w-4 h-4 shrink-0 text-amber-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">Auth Flow</p>
+                    <p className="text-xs text-muted-foreground truncate">Login, signup, and password reset</p>
+                </div>
+            </>
+        ),
+        pinned: true,
     },
     {
         id: "3",
-        icon: <LayoutDashboard className="w-4 h-4 text-blue-400" />,
-        label: "Dashboard Layout",
-        description: "Sidebar navigation with collapsible sections",
+        content: (
+            <>
+                <LayoutDashboard className="w-4 h-4 shrink-0 text-blue-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">Dashboard Layout</p>
+                    <p className="text-xs text-muted-foreground truncate">Sidebar navigation with collapsible sections</p>
+                </div>
+            </>
+        ),
+        pinned: false,
     },
     {
         id: "4",
-        icon: <Gauge className="w-4 h-4 text-red-400" />,
-        label: "API Rate Limiter",
-        description: "Token-bucket middleware for Express",
+        content: (
+            <>
+                <Gauge className="w-4 h-4 shrink-0 text-red-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">API Rate Limiter</p>
+                    <p className="text-xs text-muted-foreground truncate">Token-bucket middleware for Express</p>
+                </div>
+            </>
+        ),
+        pinned: false,
     },
     {
         id: "5",
-        icon: <Search className="w-4 h-4 text-violet-400" />,
-        label: "Search Indexer",
-        description: "Full-text search with fuzzy matching",
+        content: (
+            <>
+                <Search className="w-4 h-4 shrink-0 text-violet-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">Search Indexer</p>
+                    <p className="text-xs text-muted-foreground truncate">Full-text search with fuzzy matching</p>
+                </div>
+            </>
+        ),
+        pinned: false,
     },
     {
         id: "6",
-        icon: <Bell className="w-4 h-4 text-emerald-400" />,
-        label: "Notification Service",
-        description: "Email, push, and in-app notifications",
+        content: (
+            <>
+                <Bell className="w-4 h-4 shrink-0 text-emerald-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">Notification Service</p>
+                    <p className="text-xs text-muted-foreground truncate">Email, push, and in-app notifications</p>
+                </div>
+            </>
+        ),
+        pinned: false,
     },
     {
         id: "7",
-        icon: <Upload className="w-4 h-4 text-cyan-400" />,
-        label: "File Uploader",
-        description: "Drag-and-drop with progress tracking",
+        content: (
+            <>
+                <Upload className="w-4 h-4 shrink-0 text-cyan-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">File Uploader</p>
+                    <p className="text-xs text-muted-foreground truncate">Drag-and-drop with progress tracking</p>
+                </div>
+            </>
+        ),
+        pinned: false,
     },
     {
         id: "8",
-        icon: <BarChart3 className="w-4 h-4 text-orange-400" />,
-        label: "Analytics Pipeline",
-        description: "Event collection and aggregation",
+        content: (
+            <>
+                <BarChart3 className="w-4 h-4 shrink-0 text-orange-400" />
+                <div className="min-w-0 flex flex-col">
+                    <p className="text-sm font-medium text-foreground truncate">Analytics Pipeline</p>
+                    <p className="text-xs text-muted-foreground truncate">Event collection and aggregation</p>
+                </div>
+            </>
+        ),
+        pinned: false,
     },
 ];
 
-const INITIAL_PINNED = new Set(["1", "2"]);
-
 export default function PinnedListDemo() {
-    const [pinnedIds, setPinnedIds] = useState<Set<string>>(INITIAL_PINNED);
+    const [items, setItems] = useState<PinnedListItem[]>(INITIAL_ITEMS);
 
     const handleTogglePin = (id: string) => {
-        setPinnedIds((prev) => {
-            const next = new Set(prev);
-            if (next.has(id)) next.delete(id);
-            else next.add(id);
-            return next;
-        });
+        setItems((prev) =>
+            prev.map((item) =>
+                item.id === id ? { ...item, pinned: !item.pinned } : item
+            )
+        );
     };
 
     return (
         <div className="w-full p-8 flex justify-center">
-            <PinnedList pinnedIds={pinnedIds} onTogglePin={handleTogglePin}>
-                {ITEMS.map((item) => (
-                    <PinnedList.Item key={item.id} id={item.id}>
-                        {item.icon}
-                        <div className="min-w-0 flex flex-col">
-                            <p className="text-sm font-medium text-foreground truncate">
-                                {item.label}
-                            </p>
-                            <p className="text-xs text-muted-foreground truncate">
-                                {item.description}
-                            </p>
-                        </div>
-                    </PinnedList.Item>
-                ))}
-            </PinnedList>
+            <PinnedList items={items} onTogglePin={handleTogglePin} />
         </div>
     );
 }
