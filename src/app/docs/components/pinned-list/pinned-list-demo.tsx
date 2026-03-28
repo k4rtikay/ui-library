@@ -132,7 +132,7 @@ export default function PinnedListDemo() {
     };
 
     return (
-        <div className="w-full p-8 flex justify-center">
+        <div className="w-full p-8 max-w-md flex justify-center">
             <PinnedList items={items} onTogglePin={handleTogglePin} />
         </div>
     );
