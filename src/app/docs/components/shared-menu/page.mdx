@@ -1,0 +1,66 @@
+import SharedMenuDemo from "./shared-menu-demo";
+import ComponentPreview from "@/components/website/component-preview";
+import { CommandCopy } from "@/components/website/command-copy";
+import { TabsContent } from "@/components/ui/tabs";
+import CollapsibleCode from "@/components/website/collapsible-code";
+
+# Shared Menu
+
+A flexible component that displays items in multiple layouts — list, card, and compact views with smooth animated transitions between them.
+
+## Preview
+
+<ComponentPreview>
+  <TabsContent value="preview" className="relative flex items-center justify-center">
+    <SharedMenuDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    <CollapsibleCode>
+      ```tsx file=shared-menu-demo.tsx
+      ```
+    </CollapsibleCode>
+  </TabsContent>
+</ComponentPreview>
+
+## Installation
+
+<CommandCopy
+  command={{
+    npm: "npm install motion lucide-react",
+    pnpm: "pnpm add motion lucide-react",
+    bun: "bun add motion lucide-react",
+    yarn: "yarn add motion lucide-react"
+  }}
+>
+
+<CollapsibleCode>
+  ```tsx file=shared-menu.tsx
+  ```
+</CollapsibleCode>
+</CommandCopy>
+
+## API Reference
+
+### SharedMenu
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `items` | `any[]` | `[]` | The list of items to display |
+| `children` | `(item: any, index: number, viewType: ViewType) => ReactNode` | — | Render function for each item |
+| `initialView` | `"list" \| "card" \| "compact"` | `"list"` | The initial view mode |
+| `onViewChange` | `(view: ViewType) => void` | — | Callback when view changes |
+| `className` | `string` | — | Additional CSS classes |
+
+### Sub-components
+
+- **SharedMenuItem**: Base wrapper for an item (handles layoutId and provides context)
+- **SharedMenuImage**: Animated wrapper for images (shared across views)
+- **SharedMenuContent**: Animated wrapper for text content
+- **SharedMenuNumber**: Animated wrapper for labels or numbers
+
+## Features
+
+- **Multiple View Types** — Switch between List, Card, and Compact layouts
+- **Smooth Animations** — Items animate from position to position during view transitions with shared layout IDs
+- **Responsive Design** — Adapts to different screen sizes
+- **Clean Transitions** — No flickering, smooth height and position animations
