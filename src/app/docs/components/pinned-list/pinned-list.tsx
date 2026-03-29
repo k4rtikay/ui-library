@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { Pin } from "lucide-react";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 
 export interface PinnedListItem {
     id: string;
@@ -15,9 +15,17 @@ interface PinnedListProps {
     items: PinnedListItem[];
     onTogglePin: (id: string) => void;
     className?: string;
+    pinnedLabel?: string;
+    unpinnedLabel?: string;
 }
 
-export function PinnedList({ items, onTogglePin, className }: PinnedListProps) {
+export function PinnedList({
+    items,
+    onTogglePin,
+    className,
+    pinnedLabel = "Pinned",
+    unpinnedLabel = "All Items",
+}: PinnedListProps) {
 
     const pinnedItems = items.filter((item) => item.pinned);
     const unpinnedItems = items.filter((item) => !item.pinned);
@@ -28,14 +36,11 @@ export function PinnedList({ items, onTogglePin, className }: PinnedListProps) {
                 <motion.section
                     layout
                 >
-                    <AnimatePresence initial={false}>
-                        <motion.h3
-                            key={"pinned"}
-                            layout="position"
-                            className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2 px-1">
-                            Pinned
-                        </motion.h3>
-                    </AnimatePresence>
+                    <motion.h3
+                        layout="position"
+                        className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2 px-1">
+                        {pinnedLabel}
+                    </motion.h3>
                     <ul className="space-y-2" role="list">
                         {pinnedItems.map((item) => (
                             <PinnedListRow
@@ -50,15 +55,12 @@ export function PinnedList({ items, onTogglePin, className }: PinnedListProps) {
 
             {unpinnedItems.length > 0 && (
                 <motion.section layout>
-                    <AnimatePresence initial={false}>
-                        <motion.h3
-                            key={"all-items"}
-                            layout="position"
-                            className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2 px-1">
-                            All Items
-                        </motion.h3>
-                    </AnimatePresence>
-                    <ul className="space-y-2">
+                    <motion.h3
+                        layout="position"
+                        className="text-xs font-medium uppercase tracking-wider text-muted-foreground mb-2 px-1">
+                        {unpinnedLabel}
+                    </motion.h3>
+                    <ul className="space-y-2" role="list">
                         {unpinnedItems.map((item) => (
                             <PinnedListRow
                                 key={item.id}
@@ -107,15 +109,11 @@ function PinnedListRow({
                 aria-label={item.pinned ? "Unpin" : "Pin"}>
                 <motion.div
                     layout="position"
-                    initial={{ rotate: item.pinned ? 45 : 0, scale: 1 }}
-                    animate={{
-                        rotate: item.pinned ? 45 : 0,
-                        scale: item.pinned ? 1.00 : 1,
-                    }}
+                    initial={{ rotate: item.pinned ? 45 : 0 }}
+                    animate={{ rotate: item.pinned ? 45 : 0 }}
                     transition={{
                         layout: { type: "spring", stiffness: 280, damping: 25 },
                         rotate: { delay: item.pinned ? 0.18 : 0, duration: 0.15, ease: "easeInOut" },
-                        scale: { delay: item.pinned ? 0.18 : 0, duration: 0.15, ease: "easeInOut" },
                     }}
                 >
                     <PinIcon className="w-3.5 h-3.5" pinned={item.pinned} />
@@ -130,11 +128,11 @@ function PinIcon({ className, pinned }: { className?: string; pinned: boolean })
         <motion.div
             layout="position"
             initial={{
-                backgroundColor: pinned ? "#3b82f6" : "rgba(0,0,0,0)",
+                backgroundColor: pinned ? "var(--primary)" : "rgba(0,0,0,0)",
                 color: pinned ? "#ffffff" : "currentColor",
             }}
             animate={{
-                backgroundColor: pinned ? "#3b82f6" : "rgba(0,0,0,0)",
+                backgroundColor: pinned ? "var(--primary)" : "rgba(0,0,0,0)",
                 color: pinned ? "#ffffff" : "currentColor",
             }}
             transition={{
