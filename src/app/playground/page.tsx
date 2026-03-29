@@ -19,23 +19,13 @@ export default function DevRun() {
                             <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50"></div>
                         </div>
 
-                        <div className="flex-1 p-8 flex items-center justify-center relative bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [background-size:16px_16px] overflow-auto">
+                        <div className="flex-1 p-8 flex items-start justify-center relative bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [background-size:16px_16px] overflow-auto">
                             {/* NOTE: Import and place your component here for testing */}
-                            <div className="flex items-center justify-center">
-                                {/* <p className="text-muted-foreground text-sm">
-                                    Import a component into{" "}
-                                    <code className="text-foreground">
-                                        src/app/playground/page.tsx
-                                    </code>{" "}
-                                    to start.
-                                </p> */}
-                                <PinnedListDemo />
-                            </div>
+                            <PinnedListDemo />
                         </div>
                     </div>
                 </section>
 
-                {/* Controls / Docs (30%) */}
                 <section className="w-full lg:w-[30%] space-y-4">
                     <h2 className="text-xl text-foreground">Controls</h2>
                     <div className="p-6 border border-border rounded-xl bg-background h-[600px]">
