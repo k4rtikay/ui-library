@@ -50,6 +50,10 @@ export default function NavRoutes() {
                     name: "Stagger Reveal",
                     href: "/docs/components/stagger-reveal",
                 },
+                {
+                    name: "Pinned List",
+                    href: "/docs/components/pinned-list",
+                },
             ],
         },
     ];
