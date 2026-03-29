@@ -108,15 +108,14 @@ function PinnedListRow({
                 )}
                 aria-label={item.pinned ? "Unpin" : "Pin"}>
                 <motion.div
-                    layout="position"
                     initial={{ rotate: item.pinned ? 45 : 0 }}
                     animate={{ rotate: item.pinned ? 45 : 0 }}
                     transition={{
                         layout: { type: "spring", stiffness: 280, damping: 25 },
-                        rotate: { delay: item.pinned ? 0.18 : 0, duration: 0.15, ease: "easeInOut" },
+                        rotate: { delay: item.pinned ? 0.2 : 0, duration: 0.15, ease: "easeInOut" },
                     }}
                 >
-                    <PinIcon className="w-3.5 h-3.5" pinned={item.pinned} />
+                    <PinIcon className="w-4 h-4" pinned={item.pinned} />
                 </motion.div>
             </button>
         </motion.li>
