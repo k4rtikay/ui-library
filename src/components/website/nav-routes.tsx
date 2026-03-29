@@ -37,7 +37,14 @@ export default function NavRoutes() {
         {
             category: "Animations",
             items: [
-                { name: "Stagger Reveal", href: "/docs/components/stagger-reveal" },
+                {
+                    name: "Stagger Reveal",
+                    href: "/docs/components/stagger-reveal",
+                },
+                {
+                    name: "Pinned List",
+                    href: "/docs/components/pinned-list",
+                },
             ],
         },
     ];

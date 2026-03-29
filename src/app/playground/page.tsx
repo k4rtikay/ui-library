@@ -33,20 +33,9 @@ export default function DevRun() {
                             </div>
                         </div>
 
-                        <div className="flex-1 p-8 flex items-center justify-center relative bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] bg-size-[16px_16px] overflow-auto">
+                        <div className="flex-1 p-8 flex items-start justify-center relative bg-[radial-gradient(var(--color-border)_1px,transparent_1px)] [background-size:16px_16px] overflow-auto">
                             {/* NOTE: Import and place your component here for testing */}
-                            <div className="flex items-center justify-center">
-                                {/* <p className="text-muted-foreground text-sm">
-                                    Import a component into{" "}
-                                    <code className="text-foreground">
-                                        src/app/playground/page.tsx
-                                    </code>{" "}
-                                    to start.
-                                </p> */}
-                                {/* <PinnedListDemo /> */}
-                                {/* <SharedMenuDemo /> */}
-                                <PinnedListDemo />
-                            </div>
+                            <PinnedListDemo />
                         </div>
                     </div>
                 </section>

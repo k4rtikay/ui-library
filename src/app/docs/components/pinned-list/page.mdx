@@ -1,0 +1,62 @@
+import PinnedListDemo from "./pinned-list-demo";
+import ComponentPreview from "@/components/website/component-preview";
+import { CommandCopy } from "@/components/website/command-copy";
+import { TabsContent } from "@/components/ui/tabs";
+import CollapsibleCode from "@/components/website/collapsible-code";
+
+# Pinned List
+
+An animated list that lets users pin items to a dedicated section. Items glide between sections with spring-based layout animations, and the pin icon rotates with a tactile color transition.
+
+## Preview
+
+<ComponentPreview>
+  <TabsContent value="preview" className="relative flex items-center justify-center">
+    <PinnedListDemo />
+  </TabsContent>
+  <TabsContent value="code">
+    <CollapsibleCode>
+      ```tsx file=pinned-list-demo.tsx
+      ```
+    </CollapsibleCode>
+  </TabsContent>
+</ComponentPreview>
+
+## Installation
+
+<CommandCopy
+  command={{
+    npm: "npm install motion lucide-react",
+    pnpm: "pnpm add motion lucide-react",
+    bun: "bun add motion lucide-react",
+    yarn: "yarn add motion lucide-react"
+  }}
+>
+
+<CollapsibleCode>
+  ```tsx file=pinned-list.tsx
+  ```
+</CollapsibleCode>
+</CommandCopy>
+
+## API Reference
+
+### PinnedList
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| items | `PinnedListItem[]` | — | Array of items to render |
+| onTogglePin | `(id: string) => void` | — | Called when a pin button is clicked |
+| className | `string` | `undefined` | Additional CSS classes |
+| pinnedLabel | `string` | `"Pinned"` | Heading for the pinned section |
+| unpinnedLabel | `string` | `"All Items"` | Heading for the unpinned section |
+
+### PinnedListItem
+
+| Field | Type | Description |
+|-------|------|-------------|
+| id | `string` | Unique identifier used for layout animation |
+| content | `React.ReactNode` | Content rendered inside the list item |
+| pinned | `boolean` | Whether the item is pinned |
+
+> The component is fully controlled — you own the `items` state and handle pin toggling via `onTogglePin`. The pin accent color uses `--primary` so it follows your theme automatically.
