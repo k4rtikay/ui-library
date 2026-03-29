@@ -128,11 +128,11 @@ function PinIcon({ className, pinned }: { className?: string; pinned: boolean })
             layout="position"
             initial={{
                 backgroundColor: pinned ? "var(--primary)" : "rgba(0,0,0,0)",
-                color: pinned ? "#ffffff" : "currentColor",
+                color: pinned ? "var(--primary-foreground)" : "currentColor",
             }}
             animate={{
                 backgroundColor: pinned ? "var(--primary)" : "rgba(0,0,0,0)",
-                color: pinned ? "#ffffff" : "currentColor",
+                color: pinned ? "var(--primary-foreground)" : "currentColor",
             }}
             transition={{
                 layout: { type: "spring", stiffness: 280, damping: 25 },
