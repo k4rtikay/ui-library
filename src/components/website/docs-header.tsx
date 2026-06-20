@@ -1,28 +1,19 @@
-"use client";
-
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ModeToggle } from "@/components/website/mode-toggle";
 import MobileNav from "@/components/website/mobile-nav";
 import { SpotlightTrigger } from "@/components/website/spotlight-trigger";
+import { Github } from "lucide-react";
 
 export default function DocsHeader() {
-    const pathname = usePathname();
-
-    const navItems = [
-        { href: "/docs", label: "Docs" },
-        { href: "/playground", label: "Playground" },
-    ];
-
     return (
-        <header className="sticky backdrop-blur-md z-50 top-4 w-full bg-card/70 border-border border-2 rounded-full shadow-sm max-w-1/2 mx-auto my-8">
-            <div className="flex items-center justify-between px-8 py-2 text-sm">
+        <header className="sticky backdrop-blur-md z-50 top-4 w-full bg-card/70 border-border border-2 rounded-xl shadow-sm max-w-1/2 mx-auto my-8">
+            <div className="flex items-center justify-between px-4 py-1 text-sm">
                 <div className="flex items-center gap-6">
-                    <MobileNav />
+                    {/*<MobileNav />*/}
                     <Link
                         href="/"
-                        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                        className="flex items-center gap-2"
                     >
                         <Image
                             src="/flow-kit-icon.png"
@@ -30,34 +21,19 @@ export default function DocsHeader() {
                             width={24}
                             height={24}
                         />
-                        <span className="font-semibold">
-                            Flow Kit
-                        </span>
                     </Link>
                 </div>
-                <SpotlightTrigger />
                 <div className="flex items-center gap-4">
-                    <nav className="hidden md:flex items-center gap-2">
-                        {navItems.map((item) => {
-                            const isActive = pathname.startsWith(item.href);
-                            return (
-                                <Link
-                                    key={item.href}
-                                    href={item.href}
-                                    className={`px-4 py-2 rounded-[50px] [corner-shape:squircle] transition-all duration-200
-                                             ${isActive
-                                        ? "text-forground font-medium"
-                                        : "text-muted-foreground hover:text-foreground"
-                                    }`}
-                                >
-                                    {item.label}
-                                </Link>
-                            );
-                        })}
-                    </nav>
+                    <SpotlightTrigger />
                     <ModeToggle />
+                    <Link
+                        href="https://github.com/flow-kit/ui-library"
+                        className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                    >
+                        <Github size={16} />
+                    </Link>
                 </div>
-            </div>
+            </div>  
         </header>
     );
 }
