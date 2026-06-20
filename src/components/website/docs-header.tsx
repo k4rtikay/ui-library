@@ -7,7 +7,7 @@ import { Github } from "lucide-react";
 
 export default function DocsHeader() {
     return (
-        <header className="sticky backdrop-blur-md z-50 top-4 w-full bg-card/70 border-border border-2 rounded-xl shadow-sm max-w-1/2 mx-auto my-8">
+        <header className="sticky backdrop-blur-md z-50 top-4 w-full bg-card/70 border-border border-px rounded-xl shadow-sm max-w-1/2 mx-auto my-8">
             <div className="flex items-center justify-between px-4 py-1 text-sm">
                 <div className="flex items-center gap-6">
                     {/*<MobileNav />*/}
@@ -27,7 +27,7 @@ export default function DocsHeader() {
                     <SpotlightTrigger />
                     <ModeToggle />
                     <Link
-                        href="https://github.com/flow-kit/ui-library"
+                        href="https://github.com/k4rtikay/ui-library"
                         className="flex items-center gap-2 hover:opacity-80 transition-opacity"
                     >
                         <Github size={16} />
