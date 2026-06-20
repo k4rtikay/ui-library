@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ModeToggle } from "@/components/website/mode-toggle";
 import MobileNav from "@/components/website/mobile-nav";
+import { SpotlightTrigger } from "@/components/website/spotlight-trigger";
 
 export default function DocsHeader() {
     const pathname = usePathname();
@@ -15,7 +16,7 @@ export default function DocsHeader() {
     ];
 
     return (
-        <header className="sticky backdrop-blur-md z-50 top-4 w-full bg-card/70 border-border border-2 rounded-full shadow-sm max-w-1/2 mx-auto my-8 overflow-hidden">
+        <header className="sticky backdrop-blur-md z-50 top-4 w-full bg-card/70 border-border border-2 rounded-full shadow-sm max-w-1/2 mx-auto my-8">
             <div className="flex items-center justify-between px-8 py-2 text-sm">
                 <div className="flex items-center gap-6">
                     <MobileNav />
@@ -34,6 +35,7 @@ export default function DocsHeader() {
                         </span>
                     </Link>
                 </div>
+                <SpotlightTrigger />
                 <div className="flex items-center gap-4">
                     <nav className="hidden md:flex items-center gap-2">
                         {navItems.map((item) => {
