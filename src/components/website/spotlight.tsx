@@ -103,7 +103,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                             bounce: 0,
                             duration: 0.2,
                         }}
-                        className="relative w-full max-w-2xl overflow-hidden rounded-xl border border-white/10 bg-zinc-950/80 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl"
+                        className="relative w-full max-w-2xl overflow-hidden rounded-xl border border-border/10 bg-card/80 text-foreground shadow-2xl shadow-primary/10 backdrop-blur-xl"
                     >
                         <Command
                             label="Global Command Menu"
@@ -114,17 +114,17 @@ export default function Spotlight({ routes }: SpotlightProps) {
                                 className="flex items-center border-b border-white/5 px-4"
                                 cmdk-input-wrapper=""
                             >
-                                <Search className="mr-3 h-5 w-5 text-zinc-500" />
+                                <Search className="mr-3 h-5 w-5" />
                                 <Command.Input
                                     autoFocus
                                     placeholder="Search components, interactions, and docs..."
-                                    className="flex h-14 w-full rounded-md bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                                    className="flex h-14 w-full rounded-md bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
                                 />
                             </div>
 
                             {/* Search Results Area */}
                             <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden p-2">
-                                <Command.Empty className="py-6 text-center text-sm text-zinc-500">
+                                <Command.Empty className="py-6 text-center text-sm">
                                     No results found.
                                 </Command.Empty>
 
@@ -133,7 +133,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                                         <Command.Group
                                             key={category}
                                             heading={category}
-                                            className="p-1 text-xs font-medium text-zinc-500"
+                                            className="p-1 text-xs font-medium"
                                         >
                                             {items.map((route) => (
                                                 <Command.Item
@@ -146,9 +146,9 @@ export default function Spotlight({ routes }: SpotlightProps) {
                                                             ),
                                                         )
                                                     }
-                                                    className="group relative flex cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm text-zinc-300 outline-none data-[selected=true]:bg-white/10 data-[selected=true]:text-white"
+                                                    className="group relative flex cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm text-muted-foreground outline-none data-[selected=true]:bg-white/10 data-[selected=true]:text-foreground"
                                                 >
-                                                    <FileText className="mr-2 h-4 w-4 text-zinc-500 group-data-[selected=true]:text-cyan-400" />
+                                                    <FileText className="mr-2 h-4 w-4 text-foreground group-data-[selected=true]:text-blue-500" />
                                                     {route.title}
                                                 </Command.Item>
                                             ))}
