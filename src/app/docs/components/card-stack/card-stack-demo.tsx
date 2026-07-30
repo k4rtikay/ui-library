@@ -51,7 +51,7 @@ export default function CardStackDemo() {
 
                         <CardContent className="">
                             <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
-                                "{testimonial.content}"
+                                {testimonial.content}
                             </p>
                         </CardContent>
 
