@@ -15,7 +15,7 @@ import {
 export default function CardStackDemo() {
     return (
         <div className="flex flex-col min-h-[10rem] w-full items-center justify-center">
-            <CardStack className="h-64 md:h-52 w-[18rem] md:w-[32rem]">
+            <CardStack>
                 {TESTIMONIALS.map((testimonial) => (
                     <Card
                         key={testimonial.id}

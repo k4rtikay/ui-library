@@ -23,7 +23,7 @@ export default function CardStackControlledDemo() {
                 pauseOnHover
                 offsets={customOffsets}
                 maxVisibleCards={3}
-                className="h-[220px] w-[260px] sm:h-[220px] sm:w-[320px]"
+                className="md:min-w-md"
             >
                 {DAILY_ACTIVITIES.map((day) => (
                     <div

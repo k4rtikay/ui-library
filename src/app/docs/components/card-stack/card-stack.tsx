@@ -233,6 +233,12 @@ export function CardStack({
             aria-live="polite"
             {...props}
         >
+            <div
+                className="relative invisible pointer-events-none"
+                aria-hidden="true"
+            >
+                {cards[0]}
+            </div>
             {cards.map((item, index) => {
                 const isTop = index === activeIndex;
                 const variant = getCardVariant(index);
