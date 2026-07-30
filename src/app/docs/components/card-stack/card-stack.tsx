@@ -270,7 +270,6 @@ export function CardStack({
                             isTop && (clickable || keyboardNavigable) ? 0 : -1
                         }
                         onKeyDown={handleKeyDown}
-                        role={clickable ? "button" : undefined}
                         aria-label={`Card ${index + 1} of ${totalCards}`}
                         aria-current={isTop ? "true" : undefined}
                     >
