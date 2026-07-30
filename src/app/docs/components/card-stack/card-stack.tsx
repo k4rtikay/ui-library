@@ -79,7 +79,6 @@ export function CardStack({
 
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const isKeyRef = useRef(false);
-    const autoAdvanceTimerRef = useRef<NodeJS.Timeout>(null);
 
     const maxOffset = Math.max(
         0,
@@ -124,21 +123,14 @@ export function CardStack({
     };
 
     useEffect(() => {
-        if (!autoAdvance || isPaused) {
-            if (autoAdvanceTimerRef.current) {
-                clearInterval(autoAdvanceTimerRef.current);
-            }
-            return;
-        }
+        if (!autoAdvance || isPaused) return;
 
-        autoAdvanceTimerRef.current = setInterval(() => {
+        const timerId = setTimeout(() => {
             handleNext();
         }, autoAdvanceInterval);
 
         return () => {
-            if (autoAdvanceTimerRef.current) {
-                clearInterval(autoAdvanceTimerRef.current);
-            }
+            clearTimeout(timerId);
         };
     }, [autoAdvance, autoAdvanceInterval, isPaused, handleNext]);
 
