@@ -64,7 +64,7 @@ export const LoaderButton = React.forwardRef<
                         "bg-primary text-primary-foreground hover:brightness-95",
                     state === "loading" && "bg-primary text-primary-foreground",
                     state === "success" &&
-                        "bg-green-500 text-white dark:bg-green-600",
+                        "bg-green-200 text-green-900 dark:bg-green-700 dark:text-green-50",
                     state === "error" &&
                         "bg-destructive text-destructive-foreground",
                     className,
