@@ -65,7 +65,7 @@ export const LoaderButton = React.forwardRef<
                     state === "success" &&
                         "bg-green-200 text-green-900 dark:bg-green-700 dark:text-green-50",
                     state === "error" &&
-                        "bg-destructive text-destructive-foreground",
+                        "bg-destructive/25 dark:bg-destructive text-destructive-foreground dark:text-white",
                     className,
                 )}
                 aria-busy={state === "loading"}
