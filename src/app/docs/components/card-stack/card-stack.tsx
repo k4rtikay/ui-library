@@ -222,7 +222,6 @@ export function CardStack({
             onMouseLeave={handleMouseLeave}
             role="region"
             aria-label="Card stack"
-            aria-live="polite"
             {...props}
         >
             <div
@@ -269,11 +268,6 @@ export function CardStack({
                     </motion.div>
                 );
             })}
-
-            {/* Screen reader announcement */}
-            <div className="sr-only" aria-live="polite" aria-atomic="true">
-                Showing card {activeIndex + 1} of {totalCards}
-            </div>
         </div>
     );
 }
