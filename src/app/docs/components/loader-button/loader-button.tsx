@@ -15,112 +15,117 @@ interface LoaderButtonProps extends HTMLMotionProps<"button"> {
     loader?: React.ReactNode;
 }
 
-export const LoaderButton = React.forwardRef<HTMLButtonElement, LoaderButtonProps>((
-    {
-        state,
-        children = "Submit",
-        successLabel,
-        errorLabel,
-        loader,
-        className,
-        disabled,
-        ...props
+export const LoaderButton = React.forwardRef<
+    HTMLButtonElement,
+    LoaderButtonProps
+>(
+    (
+        {
+            state,
+            children = "Submit",
+            successLabel,
+            errorLabel,
+            loader,
+            className,
+            disabled,
+            ...props
+        },
+        ref,
+    ) => {
+        const isDisabled = disabled ?? state !== "idle";
+
+        const defaultSuccessLabel = (
+            <span className="flex justify-center items-center gap-1">
+                <CheckCircle2 className="w-4 h-4" /> Success
+            </span>
+        );
+
+        const defaultErrorLabel = (
+            <span className="flex justify-center items-center gap-1">
+                <XCircle className="w-4 h-4" /> Error
+            </span>
+        );
+
+        return (
+            <motion.button
+                ref={ref}
+                disabled={isDisabled}
+                variants={buttonVariants}
+                animate={state}
+                className={cn(
+                    // Base styles
+                    "relative flex items-center justify-center min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold",
+                    "transition-colors duration-300",
+                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                    isDisabled && "cursor-not-allowed",
+
+                    // Theme-aware state colors
+                    state === "idle" &&
+                        "bg-primary text-primary-foreground hover:brightness-95",
+                    state === "loading" && "bg-primary text-primary-foreground",
+                    state === "success" &&
+                        "bg-green-500 text-white dark:bg-green-600",
+                    state === "error" &&
+                        "bg-destructive text-destructive-foreground",
+                    className,
+                )}
+                aria-busy={state === "loading"}
+                {...props}
+            >
+                <AnimatePresence mode="wait">
+                    {state === "idle" && (
+                        <motion.div
+                            key="idle"
+                            variants={contentVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                        >
+                            {children}
+                        </motion.div>
+                    )}
+                    {state === "loading" && (
+                        <motion.div
+                            key="loading"
+                            variants={contentVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            className="w-full flex items-center justify-center gap-2"
+                            aria-live="polite"
+                        >
+                            {loader ?? <LoadingSpinner />}
+                        </motion.div>
+                    )}
+                    {state === "success" && (
+                        <motion.div
+                            key="success"
+                            variants={contentVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            aria-live="polite"
+                        >
+                            {successLabel ?? defaultSuccessLabel}
+                        </motion.div>
+                    )}
+                    {state === "error" && (
+                        <motion.div
+                            key="error"
+                            variants={contentVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                            aria-live="polite"
+                        >
+                            {errorLabel ?? defaultErrorLabel}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </motion.button>
+        );
     },
-    ref,
-) => {
-    const isDisabled = disabled ?? state !== "idle";
-
-    const defaultSuccessLabel = (
-        <span className="flex justify-center items-center gap-1">
-            <CheckCircle2 className="w-4 h-4" /> Success
-        </span>
-    );
-
-    const defaultErrorLabel = (
-        <span className="flex justify-center items-center gap-1">
-            <XCircle className="w-4 h-4" /> Error
-        </span>
-    );
-
-    return (
-        <motion.button
-            ref={ref}
-            disabled={isDisabled}
-            variants={buttonVariants}
-            animate={state}
-            className={cn(
-                "min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold",
-                "hover:brightness-95 transition-colors duration-300",
-                "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                isDisabled && "cursor-not-allowed",
-                className,
-            )}
-            style={{
-                backgroundColor:
-                    state === "success" ? "#a0e2b3ff" :
-                        state === "error" ? "#efb2adff" :
-                            "var(--primary)",
-                color:
-                    state === "success" ? "#1f3024ff" :
-                        state === "error" ? "#4a1b1bff" :
-                            "var(--primary-foreground)",
-            }}
-            aria-busy={state === "loading"}
-            {...props}
-        >
-            <AnimatePresence mode="wait">
-                {state === "idle" && (
-                    <motion.div
-                        key="idle"
-                        variants={contentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                    >
-                        {children}
-                    </motion.div>
-                )}
-                {state === "loading" && (
-                    <motion.div
-                        key="loading"
-                        variants={contentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        className="w-full flex items-center justify-center gap-2"
-                        aria-live="polite"
-                    >
-                        {loader ?? <LoadingSpinner />}
-                    </motion.div>
-                )}
-                {state === "success" && (
-                    <motion.div
-                        key="success"
-                        variants={contentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        aria-live="polite"
-                    >
-                        {successLabel ?? defaultSuccessLabel}
-                    </motion.div>
-                )}
-                {state === "error" && (
-                    <motion.div
-                        key="error"
-                        variants={contentVariants}
-                        initial="initial"
-                        animate="animate"
-                        exit="exit"
-                        aria-live="polite"
-                    >
-                        {errorLabel ?? defaultErrorLabel}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.button>
-    );
-});
+);
 
 LoaderButton.displayName = "LoaderButton";
 
@@ -131,7 +136,7 @@ const buttonVariants = {
         scale: 1,
     },
     loading: {
-        scale: [1, 1.02, 1],
+        scale: 1,
         transition: {
             scale: {
                 repeat: Infinity,
@@ -141,7 +146,7 @@ const buttonVariants = {
         } as const,
     },
     success: {
-        scale: [1, 1.1, 1],
+        scale: [1, 1.05, 1],
         transition: {
             scale: {
                 duration: 0.3,
