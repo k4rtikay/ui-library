@@ -49,7 +49,6 @@ export const LoaderButton = React.forwardRef<
         return (
             <motion.button
                 ref={ref}
-                disabled={isDisabled}
                 variants={buttonVariants}
                 animate={state}
                 className={cn(
@@ -57,7 +56,7 @@ export const LoaderButton = React.forwardRef<
                     "relative flex items-center justify-center min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold",
                     "transition-colors duration-300",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    isDisabled && "cursor-not-allowed",
+                    isDisabled && "pointer-events-none cursor-not-allowed",
 
                     // Theme-aware state colors
                     state === "idle" &&
@@ -70,8 +69,15 @@ export const LoaderButton = React.forwardRef<
                     className,
                 )}
                 aria-busy={state === "loading"}
+                aria-live="polite"
                 {...props}
             >
+                <span className="sr-only" aria-live="polite">
+                    {state === "loading" && "Loading"}
+                    {state === "success" && "Success"}
+                    {state === "error" && "Error"}
+                </span>
+                
                 <AnimatePresence mode="wait">
                     {state === "idle" && (
                         <motion.div
@@ -91,8 +97,8 @@ export const LoaderButton = React.forwardRef<
                             initial="initial"
                             animate="animate"
                             exit="exit"
+                            aria-hidden="true"
                             className="w-full flex items-center justify-center gap-2"
-                            aria-live="polite"
                         >
                             {loader ?? <LoadingSpinner />}
                         </motion.div>
@@ -104,7 +110,7 @@ export const LoaderButton = React.forwardRef<
                             initial="initial"
                             animate="animate"
                             exit="exit"
-                            aria-live="polite"
+                            aria-hidden="true"
                         >
                             {successLabel ?? defaultSuccessLabel}
                         </motion.div>
@@ -116,7 +122,7 @@ export const LoaderButton = React.forwardRef<
                             initial="initial"
                             animate="animate"
                             exit="exit"
-                            aria-live="polite"
+                            aria-hidden="true"
                         >
                             {errorLabel ?? defaultErrorLabel}
                         </motion.div>
