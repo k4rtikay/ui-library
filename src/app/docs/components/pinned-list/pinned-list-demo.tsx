@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { PinnedList, PinnedListItem } from "./pinned-list";
+import {
+    PinnedList,
+    type PinnedListItem,
+} from "../../../../../registry/pinned-list";
 import {
     Palette,
     Lock,

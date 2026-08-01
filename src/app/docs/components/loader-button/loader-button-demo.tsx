@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LoaderButton, type ButtonState } from "./loader-button";
+import {
+    LoaderButton,
+    type ButtonState,
+} from "../../../../../registry/loader-button";
 import { motion } from "motion/react";
 
 

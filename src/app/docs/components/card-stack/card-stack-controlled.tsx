@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { CardStack, CardStackIndicator } from "./card-stack";
+import {
+    CardStack,
+    CardStackIndicator,
+} from "../../../../../registry/card-stack";
 
 export default function CardStackControlledDemo() {
     const [activeIndex, setActiveIndex] = useState(0);

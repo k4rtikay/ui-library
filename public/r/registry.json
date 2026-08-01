@@ -54,6 +54,19 @@
                 }
             ],
             "dependencies": ["motion", "lucide-react"]
+        },
+        {
+            "name": "loader-button",
+            "type": "registry:ui",
+            "title": "Loader Button",
+            "description": "A stateful button that displays a loading indicator while a task is in progress.",
+            "files": [
+                {
+                    "path": "registry/loader-button.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "lucide-react"]
         }
     ]
 }

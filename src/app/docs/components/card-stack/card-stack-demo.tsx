@@ -1,7 +1,10 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CardStack, CardStackIndicator } from "./card-stack";
+import {
+    CardStack,
+    CardStackIndicator,
+} from "../../../../../registry/card-stack";
 import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
