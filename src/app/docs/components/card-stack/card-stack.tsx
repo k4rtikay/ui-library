@@ -8,7 +8,7 @@ import React, {
     useEffect,
     useCallback,
 } from "react";
-import { motion, Transition } from "motion/react";
+import { motion, Transition, useReducedMotion } from "motion/react";
 
 type CardOffset = {
     scale: number;
@@ -80,6 +80,8 @@ export function CardStack({
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const isKeyRef = useRef(false);
 
+    const shouldReduceMotion = useReducedMotion();
+
     const maxOffset = Math.max(
         0,
         ...offsets.slice(0, maxVisibleCards).map((offset) => offset.y),
@@ -149,10 +151,10 @@ export function CardStack({
 
         if (isExiting) {
             return {
-                y: exitOffset,
+                y: shouldReduceMotion ? offsets[0]?.y || 0 : exitOffset,
                 opacity: 0,
                 zIndex: 50,
-                filter: `blur(${exitBlur}px)`,
+                filter: shouldReduceMotion ? "none" : `blur(${exitBlur}px)`,
                 scale: offsets[0]?.scale || 1,
                 transition: { duration: 0.2 },
             };
@@ -242,9 +244,17 @@ export function CardStack({
                         }}
                         initial={variant}
                         animate={variant}
-                        transition={transition}
+                        transition={
+                            shouldReduceMotion
+                                ? {
+                                      opacity: { duration: 0.2 },
+                                      scale: { duration: 0 },
+                                      y: { duration: 0 },
+                                  }
+                                : transition
+                        }
                         whileTap={
-                            clickable && isTop
+                            clickable && isTop && !shouldReduceMotion
                                 ? { y: `${(offsets[0]?.y || 0) + 6}px` }
                                 : undefined
                         }
