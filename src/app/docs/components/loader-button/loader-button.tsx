@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, AnimatePresence, HTMLMotionProps } from "motion/react";
+import { motion, AnimatePresence, HTMLMotionProps, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle } from "lucide-react";
 
@@ -46,11 +46,14 @@ export const LoaderButton = React.forwardRef<
             </span>
         );
 
+        const shouldReduceMotion = useReducedMotion();
+
         return (
             <motion.button
                 ref={ref}
                 variants={buttonVariants}
                 animate={state}
+                custom={shouldReduceMotion}
                 className={cn(
                     // Base styles
                     "relative flex items-center justify-center min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold",
@@ -151,24 +154,28 @@ const buttonVariants = {
             },
         } as const,
     },
-    success: {
-        scale: [1, 1.05, 1],
-        transition: {
-            scale: {
-                duration: 0.3,
-                ease: "easeInOut",
-            },
-        } as const,
+    success: (shouldReduceMotion : boolean) => {
+        return {
+            scale: shouldReduceMotion ? 1 : [1, 1.05, 1],
+            transition: {
+                scale: {
+                    duration: 0.3,
+                    ease: "easeInOut",
+                },
+            } as const,
+        };
     },
-    error: {
-        scale: 1,
-        x: [0, -6, 5, -3, 2, 0],
-        transition: {
-            x: {
-                duration: 0.3,
-                ease: "easeOut",
-            },
-        } as const,
+    error: (shouldReduceMotion: boolean) => {
+        return {
+            scale: 1,
+            x: shouldReduceMotion ? 0 : [0, -6, 5, -3, 2, 0],
+            transition: {
+                x: {
+                    duration: 0.3,
+                    ease: "easeOut",
+                },
+            } as const,
+        };
     },
 };
 
