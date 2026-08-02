@@ -19,7 +19,7 @@ export default function NavRoutes() {
             category: "Buttons",
             items: [
                 { name: "Loader Button", href: "/docs/components/loader-button" },
-                { name: "Hello Button", href: "/docs/components/hello-button" },
+                // { name: "Hello Button", href: "/docs/components/hello-button" },
             ],
         },
         {
@@ -28,19 +28,19 @@ export default function NavRoutes() {
                 { name: "Card Stack", href: "/docs/components/card-stack" },
             ],
         },
-        {
-            category: "Menus",
-            items: [
-                { name: "Shared Menu", href: "/docs/components/shared-menu" },
-            ],
-        },
+        // {
+        //     category: "Menus",
+        //     items: [
+        //         { name: "Shared Menu", href: "/docs/components/shared-menu" },
+        //     ],
+        // },
         {
             category: "Animations",
             items: [
-                {
-                    name: "Stagger Reveal",
-                    href: "/docs/components/stagger-reveal",
-                },
+                // {
+                //     name: "Stagger Reveal",
+                //     href: "/docs/components/stagger-reveal",
+                // },
                 {
                     name: "Pinned List",
                     href: "/docs/components/pinned-list",

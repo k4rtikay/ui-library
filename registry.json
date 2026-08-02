@@ -17,32 +17,6 @@
             "dependencies": ["motion"]
         },
         {
-            "name": "stagger-reveal",
-            "type": "registry:ui",
-            "title": "Stagger Reveal",
-            "description": "Animate children with staggered entrance/exit animations.",
-            "files": [
-                {
-                    "path": "registry/stagger-reveal.tsx",
-                    "type": "registry:component"
-                }
-            ],
-            "dependencies": ["motion"]
-        },
-        {
-            "name": "shared-menu",
-            "type": "registry:ui",
-            "title": "Shared Menu",
-            "description": "Multi-view item display with smooth animated transitions between list, card, and compact layouts.",
-            "files": [
-                {
-                    "path": "registry/shared-menu.tsx",
-                    "type": "registry:component"
-                }
-            ],
-            "dependencies": ["motion"]
-        },
-        {
             "name": "pinned-list",
             "type": "registry:ui",
             "title": "Pinned List",
