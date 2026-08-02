@@ -1,11 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Button } from "../ui/button";
 import CopyButton from "./copy-button";
 
 type PackageManager = "npm" | "pnpm" | "bun" | "yarn";
@@ -39,14 +36,7 @@ export function CommandCopy({
         setPackageManager(pm);
         localStorage.setItem("package-manager", pm);
     };
-
-    const [hasCopied, setHasCopied] = React.useState(false);
-    const copyCommand = () => {
-        navigator.clipboard.writeText(command[packageManager]);
-        setHasCopied(true);
-        setTimeout(() => setHasCopied(false), 2000);
-    };
-
+    
     return (
         <div className={cn("w-full", className)}>
             <Tabs defaultValue="cli" className="relative w-full">

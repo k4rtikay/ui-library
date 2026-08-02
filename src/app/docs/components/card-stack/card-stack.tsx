@@ -81,16 +81,6 @@ export function CardStack({
     const isKeyRef = useRef(false);
     const autoAdvanceTimerRef = useRef<NodeJS.Timeout>(null);
 
-    // Edge cases
-    if (totalCards === 0) return null;
-    if (totalCards === 1) {
-        return (
-            <div className={cn("relative", className)} {...props}>
-                <div className="relative">{cards[0]}</div>
-            </div>
-        );
-    }
-
     const maxOffset = Math.max(
         0,
         ...offsets.slice(0, maxVisibleCards).map((offset) => offset.y),
@@ -219,6 +209,16 @@ export function CardStack({
             setIsPaused(false);
         }
     };
+
+    // Edge cases
+    if (totalCards === 0) return null;
+    if (totalCards === 1) {
+        return (
+            <div className={cn("relative", className)} {...props}>
+                <div className="relative">{cards[0]}</div>
+            </div>
+        );
+    }
 
     return (
         <div

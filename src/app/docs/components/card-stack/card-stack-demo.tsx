@@ -1,8 +1,5 @@
-"use client";
-
 import { cn } from "@/lib/utils";
-import { CardStack, CardStackIndicator } from "./card-stack";
-import { useState } from "react";
+import { CardStack } from "./card-stack";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
@@ -51,7 +48,7 @@ export default function CardStackDemo() {
 
                         <CardContent className="">
                             <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
-                                "{testimonial.content}"
+                                {testimonial.content}
                             </p>
                         </CardContent>
 

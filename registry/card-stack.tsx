@@ -122,16 +122,6 @@ export function CardStack({
         }
     }, [activeIndex]);
 
-    // Edge cases
-    if (totalCards === 0) return null;
-    if (totalCards === 1) {
-        return (
-            <div className={cn("relative", className)} {...props}>
-                <div className="relative">{cards[0]}</div>
-            </div>
-        );
-    }
-
 
     const maxOffset = Math.max(
         0,
@@ -222,6 +212,16 @@ export function CardStack({
             setIsPaused(false);
         }
     };
+
+    // Edge cases
+    if (totalCards === 0) return null;
+    if (totalCards === 1) {
+        return (
+            <div className={cn("relative", className)} {...props}>
+                <div className="relative">{cards[0]}</div>
+            </div>
+        );
+    }
 
     return (
         <div
