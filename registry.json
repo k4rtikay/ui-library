@@ -14,9 +14,7 @@
                     "type": "registry:component"
                 }
             ],
-            "dependencies": [
-                "motion"
-            ]
+            "dependencies": ["motion"]
         },
         {
             "name": "stagger-reveal",
@@ -29,9 +27,7 @@
                     "type": "registry:component"
                 }
             ],
-            "dependencies": [
-                "motion"
-            ]
+            "dependencies": ["motion"]
         },
         {
             "name": "shared-menu",
@@ -44,9 +40,33 @@
                     "type": "registry:component"
                 }
             ],
-            "dependencies": [
-                "motion"
-            ]
+            "dependencies": ["motion"]
+        },
+        {
+            "name": "pinned-list",
+            "type": "registry:ui",
+            "title": "Pinned List",
+            "description": "A list of items where items move seamlessly to pinned and unpinned positions.",
+            "files": [
+                {
+                    "path": "registry/pinned-list.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "lucide-react"]
+        },
+        {
+            "name": "loader-button",
+            "type": "registry:ui",
+            "title": "Loader Button",
+            "description": "A stateful button that displays a loading indicator while a task is in progress.",
+            "files": [
+                {
+                    "path": "registry/loader-button.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "lucide-react"]
         }
     ]
 }

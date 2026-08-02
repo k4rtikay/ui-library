@@ -1,8 +1,7 @@
-"use client";
-
 import { cn } from "@/lib/utils";
-import { CardStack, CardStackIndicator } from "./card-stack";
-import { useState } from "react";
+import {
+    CardStack,
+} from "../../../../../registry/card-stack";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
@@ -15,7 +14,7 @@ import {
 export default function CardStackDemo() {
     return (
         <div className="flex flex-col min-h-[10rem] w-full items-center justify-center">
-            <CardStack className="h-64 md:h-52 w-[18rem] md:w-[32rem]">
+            <CardStack>
                 {TESTIMONIALS.map((testimonial) => (
                     <Card
                         key={testimonial.id}
@@ -51,7 +50,7 @@ export default function CardStackDemo() {
 
                         <CardContent className="">
                             <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
-                                "{testimonial.content}"
+                                {testimonial.content}
                             </p>
                         </CardContent>
 

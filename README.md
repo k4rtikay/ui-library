@@ -20,6 +20,7 @@ A collection of free, animated UI components built with React, Tailwind CSS, sha
 |-----------|-------------|
 | **Card Stack** | Animated stacking cards with click/keyboard navigation, auto-advance, and customizable transitions |
 | **Stagger Reveal** | Animate children with staggered entrance animations, supports text and item variants |
+| **Pinned List** | A list of items where items move seamlessly to pinned and unpinned positions. |
 
 ## Getting Started
 

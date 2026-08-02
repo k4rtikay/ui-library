@@ -1,7 +1,7 @@
 {
     "$schema": "https://ui.shadcn.com/schema/registry.json",
-    "name": "motion-ui",
-    "homepage": "https://motion-ui.com",
+    "name": "flow-kit",
+    "homepage": "https://flow-kit-beta.vercel.app/",
     "items": [
         {
             "name": "card-stack",
@@ -14,9 +14,59 @@
                     "type": "registry:component"
                 }
             ],
-            "dependencies": [
-                "motion"
-            ]
+            "dependencies": ["motion"]
+        },
+        {
+            "name": "stagger-reveal",
+            "type": "registry:ui",
+            "title": "Stagger Reveal",
+            "description": "Animate children with staggered entrance/exit animations.",
+            "files": [
+                {
+                    "path": "registry/stagger-reveal.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion"]
+        },
+        {
+            "name": "shared-menu",
+            "type": "registry:ui",
+            "title": "Shared Menu",
+            "description": "Multi-view item display with smooth animated transitions between list, card, and compact layouts.",
+            "files": [
+                {
+                    "path": "registry/shared-menu.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion"]
+        },
+        {
+            "name": "pinned-list",
+            "type": "registry:ui",
+            "title": "Pinned List",
+            "description": "A list of items where items move seamlessly to pinned and unpinned positions.",
+            "files": [
+                {
+                    "path": "registry/pinned-list.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "lucide-react"]
+        },
+        {
+            "name": "loader-button",
+            "type": "registry:ui",
+            "title": "Loader Button",
+            "description": "A stateful button that displays a loading indicator while a task is in progress.",
+            "files": [
+                {
+                    "path": "registry/loader-button.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "lucide-react"]
         }
     ]
 }

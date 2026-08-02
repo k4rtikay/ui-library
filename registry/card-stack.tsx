@@ -8,7 +8,7 @@ import React, {
     useEffect,
     useCallback,
 } from "react";
-import { motion, Transition } from "motion/react";
+import { motion, Transition, useReducedMotion } from "motion/react";
 
 type CardOffset = {
     scale: number;
@@ -79,8 +79,15 @@ export function CardStack({
 
     const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
     const isKeyRef = useRef(false);
-    const autoAdvanceTimerRef = useRef<NodeJS.Timeout>(null);
 
+    const shouldReduceMotion = useReducedMotion();
+
+    const maxOffset = Math.max(
+        0,
+        ...offsets.slice(0, maxVisibleCards).map((offset) => offset.y),
+    );
+
+    const lastIndex = (activeIndex - 1 + totalCards) % totalCards;
 
     const handleNext = useCallback(() => {
         const newIndex = (activeIndex + 1) % totalCards;
@@ -92,53 +99,6 @@ export function CardStack({
         onIndexChange?.(newIndex);
         setHasInteracted(true);
     }, [activeIndex, totalCards, isControlled, onIndexChange]);
-
-
-    useEffect(() => {
-        if (!autoAdvance || isPaused) {
-            if (autoAdvanceTimerRef.current) {
-                clearInterval(autoAdvanceTimerRef.current);
-            }
-            return;
-        }
-
-        autoAdvanceTimerRef.current = setInterval(() => {
-            handleNext();
-        }, autoAdvanceInterval);
-
-        return () => {
-            if (autoAdvanceTimerRef.current) {
-                clearInterval(autoAdvanceTimerRef.current);
-            }
-        };
-    }, [autoAdvance, autoAdvanceInterval, isPaused, handleNext]);
-
-    // Focus management
-    useEffect(() => {
-        if (isKeyRef.current) {
-            const currentCard = cardsRef.current[activeIndex];
-            currentCard?.focus();
-            isKeyRef.current = false;
-        }
-    }, [activeIndex]);
-
-    // Edge cases
-    if (totalCards === 0) return null;
-    if (totalCards === 1) {
-        return (
-            <div className={cn("relative", className)} {...props}>
-                <div className="relative">{cards[0]}</div>
-            </div>
-        );
-    }
-
-
-    const maxOffset = Math.max(
-        0,
-        ...offsets.slice(0, maxVisibleCards).map((offset) => offset.y),
-    );
-
-    const lastIndex = (activeIndex - 1 + totalCards) % totalCards;
 
     const handleKeyDown = (e: React.KeyboardEvent) => {
         if (!keyboardNavigable) return;
@@ -164,16 +124,37 @@ export function CardStack({
         }
     };
 
+    useEffect(() => {
+        if (!autoAdvance || isPaused) return;
+
+        const timerId = setTimeout(() => {
+            handleNext();
+        }, autoAdvanceInterval);
+
+        return () => {
+            clearTimeout(timerId);
+        };
+    }, [autoAdvance, autoAdvanceInterval, isPaused, handleNext]);
+
+    // Focus management
+    useEffect(() => {
+        if (isKeyRef.current) {
+            const currentCard = cardsRef.current[activeIndex];
+            currentCard?.focus();
+            isKeyRef.current = false;
+        }
+    }, [activeIndex]);
+
     const getCardVariant = (index: number) => {
         const isTop = index === activeIndex;
         const isExiting = index === lastIndex && hasInteracted;
 
         if (isExiting) {
             return {
-                y: exitOffset,
+                y: shouldReduceMotion ? offsets[0]?.y || 0 : exitOffset,
                 opacity: 0,
                 zIndex: 50,
-                filter: `blur(${exitBlur}px)`,
+                filter: shouldReduceMotion ? "none" : `blur(${exitBlur}px)`,
                 scale: offsets[0]?.scale || 1,
                 transition: { duration: 0.2 },
             };
@@ -223,6 +204,16 @@ export function CardStack({
         }
     };
 
+    // Edge cases
+    if (totalCards === 0) return null;
+    if (totalCards === 1) {
+        return (
+            <div className={cn("relative", className)} {...props}>
+                <div className="relative">{cards[0]}</div>
+            </div>
+        );
+    }
+
     return (
         <div
             className={cn("relative flex flex-col justify-end ", className)}
@@ -233,9 +224,14 @@ export function CardStack({
             onMouseLeave={handleMouseLeave}
             role="region"
             aria-label="Card stack"
-            aria-live="polite"
             {...props}
         >
+            <div
+                className="relative invisible pointer-events-none"
+                aria-hidden="true"
+            >
+                {cards[0]}
+            </div>
             {cards.map((item, index) => {
                 const isTop = index === activeIndex;
                 const variant = getCardVariant(index);
@@ -248,9 +244,17 @@ export function CardStack({
                         }}
                         initial={variant}
                         animate={variant}
-                        transition={transition}
+                        transition={
+                            shouldReduceMotion
+                                ? {
+                                      opacity: { duration: 0.2 },
+                                      scale: { duration: 0 },
+                                      y: { duration: 0 },
+                                  }
+                                : transition
+                        }
                         whileTap={
-                            clickable && isTop
+                            clickable && isTop && !shouldReduceMotion
                                 ? { y: `${(offsets[0]?.y || 0) + 6}px` }
                                 : undefined
                         }
@@ -267,7 +271,6 @@ export function CardStack({
                             isTop && (clickable || keyboardNavigable) ? 0 : -1
                         }
                         onKeyDown={handleKeyDown}
-                        role={clickable ? "button" : undefined}
                         aria-label={`Card ${index + 1} of ${totalCards}`}
                         aria-current={isTop ? "true" : undefined}
                     >
@@ -275,11 +278,6 @@ export function CardStack({
                     </motion.div>
                 );
             })}
-
-            {/* Screen reader announcement */}
-            <div className="sr-only" aria-live="polite" aria-atomic="true">
-                Showing card {activeIndex + 1} of {totalCards}
-            </div>
         </div>
     );
 }
