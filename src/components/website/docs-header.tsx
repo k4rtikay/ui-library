@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ModeToggle } from "@/components/website/mode-toggle";
-import MobileNav from "@/components/website/mobile-nav";
+// import MobileNav from "@/components/website/mobile-nav";
 import { SpotlightTrigger } from "@/components/website/spotlight-trigger";
 import { Github } from "lucide-react";
 

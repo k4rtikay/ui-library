@@ -1,63 +1,61 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import clsx from "clsx";
+// import { usePathname } from "next/navigation";
 import NavRoutes from "./nav-routes";
 
-export function Sidebar({ ...props }) {
-    const pathname = usePathname();
+export function Sidebar() {
+    // const pathname = usePathname();
 
-    const comps = [
-        {
-            category: "Getting Started",
-            items: [
-                {
-                    name: "Introduction",
-                    href: "/docs",
-                },
-                {
-                    name: "Setup",
-                    href: "/docs/setup",
-                },
-            ],
-        },
-        {
-            category: "Buttons",
-            items: [
-                {
-                    name: "Expanding Pill",
-                    href: "/docs/components/expanding-pill",
-                },
-            ],
-        },
-        {
-            category: "Cards",
-            items: [
-                {
-                    name: "Card Stack",
-                    href: "/docs/components/card-stack",
-                },
-                {
-                    name: "Lenticular Card",
-                    href: "/docs/components/lenticular-card",
-                },
-                {
-                    name: "FAQ Section",
-                    href: "/docs/components/faq-section",
-                },
-            ],
-        },
-        {
-            category: "Interactive",
-            items: [
-                {
-                    name: "Drag and Drop Accordion",
-                    href: "/docs/components/dnd-accordion",
-                },
-            ],
-        },
-    ];
+    // const comps = [
+    //     {
+    //         category: "Getting Started",
+    //         items: [
+    //             {
+    //                 name: "Introduction",
+    //                 href: "/docs",
+    //             },
+    //             {
+    //                 name: "Setup",
+    //                 href: "/docs/setup",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "Buttons",
+    //         items: [
+    //             {
+    //                 name: "Expanding Pill",
+    //                 href: "/docs/components/expanding-pill",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "Cards",
+    //         items: [
+    //             {
+    //                 name: "Card Stack",
+    //                 href: "/docs/components/card-stack",
+    //             },
+    //             {
+    //                 name: "Lenticular Card",
+    //                 href: "/docs/components/lenticular-card",
+    //             },
+    //             {
+    //                 name: "FAQ Section",
+    //                 href: "/docs/components/faq-section",
+    //             },
+    //         ],
+    //     },
+    //     {
+    //         category: "Interactive",
+    //         items: [
+    //             {
+    //                 name: "Drag and Drop Accordion",
+    //                 href: "/docs/components/dnd-accordion",
+    //             },
+    //         ],
+    //     },
+    // ];
 
     return (
         <aside

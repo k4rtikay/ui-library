@@ -1,4 +1,3 @@
-import { Sidebar } from "@/components/website/sidebar";
 import DocsHeader from "@/components/website/docs-header";
 import Spotlight, { RouteItem } from "@/components/website/spotlight";
 
