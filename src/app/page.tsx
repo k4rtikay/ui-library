@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BgImage from "../../public/waves-green.png";
 import { Instrument_Serif } from "next/font/google";
+import { DocsLinkButton } from "@/components/docs-link-button";
 import { GithubStarButton } from "@/components/github-star-button";
 
 const instrumentSerif = Instrument_Serif({
@@ -52,7 +53,10 @@ export default function Home() {
                         Motion.
                     </p>
 
-                    <GithubStarButton />
+                    <div className="flex w-full max-w-[200px] flex-col items-center justify-center gap-3 md:w-auto md:max-w-none md:flex-row">
+                        <DocsLinkButton />
+                        <GithubStarButton />
+                    </div>
                 </div>
             </main>
         </div>

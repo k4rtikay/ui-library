@@ -29,7 +29,7 @@ export function GithubStarButton() {
             rel="noopener noreferrer"
             initial="rest"
             whileHover="hover"
-            className="text-sm font-medium tracking-wide leading-0.5 ring-2 ring-white/10 bg-zinc-900 text-zinc-50 px-4 py-3 rounded-xl flex gap-2 items-center justify-center shadow-[inset_0px_2px_8px_0px_rgba(255,255,255,0.55),0px_2px_16px_0px_rgba(0,0,0,0.1)]"
+            className="w-full md:w-44 text-sm font-medium tracking-wide leading-0.5 ring-2 ring-white/10 bg-zinc-900 text-zinc-50 px-4 py-3 rounded-xl flex gap-2 items-center justify-center shadow-[inset_0px_2px_8px_0px_rgba(255,255,255,0.55),0px_2px_16px_0px_rgba(0,0,0,0.1)]"
         >
             Star on Github
             <motion.div
