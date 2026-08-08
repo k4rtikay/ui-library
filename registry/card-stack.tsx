@@ -258,7 +258,7 @@ export function CardStack({
                                 ? { y: `${(offsets[0]?.y || 0) + 6}px` }
                                 : undefined
                         }
-                        className={cn("absolute inset-0 outline-none group", {
+                        className={cn("absolute inset-0 group focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-black  focus:ring-gray-300 dark:focus:ring-gray-600/70 rounded-xl", {
                             "pointer-events-none": !isTop,
                             "cursor-pointer select-none": clickable && isTop,
                         })}
