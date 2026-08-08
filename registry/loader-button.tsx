@@ -58,6 +58,7 @@ export const LoaderButton = React.forwardRef<
                 ref={ref}
                 variants={buttonVariants}
                 animate={state}
+                disabled={isDisabled}
                 custom={shouldReduceMotion}
                 className={cn(
                     // Base styles
