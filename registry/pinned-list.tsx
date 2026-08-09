@@ -101,7 +101,7 @@ function PinnedListRow({
                 {item.content}
             </div>
 
-            <button
+            <button                
                 onClick={() => onTogglePin(item.id)}
                 className={cn(
                     "shrink-0 p-1.5 rounded-full transition-colors outline-none",
