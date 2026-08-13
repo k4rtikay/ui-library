@@ -8,9 +8,10 @@ import { Button } from "../ui/button";
 
 export default function DocsHeader() {
     return (
-        <header className="sticky w-full z-50 top-8 p-2 my-4 overflow-hidden flex justify-between items-center">
+        <header className="sticky w-full top-0 z-50 pt-8 pb-12 overflow-hidden flex justify-between items-center">
+          <div className="-z-10 absolute inset-0 bg-gradient-to-t from-transparent from-20% to-background to-60%"></div>
             <div className="flex items-center gap-4">
-                <MobileNav />
+                <MobileNav /> 
                 <Button
                     variant="outline"
                     size="icon"
@@ -26,7 +27,7 @@ export default function DocsHeader() {
                         height={32}
                         className="size-8 shrink-0 rounded-full object-cover h-9 w-9"
                     />
-                </Link> 
+                </Link>
             </div>
             <div className="flex items-center gap-4">
                 <SpotlightTrigger />
