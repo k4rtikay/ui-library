@@ -83,7 +83,7 @@
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
+    --background: oklch(0.22 0 0);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
@@ -114,6 +114,9 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+    --elevation-md:
+        0 4px 6px -1px rgb(0 0 0 / 0.5),
+        0 2px 4px -2px rgb(0 0 0 / 0.4);
 }
 
 @layer base {
@@ -127,7 +130,6 @@
 }
 
 @layer components {
-
     [data-rehype-pretty-code-figure] pre {
         @apply bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg p-4 overflow-x-auto text-sm leading-6;
     }
@@ -147,8 +149,12 @@
 
 @layer utilities {
     .prose {
-        :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::before,
-        :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *))::after {
+        :where(code):not(
+                :where([class~="not-prose"], [class~="not-prose"] *)
+            )::before,
+        :where(code):not(
+                :where([class~="not-prose"], [class~="not-prose"] *)
+            )::after {
             content: "";
         }
     }
