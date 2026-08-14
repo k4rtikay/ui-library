@@ -4,6 +4,12 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { paths } from "@/lib/paths";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function NavRoutes() {
     const pathname = usePathname();
@@ -24,38 +30,48 @@ export default function NavRoutes() {
     }, []);
 
     return (
-        <ul className="flex flex-col gap-4">
-            {pathsByCategory.map((category) => (
-                <li key={category.category} className="flex flex-col gap-1">
-                    <p className="pb-2 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-100">
-                        {category.category}
-                    </p>
-                    <ul className="relative mx-auto flex w-[94%] flex-col gap-1 border-l border-l-zinc-500">
-                        {category.items.map((item) => {
-                            const isActive = pathname === item.href;
+        <nav aria-label="Documentation navigation">
+            <Accordion
+                type="multiple"
+                defaultValue={pathsByCategory.map((category) => category.category)}
+                className="flex flex-col gap-2"
+            >
+                {pathsByCategory.map((category) => (
+                    <AccordionItem
+                        key={category.category}
+                        value={category.category}
+                        className="border-b-0"
+                    >
+                        <AccordionTrigger className="rounded-md px-2 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:no-underline hover:bg-foreground/5">
+                            {category.category}
+                        </AccordionTrigger>
+                        <AccordionContent className="pb-0">
+                            <ul className="mt-1 flex flex-col gap-1 border-l border-border pl-2">
+                                {category.items.map((item) => {
+                                    const isActive = pathname === item.href;
 
-                            return (
-                                <li key={item.href} className="relative">
-                                    <Link
-                                        href={item.href}
-                                        className={cn(
-                                            "block rounded-r-[15px] px-3 py-2 text-sm font-medium transition-colors duration-200 [corner-shape:squircle]",
-                                            {
-                                                "bg-linear-to-r from-zinc-200 to-zinc-300 text-zinc-900 dark:from-[#171717] dark:to-zinc-700 dark:text-white":
-                                                    isActive,
-                                                "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800":
-                                                    !isActive,
-                                            },
-                                        )}
-                                    >
-                                        {item.title}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </li>
-            ))}
-        </ul>
+                                    return (
+                                        <li key={item.href}>
+                                            <Link
+                                                href={item.href}
+                                                className={cn(
+                                                    "relative block overflow-hidden rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 before:absolute before:inset-0 before:bg-foreground before:opacity-0 before:transition-opacity hover:before:opacity-5",
+                                                    isActive &&
+                                                        "text-foreground before:opacity-10 hover:before:opacity-10",
+                                                )}
+                                            >
+                                                <span className="relative">
+                                                    {item.title}
+                                                </span>
+                                            </Link>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </AccordionContent>
+                    </AccordionItem>
+                ))}
+            </Accordion>
+        </nav>
     );
 }
