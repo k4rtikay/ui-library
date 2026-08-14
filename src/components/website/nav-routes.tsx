@@ -3,78 +3,52 @@
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { paths } from "@/lib/paths";
 
 export default function NavRoutes() {
     const pathname = usePathname();
+    const pathsByCategory = paths.reduce<
+        Array<{ category: string; items: typeof paths }>
+    >((categories, path) => {
+        const category = categories.find(
+            (group) => group.category === path.category,
+        );
 
-    const comps = [
-        {
-            category: "Getting Started",
-            items: [
-                { name: "Introduction", href: "/docs" },
-                { name: "Setup", href: "/docs/setup" },
-            ],
-        },
-        {
-            category: "Buttons",
-            items: [
-                { name: "Loader Button", href: "/docs/components/loader-button" },
-                // { name: "Hello Button", href: "/docs/components/hello-button" },
-            ],
-        },
-        {
-            category: "Cards",
-            items: [
-                { name: "Card Stack", href: "/docs/components/card-stack" },
-            ],
-        },
-        // {
-        //     category: "Menus",
-        //     items: [
-        //         { name: "Shared Menu", href: "/docs/components/shared-menu" },
-        //     ],
-        // },
-        {
-            category: "Animations",
-            items: [
-                // {
-                //     name: "Stagger Reveal",
-                //     href: "/docs/components/stagger-reveal",
-                // },
-                {
-                    name: "Pinned List",
-                    href: "/docs/components/pinned-list",
-                },
-            ],
-        },
-    ];
+        if (category) {
+            category.items.push(path);
+        } else {
+            categories.push({ category: path.category, items: [path] });
+        }
+
+        return categories;
+    }, []);
 
     return (
         <ul className="flex flex-col gap-4">
-            {comps.map((comp) => (
-                <li key={comp.category} className="flex flex-col gap-1">
-                    <p className="font-bold text-xs text-zinc-500 dark:text-zinc-100 uppercase tracking-wider pb-2">
-                        {comp.category}
+            {pathsByCategory.map((category) => (
+                <li key={category.category} className="flex flex-col gap-1">
+                    <p className="pb-2 text-xs font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-100">
+                        {category.category}
                     </p>
-                    <ul className="flex flex-col gap-1 w-[94%] mx-auto border-l border-l-zinc-500 relative">
-                        {comp.items.map((item) => {
+                    <ul className="relative mx-auto flex w-[94%] flex-col gap-1 border-l border-l-zinc-500">
+                        {category.items.map((item) => {
                             const isActive = pathname === item.href;
 
                             return (
-                                <li key={item.name} className="relative">
+                                <li key={item.href} className="relative">
                                     <Link
                                         href={item.href}
                                         className={cn(
-                                            "block px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-r-[15px] [corner-shape:squircle]",
+                                            "block rounded-r-[15px] px-3 py-2 text-sm font-medium transition-colors duration-200 [corner-shape:squircle]",
                                             {
                                                 "bg-linear-to-r from-zinc-200 to-zinc-300 text-zinc-900 dark:from-[#171717] dark:to-zinc-700 dark:text-white":
                                                     isActive,
-                                                "text-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800":
+                                                "text-zinc-700 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-800":
                                                     !isActive,
-                                            }
+                                            },
                                         )}
                                     >
-                                        {item.name}
+                                        {item.title}
                                     </Link>
                                 </li>
                             );
