@@ -5,12 +5,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Search, FileText } from "lucide-react";
+import type { RouteItem } from "@/lib/paths";
 
-export type RouteItem = {
-    title: string;
-    href: string;
-    category: string;
-};
 
 interface SpotlightProps {
     routes: RouteItem[];
