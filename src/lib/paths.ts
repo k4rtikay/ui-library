@@ -1,36 +1,69 @@
-import { RouteItem } from "@/components/website/spotlight";
+import type { LucideIcon } from "lucide-react";
+import { MousePointerClick, PanelsTopLeft, Rocket, Rows } from "lucide-react";
 
-export const paths: RouteItem[] = [
-    { title: "Introduction", href: "/docs", category: "Getting Started" },
-    { title: "Setup", href: "/docs/setup", category: "Getting Started" },
+export type RouteItem = {
+    title: string;
+    href: string;
+    category: string;
+};
+
+type DocsNavItem = Omit<RouteItem, "category">;
+
+export type DocsNavCategory = {
+    id: string;
+    title: string;
+    icon: LucideIcon;
+    items: DocsNavItem[];
+};
+
+export const docsNavigation: DocsNavCategory[] = [
     {
-        title: "Loader Button",
-        href: "/docs/components/loader-button",
-        category: "Buttons",
+        id: "getting-started",
+        title: "Getting Started",
+        icon: Rocket,
+        items: [
+            { title: "Introduction", href: "/docs" },
+            { title: "Setup", href: "/docs/setup" },
+        ],
     },
-    // {
-    //     title: "Hello Button",
-    //     href: "/docs/components/hello-button",
-    //     category: "Buttons",
-    // },
     {
-        title: "Card Stack",
-        href: "/docs/components/card-stack",
-        category: "Cards",
+        id: "buttons",
+        title: "Buttons",
+        icon: MousePointerClick,
+        items: [
+            {
+                title: "Loader Button",
+                href: "/docs/components/loader-button",
+            },
+        ],
     },
-    // {
-    //     title: "Shared Menu",
-    //     href: "/docs/components/shared-menu",
-    //     category: "Menus",
-    // },
-    // {
-    //     title: "Stagger Reveal",
-    //     href: "/docs/components/stagger-reveal",
-    //     category: "Animations",
-    // },
     {
-        title: "Pinned List",
-        href: "/docs/components/pinned-list",
-        category: "Animations",
+        id: "cards",
+        title: "Cards",
+        icon: PanelsTopLeft,
+        items: [
+            {
+                title: "Card Stack",
+                href: "/docs/components/card-stack",
+            },
+        ],
+    },
+    {
+        id: "animations",
+        title: "Lists",
+        icon: Rows,
+        items: [
+            {
+                title: "Pinned List",
+                href: "/docs/components/pinned-list",
+            },
+        ],
     },
 ];
+
+export const paths: RouteItem[] = docsNavigation.flatMap((category) =>
+    category.items.map((item) => ({
+        ...item,
+        category: category.title,
+    })),
+);
