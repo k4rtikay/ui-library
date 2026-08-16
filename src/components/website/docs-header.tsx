@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 
 export default function DocsHeader() {
     return (
-        <header className="sticky w-full top-0 left-0 right-0 z-99 pt-8 pb-12 overflow-hidden flex justify-between items-center">
+        <header className="sticky w-full top-0 left-0 right-0 z-40 pt-8 pb-12 overflow-hidden flex justify-between items-center">
           <div className="-z-10 absolute inset-0 bg-gradient-to-t from-transparent from-20% to-background to-60%"></div>
             <div className="flex items-center gap-4">
                 <MobileNav /> 
