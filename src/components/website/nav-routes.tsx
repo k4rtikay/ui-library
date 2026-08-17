@@ -30,7 +30,7 @@ export default function NavRoutes() {
                             value={category.id}
                             className="border-b-0"
                         >
-                            <AccordionTrigger className="rounded-md px-2 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:no-underline hover:bg-foreground/5">
+                            <AccordionTrigger className="rounded-md py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:no-underline hover:bg-foreground/5">
                                 <span className="flex items-center gap-2">
                                     <Icon className="size-4" />
                                     {category.title}
