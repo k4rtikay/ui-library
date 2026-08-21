@@ -8,8 +8,7 @@ import { Button } from "../ui/button";
 
 export default function DocsHeader() {
     return (
-        <header className="sticky w-full top-0 left-0 right-0 z-40 pt-8 pb-12 overflow-hidden flex justify-between items-center">
-          <div className="-z-10 absolute inset-0 bg-gradient-to-t from-transparent from-20% to-background to-60%"></div>
+      <header className="absolute inset-x-0 top-0 z-40 flex w-full items-center justify-between bg-gradient-to-t from-transparent from-20% to-background to-60% px-4 pt-8 pb-12 md:px-8">
             <div className="flex items-center gap-4">
                 <MobileNav /> 
                 <Button
@@ -38,12 +37,14 @@ export default function DocsHeader() {
                     className="rounded-full bg-secondary text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground shadow-md dark:shadow-(--elevation-md)"
                     asChild
                 >
-                    <Link
+                    <a
                         href="https://github.com/k4rtikay/ui-library"
+                        target="_blank"
+                        rel="noopen noreferrer"
                         className="flex items-center"
                     >
                         <Github size={16} />
-                    </Link>
+                    </a>
                 </Button>
             </div>
             

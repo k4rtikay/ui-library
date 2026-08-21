@@ -36,8 +36,8 @@ export default function NavRoutes() {
                                     {category.title}
                                 </span>
                             </AccordionTrigger>
-                            <AccordionContent className="pb-0">
-                                <ul className="mt-1 flex flex-col gap-1 border-l border-border pl-2">
+                            <AccordionContent className="mx-1 -my-2 px-2 py-2 pb-2">
+                                <ul className="mt-1 flex flex-col border-l border-border pl-2">
                                     {category.items.map((item) => {
                                         const isActive = pathname === item.href;
 
@@ -46,9 +46,9 @@ export default function NavRoutes() {
                                                 <Link
                                                     href={item.href}
                                                     className={cn(
-                                                        "relative block overflow-hidden rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200 before:absolute before:inset-0 before:bg-foreground before:opacity-0 before:transition-opacity hover:before:opacity-5",
+                                                        "relative mb-1 block rounded-xl px-3 py-2 text-sm font-medium text-muted-foreground transition-colors duration-200",
                                                         isActive &&
-                                                            "text-foreground before:opacity-10 hover:before:opacity-10",
+                                                            "text-sidebar-primary-foreground bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
                                                     )}
                                                 >
                                                     <span className="relative">
