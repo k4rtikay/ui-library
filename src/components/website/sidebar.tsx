@@ -6,7 +6,7 @@ import { Box, Search } from "lucide-react";
 
 export function Sidebar() {
     return (
-        <aside className="bg-muted hidden h-dvh w-64 shrink-0 self-start px-4 py-4 text-sm md:sticky md:top-0 md:flex md:flex-col md:gap-4">
+        <aside className="bg-sidebar hidden h-dvh w-64 shrink-0 self-start px-4 py-4 text-sm md:sticky md:top-0 md:flex md:flex-col md:gap-4">
             <h1 className="mt-6 text-xl font-semibold">Flow-Kit</h1>
             <div className="w-full flex items-center gap-2 font-mono text-sm text-muted-foreground">
                 <Box className="size-4" />
@@ -26,7 +26,7 @@ export function Sidebar() {
                 <input
                     type="text"
                     placeholder="Filter components..."
-                    className="h-9 w-full rounded-xl border border-border bg-background pl-9 pr-10 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/30"
+                    className="h-9 w-full rounded-xl border border-border bg-secondary pl-9 pr-10 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/30"
                 />
                 <kbd className="pointer-events-none absolute right-3 top-1/2 flex h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded border border-border bg-background px-1.5 font-mono text-[11px] text-muted-foreground shadow-sm">
                     /

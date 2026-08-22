@@ -9,7 +9,7 @@ export default function DocsLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <div className="bg-muted grid h-dvh overflow-hidden md:grid-cols-[16rem_1fr]">
+        <div className="bg-sidebar grid h-dvh overflow-hidden md:grid-cols-[16rem_1fr]">
             <Sidebar />
             <div className="relative m-3 min-h-0 min-w-0 overflow-hidden rounded-4xl bg-background">
                 <DocsHeader />
