@@ -12,7 +12,7 @@ export function Sidebar() {
                 <Box className="size-4" />
                 <span>
                     v0.1.0{" "}
-                    <span className="ml-2 bg-accent text-accent-foreground rounded-full py-1 px-2">
+                    <span className="text-xs bg-accent text-accent-foreground rounded-full border-1 border-border py-1 px-2">
                         Beta
                     </span>
                 </span>
