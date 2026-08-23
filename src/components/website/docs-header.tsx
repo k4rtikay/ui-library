@@ -6,7 +6,15 @@ import { SpotlightTrigger } from "@/components/website/spotlight-trigger";
 import { Github, Sidebar } from "lucide-react";
 import { Button } from "../ui/button";
 
-export default function DocsHeader() {
+interface DocsHeaderProps {
+    isSidebarCollapsed: boolean;
+    onToggleSidebar: () => void;
+}
+
+export default function DocsHeader({
+    isSidebarCollapsed,
+    onToggleSidebar,
+}: DocsHeaderProps) {
     return (
       <header className="absolute inset-x-0 top-0 z-40 flex w-full items-center justify-between px-4 pt-8 pb-12 md:px-8">
             <div className="flex items-center gap-4">
@@ -15,6 +23,12 @@ export default function DocsHeader() {
                     variant="outline"
                     size="icon"
                     className="rounded-full bg-secondary text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground shadow-md dark:shadow-(--elevation-md)"
+                    aria-controls="docs-sidebar"
+                    aria-expanded={!isSidebarCollapsed}
+                    aria-label={
+                        isSidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"
+                    }
+                    onClick={onToggleSidebar}
                 >
                     <Sidebar />
                 </Button>

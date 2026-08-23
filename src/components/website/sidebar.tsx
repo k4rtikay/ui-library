@@ -4,9 +4,19 @@
 import NavRoutes from "./nav-routes";
 import { Box, Search } from "lucide-react";
 
-export function Sidebar() {
+interface SidebarProps {
+    isCollapsed: boolean;
+}
+
+export function Sidebar({ isCollapsed }: SidebarProps) {
     return (
-        <aside className="bg-sidebar hidden h-dvh w-64 shrink-0 self-start px-4 py-4 text-sm md:sticky md:top-0 md:flex md:flex-col md:gap-4">
+        <aside
+            id="docs-sidebar"
+            className="bg-sidebar hidden h-dvh w-64 shrink-0 self-start px-4 py-4 text-sm md:sticky md:top-0 md:flex md:flex-col md:gap-4"
+            data-collapsed={isCollapsed}
+            aria-hidden={isCollapsed}
+            inert={isCollapsed}
+        >
             <h1 className="mt-6 text-xl font-semibold">Flow-Kit</h1>
             <div className="w-full flex items-center gap-2 font-mono text-sm text-muted-foreground">
                 <Box className="size-4" />

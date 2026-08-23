@@ -48,7 +48,7 @@ export default function NavRoutes() {
                                                     className={cn(
                                                         "relative mb-1 block rounded-lg p-2 text-sm font-medium text-muted-foreground hover:text-sidebar-foreground dark:hover:bg-sidebar-accent transition-colors duration-200",
                                                         isActive &&
-                                                            "text-sidebar-primary-foreground bg-sidebar-primary hover:text-sidebar-primary-foreground dark:hover:bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
+                                                            "text-sidebar-primary-foreground text-shadow-sm bg-sidebar-primary hover:text-sidebar-primary-foreground dark:hover:bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
                                                     )}
                                                 >
                                                     <span className="relative">
