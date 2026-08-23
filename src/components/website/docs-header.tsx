@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 
 export default function DocsHeader() {
     return (
-      <header className="absolute inset-x-0 top-0 z-40 flex w-full items-center justify-between  px-4 pt-8 pb-12 md:px-8">
+      <header className="absolute inset-x-0 top-0 z-40 flex w-full items-center justify-between px-4 pt-8 pb-12 md:px-8">
             <div className="flex items-center gap-4">
                 <MobileNav /> 
                 <Button
