@@ -22,7 +22,7 @@ export default function DocsHeader({
                 <Button
                     variant="outline"
                     size="icon"
-                    className="hidden md:block rounded-full bg-secondary text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground shadow-md dark:shadow-(--elevation-md)"
+                    className="hidden md:inline-flex rounded-full bg-secondary text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground shadow-md dark:shadow-(--elevation-md)"
                     aria-controls="docs-sidebar"
                     aria-expanded={!isSidebarCollapsed}
                     aria-label={
