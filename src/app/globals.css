@@ -131,7 +131,7 @@
 
 @layer components {
     [data-rehype-pretty-code-figure] pre {
-        @apply bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg p-4 overflow-x-auto text-sm leading-6;
+        @apply bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-x-auto text-sm leading-6;
     }
 
     code[data-theme*="light"],

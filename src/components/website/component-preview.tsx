@@ -24,7 +24,7 @@ export default function ComponentPreview({
                         </div>
                     </TabsList>
                 </div>
-                <div className="relative not-prose rounded-2xl bg-muted/60 dark:bg-muted p-10 border">
+                <div className="relative not-prose rounded-2xl border bg-muted/60 dark:bg-muted overflow-hidden">
                     {children}
                 </div>
             </Tabs>
