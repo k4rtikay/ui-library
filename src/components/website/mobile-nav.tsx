@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu } from "lucide-react";
+import { Sidebar } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import NavRoutes from "./nav-routes";
@@ -15,10 +15,10 @@ export default function MobileNav() {
                 <SheetTrigger asChild>
                     <Button
                         variant={"ghost"}
-                        className="md:hidden"
+                        className="md:hidden rounded-full bg-secondary text-secondary-foreground dark:bg-secondary dark:text-secondary-foreground shadow-md dark:shadow-(--elevation-md)"
                         size={"icon"}
                     >
-                        <Menu />
+                        <Sidebar />
                         <span className="sr-only">Toggle Menu</span>
                     </Button>
                 </SheetTrigger>
