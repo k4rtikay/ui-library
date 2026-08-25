@@ -5,31 +5,31 @@ const components: MDXComponents = {};
 export function useMDXComponents(): MDXComponents {
     return {
         table: (props) => (
-            <div className="not-prose my-6 w-full overflow-y-auto rounded-lg border border-zinc-200 dark:border-zinc-800">
+            <div className="not-prose my-6 w-full overflow-y-auto rounded-lg border border-border">
                 <table className="w-full text-sm" {...props} />
             </div>
         ),
         thead: (props) => (
             <thead
-                className="w-full text-left text-sm font-medium text-zinc-500 dark:text-zinc-400"
+                className="w-full text-left text-sm font-medium"
                 {...props}
             />
         ),
         tbody: (props) => (
             <tbody
-                className="w-full text-left text-sm font-medium text-zinc-500 dark:text-zinc-400"
+                className="w-full text-left text-sm font-medium"
                 {...props}
             />
         ),
         th: (props) => (
             <th
-                className="border-b border-zinc-200 bg-zinc-50 px-4 py-3 text-left font-medium text-zinc-900 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-100 [&_code]:rounded [&_code]:bg-zinc-200/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-normal [&_code]:dark:bg-zinc-800"
+                className="border-b border-border bg-muted px-4 py-3 text-left font-medium text-foreground dark:bg-muted [&_code]:rounded [&_code]:bg-zinc-200/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-normal [&_code]:dark:bg-zinc-800"
                 {...props}
             />
         ),
         td: (props) => (
             <td
-                className="border-b border-zinc-100 px-4 py-3 text-zinc-600 dark:border-zinc-800 dark:text-zinc-400 [&_code]:rounded [&_code]:bg-zinc-200/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-normal [&_code]:dark:bg-zinc-800"
+                className="border-b border-border px-4 py-3 [&_code]:rounded [&_code]:bg-zinc-200/60 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-xs [&_code]:font-normal [&_code]:dark:bg-zinc-800"
                 {...props}
             />
         ),
