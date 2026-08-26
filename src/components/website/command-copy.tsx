@@ -4,6 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CopyButton from "./copy-button";
+import ManualInstallationSteps from "./manual-installation-steps";
 
 type PackageManager = "npm" | "pnpm" | "bun" | "yarn";
 
@@ -90,13 +91,7 @@ export function CommandCopy({
                 </TabsContent>
 
                 <TabsContent value="manual">
-                    <p>
-                        Copy this code and paste it into a .tsx file.
-                    </p>
-                    <p>Update the imports as needed.</p>
-                    <div className="not-prose w-full px-8 py-4 border rounded-lg">
-                        {children}
-                    </div>
+                    <ManualInstallationSteps>{children}</ManualInstallationSteps>
                 </TabsContent>
             </Tabs>
         </div>
