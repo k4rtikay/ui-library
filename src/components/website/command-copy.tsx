@@ -46,7 +46,7 @@ export function CommandCopy({
             <Tabs defaultValue="cli" className="relative w-full">
                 <TabsList
                     variant="line"
-                    className="border-b w-full justify-start px-0"
+                    className="border-b w-full justify-start px-0 mb-1"
                 >
                     <div className="flex items-center gap-2">
                         <TabsTrigger key={"cli"} value="cli">
@@ -64,14 +64,14 @@ export function CommandCopy({
                         onValueChange={updatePreference}
                         className="relative w-full gap-0"
                     >
-                        <div className="flex items-center justify-between bg-zinc-100 dark:bg-zinc-900 rounded-t-lg border border-b-0 p-1">
+                        <div className="flex items-center justify-between bg-muted rounded-t-xl border border-b-0 p-1">
                             <TabsList className="p-0 bg-transparent flex gap-1">
                                 {(["npm", "pnpm", "bun", "yarn"] as const).map(
                                     (pm) => (
                                         <TabsTrigger
                                             key={pm}
                                             value={pm}
-                                            className="p-2 bg-transparent font-semibold"
+                                            className="p-2 bg-transparent rounded-lg text-xs font-mono"
                                         >
                                             {pm}
                                         </TabsTrigger>
@@ -80,7 +80,7 @@ export function CommandCopy({
                             </TabsList>
                         </div>
 
-                        <div className="relative rounded-b-lg border px-4 py-4">
+                        <div className="relative rounded-b-xl border px-4 py-4">
                             <code className="font-mono text-sm">
                                 {command[packageManager]}
                             </code>
