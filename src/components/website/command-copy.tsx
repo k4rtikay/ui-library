@@ -29,6 +29,9 @@ export function CommandCopy({
 
     React.useEffect(() => {
         const saved = localStorage.getItem("package-manager") as PackageManager;
+        //use effect cause reading localstorage must happen after hydration
+        // small scope so compromise has been made
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (saved) setPackageManager(saved);
     }, []);
 
