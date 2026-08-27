@@ -73,7 +73,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.15 }}
-                        className="absolute inset-0 bg-zinc-950/60 backdrop-blur-sm"
+                        className="absolute inset-0 bg-zinc-950/25"
                         onClick={() => setOpen(false)}
                     />
 
@@ -99,7 +99,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                             bounce: 0,
                             duration: 0.2,
                         }}
-                        className="relative w-full max-w-2xl overflow-hidden rounded-xl border border-border/10 bg-card/80 text-foreground shadow-2xl shadow-primary/10 backdrop-blur-xl"
+                        className="relative w-full max-w-lg  overflow-hidden rounded-2xl border border-border/10 text-foreground shadow-2xl backdrop-blur-xl"
                     >
                         <Command
                             label="Global Command Menu"
@@ -107,7 +107,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                         >
                             {/* Search Input Area */}
                             <div
-                                className="flex items-center border-b border-white/5 px-4"
+                                className="flex items-center border-b border-border px-4 bg-card"
                                 cmdk-input-wrapper=""
                             >
                                 <Search className="mr-3 h-5 w-5" />
@@ -119,7 +119,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                             </div>
 
                             {/* Search Results Area */}
-                            <Command.List className="max-h-[300px] overflow-y-auto overflow-x-hidden p-2">
+                            <Command.List className="bg-muted max-h-[300px] overflow-y-auto overflow-x-hidden p-2">
                                 <Command.Empty className="py-6 text-center text-sm">
                                     No results found.
                                 </Command.Empty>
@@ -129,7 +129,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                                         <Command.Group
                                             key={category}
                                             heading={category}
-                                            className="p-1 text-xs font-medium"
+                                            className="p-1 text-xs font-[520]"
                                         >
                                             {items.map((route) => (
                                                 <Command.Item
@@ -144,7 +144,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                                                     }
                                                     className="group relative flex cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm text-muted-foreground outline-none data-[selected=true]:bg-white/10 data-[selected=true]:text-foreground"
                                                 >
-                                                    <FileText className="mr-2 h-4 w-4 text-foreground group-data-[selected=true]:text-blue-500" />
+                                                    <FileText className="mr-2 h-4 w-4 text-foreground group-data-[selected=true]:text-primary" />
                                                     {route.title}
                                                 </Command.Item>
                                             ))}
