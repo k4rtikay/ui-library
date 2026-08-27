@@ -1,5 +1,5 @@
-import type { LucideIcon } from "lucide-react";
-import { MousePointerClick, PanelsTopLeft, Rocket, Rows } from "lucide-react";
+import type { HugeIcon } from "@/components/hugeicons";
+import { MousePointerClick, PanelsTopLeft, Rocket, Rows } from "@/components/hugeicons";
 
 export type RouteItem = {
     title: string;
@@ -12,7 +12,7 @@ type DocsNavItem = Omit<RouteItem, "category">;
 export type DocsNavCategory = {
     id: string;
     title: string;
-    icon: LucideIcon;
+    icon: HugeIcon;
     items: DocsNavItem[];
 };
 

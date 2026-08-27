@@ -11,7 +11,7 @@ import {
     LayoutDashboard,
     Gauge,
     Search,
-} from "lucide-react";
+} from "@/components/hugeicons";
 
 const INITIAL_ITEMS: PinnedListItem[] = [
     {

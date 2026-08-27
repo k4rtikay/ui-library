@@ -4,7 +4,7 @@ import { Command } from "cmdk";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Search, FileText } from "lucide-react";
+import { Search, FileText } from "@/components/hugeicons";
 import type { RouteItem } from "@/lib/paths";
 
 

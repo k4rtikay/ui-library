@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sidebar } from "lucide-react";
+import { Sidebar } from "@/components/hugeicons";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
 import NavRoutes from "./nav-routes";

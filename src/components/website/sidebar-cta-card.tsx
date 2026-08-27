@@ -1,5 +1,5 @@
 import { Button } from "../ui/button";
-import { Github } from "lucide-react";
+import { Github } from "@/components/hugeicons";
 
 export default function SidebarCtaCard() {
     return (

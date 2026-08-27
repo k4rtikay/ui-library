@@ -27,7 +27,7 @@
                     "type": "registry:component"
                 }
             ],
-            "dependencies": ["motion", "lucide-react"]
+            "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
         },
         {
             "name": "loader-button",
@@ -40,7 +40,7 @@
                     "type": "registry:component"
                 }
             ],
-            "dependencies": ["motion", "lucide-react"]
+            "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
         }
     ]
 }

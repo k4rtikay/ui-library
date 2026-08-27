@@ -8,7 +8,12 @@ import {
     useReducedMotion,
 } from "motion/react";
 import { cn } from "@/lib/utils";
-import { CheckCircle2, XCircle, Loader2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import {
+    CancelCircleIcon,
+    CheckmarkCircle01Icon,
+    Loading01Icon,
+} from "@hugeicons/core-free-icons";
 
 export type ButtonState = "idle" | "loading" | "success" | "error";
 
@@ -41,13 +46,13 @@ export const LoaderButton = React.forwardRef<
 
         const defaultSuccessLabel = (
             <span className="flex justify-center items-center gap-1">
-                <CheckCircle2 className="w-4 h-4" /> Success
+                <HugeiconsIcon icon={CheckmarkCircle01Icon} className="w-4 h-4" /> Success
             </span>
         );
 
         const defaultErrorLabel = (
             <span className="flex justify-center items-center gap-1">
-                <XCircle className="w-4 h-4" /> Error
+                <HugeiconsIcon icon={CancelCircleIcon} className="w-4 h-4" /> Error
             </span>
         );
 
@@ -110,7 +115,7 @@ export const LoaderButton = React.forwardRef<
                             className="w-full flex items-center justify-center gap-2"
                         >
                             {loader ?? (
-                                <span className="w-full h-full flex items-center justify-center gap-1 text-xs opacity-90"><Loader2 className="w-5 h-5 animate-spin" />Processing</span>
+                                <span className="w-full h-full flex items-center justify-center gap-1 text-xs opacity-90"><HugeiconsIcon icon={Loading01Icon} className="w-5 h-5 animate-spin" />Processing</span>
                             )}
                         </motion.div>
                     )}

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { Check, Copy } from "lucide-react";
+import { Check, Copy } from "@/components/hugeicons";
 import { cn } from "@/lib/utils";
 
 interface CopyButtonProps {

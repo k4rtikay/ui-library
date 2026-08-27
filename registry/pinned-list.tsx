@@ -2,7 +2,8 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Pin } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { PinIcon as PinSvgIcon } from "@hugeicons/core-free-icons";
 import { motion, useReducedMotion } from "motion/react";
 
 export interface PinnedListItem {
@@ -164,7 +165,7 @@ function PinIcon({
             }}
             className="p-2 rounded-full"
         >
-            <Pin className={className} />
+            <HugeiconsIcon icon={PinSvgIcon} className={className} />
         </motion.div>
     );
 }

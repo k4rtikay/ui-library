@@ -2,7 +2,7 @@
 
 // import { usePathname } from "next/navigation";
 import NavRoutes from "./nav-routes";
-import { Box, Search } from "lucide-react";
+import { Box, Search } from "@/components/hugeicons";
 import SidebarCtaCard from "./sidebar-cta-card";
 
 

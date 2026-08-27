@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ModeToggle } from "@/components/website/mode-toggle";
 import MobileNav from "@/components/website/mobile-nav";
 import { SpotlightTrigger } from "@/components/website/spotlight-trigger";
-import { Github, Sidebar } from "lucide-react";
+import { Github, Sidebar } from "@/components/hugeicons";
 import { Button } from "../ui/button";
 
 interface DocsHeaderProps {

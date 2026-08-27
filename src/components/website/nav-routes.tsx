@@ -32,7 +32,7 @@ export default function NavRoutes() {
                         >
                             <AccordionTrigger className="rounded-lg p-2 text-sm font-[520] tracking-tight text-muted-foreground/75 hover:no-underline hover:bg-sidebar-accent transition-all duration-150 ease-out">
                                 <span className="flex items-center gap-2">
-                                    <Icon className="size-3" />
+                                    <Icon className="size-3.5" />
                                     {category.title}
                                 </span>
                             </AccordionTrigger>
