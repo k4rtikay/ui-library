@@ -16,7 +16,7 @@ import {
     Loading01Icon,
     LockIcon,
     ListViewIcon,
-    MoonIcon,
+    Moon02Icon,
     SquareMousePointerIcon,
     PaletteIcon,
     Cards01Icon,
@@ -57,7 +57,7 @@ export const Check = createIcon(Tick01Icon);
 export const Copy = createIcon(Copy01Icon);
 export const Github = createIcon(GithubIcon);
 export const Sidebar = createIcon(LayoutLeftIcon);
-export const Moon = createIcon(MoonIcon);
+export const Moon = createIcon(Moon02Icon);
 export const Sun = createIcon(Sun01Icon);
 export const Box = createIcon(CubeIcon);
 export const FileText = createIcon(File02Icon);
