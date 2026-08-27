@@ -30,14 +30,14 @@ export default function NavRoutes() {
                             value={category.id}
                             className="border-b-0"
                         >
-                            <AccordionTrigger className="rounded-lg p-2 text-xs font-bold uppercase tracking-wider text-muted-foreground hover:no-underline hover:text-sidebar-foreground dark:hover:bg-sidebar-accent">
+                            <AccordionTrigger className="rounded-lg p-2 text-sm font-[520] tracking-tight text-muted-foreground/75 hover:no-underline hover:bg-sidebar-accent transition-all duration-150 ease-out">
                                 <span className="flex items-center gap-2">
-                                    <Icon className="size-4" />
+                                    <Icon className="size-3" />
                                     {category.title}
                                 </span>
                             </AccordionTrigger>
                             <AccordionContent className="mx-1 -my-2 px-2 py-2 pb-2">
-                                <ul className="mt-1 flex flex-col border-l border-border pl-2">
+                                <ul className="mt-1 flex flex-col pl-2">
                                     {category.items.map((item) => {
                                         const isActive = pathname === item.href;
 
@@ -46,9 +46,9 @@ export default function NavRoutes() {
                                                 <Link
                                                     href={item.href}
                                                     className={cn(
-                                                        "relative mb-1 block rounded-lg p-2 text-sm font-medium text-muted-foreground hover:text-sidebar-foreground dark:hover:bg-sidebar-accent transition-colors duration-200",
+                                                        "relative block rounded-lg p-2 text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-accent transition-all duration-150 ease-out",
                                                         isActive &&
-                                                            "text-sidebar-primary-foreground text-shadow-sm bg-sidebar-primary hover:text-sidebar-primary-foreground dark:hover:bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
+                                                            "text-sidebar-primary-foreground text-shadow-sm bg-sidebar-primary hover:text-sidebar-primary-foreground hover:bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
                                                     )}
                                                 >
                                                     <span className="relative">
