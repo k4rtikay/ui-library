@@ -43,21 +43,13 @@ export function ScrollProgressPill({
       const container = scrollContainerElement;
       const activationLine =
         (container?.getBoundingClientRect().top ?? 0) + SCROLL_OFFSET;
-      const isAtEnd = container
-        ? container.scrollTop + container.clientHeight >=
-          container.scrollHeight - 1
-        : window.scrollY + window.innerHeight >=
-          document.documentElement.scrollHeight - 1;
-
-      const currentSection = isAtEnd
-        ? sectionElements.at(-1)!
-        : sectionElements.reduce(
-            (current, section) =>
-              section.element.getBoundingClientRect().top <= activationLine
-                ? section
-                : current,
-            sectionElements[0],
-          );
+      const currentSection = sectionElements.reduce(
+        (current, section) =>
+          section.element.getBoundingClientRect().top <= activationLine
+            ? section
+            : current,
+        sectionElements[0],
+      );
 
       setActiveSection(currentSection.id);
     };
@@ -83,7 +75,6 @@ export function ScrollProgressPill({
     const element = document.getElementById(id);
     if (!element) return;
 
-    setActiveSection(id);
     setIsOpen(false);
     const container = scrollContainerElement;
     if (container) {

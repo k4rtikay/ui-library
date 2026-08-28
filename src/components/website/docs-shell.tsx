@@ -2,12 +2,14 @@
 
 import {
     useCallback,
+    useLayoutEffect,
     useRef,
     useState,
     type CSSProperties,
     type ReactNode,
 } from "react";
 import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
 import DocsHeader from "./docs-header";
 import { Sidebar } from "./sidebar";
 import Spotlight from "./spotlight";
@@ -18,6 +20,7 @@ interface DocsShellProps {
 }
 
 export function DocsShell({ children }: DocsShellProps) {
+    const pathname = usePathname();
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
     const [scrollContainerElement, setScrollContainerElement] =
         useState<HTMLElement | null>(null);
@@ -26,6 +29,10 @@ export function DocsShell({ children }: DocsShellProps) {
         scrollContainerRef.current = element;
         setScrollContainerElement(element);
     }, []);
+
+    useLayoutEffect(() => {
+        scrollContainerElement?.scrollTo({ top: 0, behavior: "auto" });
+    }, [pathname, scrollContainerElement]);
 
     return (
         <motion.div
@@ -61,6 +68,7 @@ export function DocsShell({ children }: DocsShellProps) {
             </motion.div>
             <div className="relative m-3 min-h-0 min-w-0 overflow-hidden rounded-4xl bg-background">
                 <DocsHeader
+                    key={pathname}
                     isSidebarCollapsed={isSidebarCollapsed}
                     onToggleSidebar={() =>
                         setIsSidebarCollapsed((isCollapsed) => !isCollapsed)
@@ -77,7 +85,7 @@ export function DocsShell({ children }: DocsShellProps) {
                 >
                     <main
                         className="
-                      mx-auto min-h-full max-w-full px-4 pt-26 pb-24 md:max-w-3xl md:px-8 xl:pr-12
+                      mx-auto min-h-full max-w-full px-4 pt-26 pb-32 md:max-w-3xl md:px-8 xl:pr-12
                       min-w-0
 
                       prose prose-neutral dark:prose-invert text-pretty text-foreground leading-5.5
