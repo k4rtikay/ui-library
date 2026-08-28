@@ -1,5 +1,6 @@
 "use client";
 
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -11,17 +12,53 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-export default function NavRoutes() {
+interface NavRoutesProps {
+    searchQuery?: string;
+}
+
+function fuzzyMatches(value: string, query: string) {
+    let queryIndex = 0;
+    const normalizedValue = value.toLocaleLowerCase();
+
+    for (const character of normalizedValue) {
+        if (character === query[queryIndex]) {
+            queryIndex += 1;
+        }
+    }
+
+    return queryIndex === query.length;
+}
+
+export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
     const pathname = usePathname();
+    const filteredNavigation = useMemo(() => {
+        const query = searchQuery.trim().toLocaleLowerCase();
+
+        if (!query) {
+            return docsNavigation;
+        }
+
+        return docsNavigation.flatMap((category) => {
+            if (fuzzyMatches(category.title, query)) {
+                return [category];
+            }
+
+            const items = category.items.filter((item) =>
+                fuzzyMatches(item.title, query),
+            );
+
+            return items.length ? [{ ...category, items }] : [];
+        });
+    }, [searchQuery]);
 
     return (
         <nav aria-label="Documentation navigation">
             <Accordion
                 type="multiple"
-                defaultValue={docsNavigation.map((category) => category.id)}
+                defaultValue={filteredNavigation.map((category) => category.id)}
                 className="flex flex-col gap-2"
             >
-                {docsNavigation.map((category) => {
+                {filteredNavigation.map((category) => {
                     const Icon = category.icon;
 
                     return (

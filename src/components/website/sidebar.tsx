@@ -1,16 +1,18 @@
 "use client";
 
-// import { usePathname } from "next/navigation";
+import { useState } from "react";
 import NavRoutes from "./nav-routes";
-import { Box, Search } from "@/components/hugeicons";
+import { Box } from "@/components/hugeicons";
 import SidebarCtaCard from "./sidebar-cta-card";
-
+import SidebarSearch from "./sidebar-search";
 
 interface SidebarProps {
     isCollapsed: boolean;
 }
 
 export function Sidebar({ isCollapsed }: SidebarProps) {
+    const [searchQuery, setSearchQuery] = useState("");
+
     return (
         <aside
             id="docs-sidebar"
@@ -31,28 +33,17 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
                     </span>
                 </div>
 
-                <div className="relative w-full mt-2">
-                    <Search
-                        className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-                        aria-hidden="true"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Filter components..."
-                        className="h-9 w-full rounded-xl border border-border bg-secondary pl-9 pr-10 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring/30"
-                    />
-                    <kbd className="pointer-events-none absolute right-3 top-1/2 flex h-5 min-w-5 -translate-y-1/2 items-center justify-center rounded border border-border bg-background px-1.5 font-mono text-[11px] text-muted-foreground shadow-sm">
-                        /
-                    </kbd>
-                </div>
+                <SidebarSearch
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                />
             </header>
 
             <nav className="min-h-0 flex-1 overflow-y-auto">
-                <NavRoutes />
+                <NavRoutes searchQuery={searchQuery} />
             </nav>
 
             <footer className="shrink-0">
-                {/* planned footer content */}
                 <SidebarCtaCard />
             </footer>
         </aside>
