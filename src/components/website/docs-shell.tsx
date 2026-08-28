@@ -68,27 +68,31 @@ export function DocsShell({ children }: DocsShellProps) {
                     scrollContainer={scrollContainerRef}
                     scrollContainerElement={scrollContainerElement}
                 />
-                <main
+                <div
                     ref={setScrollContainer}
                     data-docs-scroll-container
-                    className="
-                  mx-auto max-w-full md:max-w-3xl md:px-8 xl:pr-12 px-4 pt-26 pb-24
-                  h-full min-w-0 overflow-y-auto overscroll-none scroll-pt-28 scrollbar-none
-                  [mask-image:linear-gradient(to_bottom,transparent_0,black_8rem,black_calc(100%_-_4rem),transparent_100%)]
-                  [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_8rem,black_calc(100%_-_4rem),transparent_100%)]
-
-                  prose prose-neutral dark:prose-invert text-pretty text-foreground leading-5.5
-
-                  prose-h1:text-3xl prose-h1:font-semibold prose-h1:tracking-tight prose-h1:text-foreground prose-h1:scroll-m-20 prose-h1:mb-4
-                  prose-h2:mt-12 prose-h2:text-xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:text-foreground
-                  prose-h3:text-base prose-h3:font-semibold prose-h3:scroll-m-20
-                  prose-strong:font-semibold prose-strong:text-foreground
-                  prose-table:block prose-table:overflow-y-auto
-                  prose-p:mt-2 prose-p:text-muted-foreground
-                "
+                    className="absolute inset-0 overflow-y-auto overscroll-none scroll-pt-28 scrollbar-none
+                    mask-[linear-gradient(to_bottom,transparent_0,black_8rem,black_calc(100%-4rem),transparent_100%)]
+                    [-webkit-mask-image:linear-gradient(to_bottom,transparent_0,black_8rem,black_calc(100%-4rem),transparent_100%)]"
                 >
-                    {children}
-                </main>
+                    <main
+                        className="
+                      mx-auto min-h-full max-w-full px-4 pt-26 pb-24 md:max-w-3xl md:px-8 xl:pr-12
+                      min-w-0
+
+                      prose prose-neutral dark:prose-invert text-pretty text-foreground leading-5.5
+
+                      prose-h1:text-3xl prose-h1:font-semibold prose-h1:tracking-tight prose-h1:text-foreground prose-h1:scroll-m-20 prose-h1:mb-4
+                      prose-h2:mt-12 prose-h2:text-xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:text-foreground
+                      prose-h3:text-base prose-h3:font-semibold prose-h3:scroll-m-20
+                      prose-strong:font-semibold prose-strong:text-foreground
+                      prose-table:block prose-table:overflow-y-auto
+                      prose-p:mt-2 prose-p:text-muted-foreground
+                    "
+                    >
+                        {children}
+                    </main>
+                </div>
                 <Spotlight routes={paths} />
             </div>
         </motion.div>
