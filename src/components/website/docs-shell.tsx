@@ -1,6 +1,12 @@
 "use client";
 
-import { useState, type CSSProperties, type ReactNode } from "react";
+import {
+    useCallback,
+    useRef,
+    useState,
+    type CSSProperties,
+    type ReactNode,
+} from "react";
 import { motion } from "motion/react";
 import DocsHeader from "./docs-header";
 import { Sidebar } from "./sidebar";
@@ -13,6 +19,13 @@ interface DocsShellProps {
 
 export function DocsShell({ children }: DocsShellProps) {
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+    const [scrollContainerElement, setScrollContainerElement] =
+        useState<HTMLElement | null>(null);
+    const scrollContainerRef = useRef<HTMLElement | null>(null);
+    const setScrollContainer = useCallback((element: HTMLElement | null) => {
+        scrollContainerRef.current = element;
+        setScrollContainerElement(element);
+    }, []);
 
     return (
         <motion.div
@@ -52,8 +65,12 @@ export function DocsShell({ children }: DocsShellProps) {
                     onToggleSidebar={() =>
                         setIsSidebarCollapsed((isCollapsed) => !isCollapsed)
                     }
+                    scrollContainer={scrollContainerRef}
+                    scrollContainerElement={scrollContainerElement}
                 />
                 <main
+                    ref={setScrollContainer}
+                    data-docs-scroll-container
                     className="
                   mx-auto max-w-full md:max-w-3xl md:px-8 xl:pr-12 px-4 pt-26 pb-24
                   h-full min-w-0 overflow-y-auto overscroll-none scroll-pt-28 scrollbar-none
