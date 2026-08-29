@@ -23,7 +23,7 @@ export const docsNavigation: DocsNavCategory[] = [
         icon: Rocket,
         items: [
             { title: "Introduction", href: "/docs" },
-            { title: "Setup", href: "/docs/setup" },
+            { title: "Installation", href: "/docs/installation" },
         ],
     },
     {

@@ -1,0 +1,43 @@
+import { CommandCopy } from "@/components/website/command-copy";
+
+# Installation
+
+Flow-Kit components are built for React projects using [shadcn/ui](https://ui.shadcn.com) and [Motion](https://motion.dev).
+
+Set up these dependencies before adding a component.
+
+## 1. Set up shadcn/ui
+
+If shadcn/ui is not already configured in your project, run its initialization command:
+
+<CommandCopy
+  command={{
+    npm: "npx shadcn@latest init",
+    pnpm: "pnpm dlx shadcn@latest init",
+    bun: "bunx --bun shadcn@latest init",
+    yarn: "yarn dlx shadcn@latest init"
+  }}
+  manualSteps={false}
+>
+  See the <a href="https://ui.shadcn.com/docs/installation" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">shadcn/ui installation guide</a>.
+</CommandCopy>
+
+## 2. Install Motion
+
+Install [Motion](https://motion.dev/docs/react-quick-start), which powers Flow-Kit's animations:
+
+<CommandCopy
+  command={{
+    npm: "npm install motion",
+    pnpm: "pnpm add motion",
+    bun: "bun add motion",
+    yarn: "yarn add motion"
+  }}
+  manualSteps={false}
+>
+  See the <a href="https://motion.dev/docs/react-installation" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">Motion installation guide</a>.
+</CommandCopy>
+
+> **You own the code.** Swap in your preferred icon library, adjust variants, and change the implementation to fit your project.
+
+For manual copy-paste instead of the CLI, full source and instructions are available on each component's page.

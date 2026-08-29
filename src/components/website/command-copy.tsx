@@ -17,12 +17,14 @@ interface CommandCopyProps {
     };
     className?: string;
     children: React.ReactNode;
+    manualSteps?: boolean;
 }
 
 export function CommandCopy({
     command,
     className,
     children,
+    manualSteps = true,
 }: CommandCopyProps) {
     const [packageManager, setPackageManager] =
         React.useState<PackageManager>("npm");
@@ -94,7 +96,13 @@ export function CommandCopy({
                 </TabsContent>
 
                 <TabsContent value="manual">
-                    <ManualInstallationSteps>{children}</ManualInstallationSteps>
+                    {manualSteps ? (
+                        <ManualInstallationSteps>{children}</ManualInstallationSteps>
+                    ) : (
+                        <div className="py-4 text-sm text-muted-foreground">
+                            {children}
+                        </div>
+                    )}
                 </TabsContent>
             </Tabs>
         </div>
