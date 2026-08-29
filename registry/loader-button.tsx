@@ -12,7 +12,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import {
     CancelCircleIcon,
     CheckmarkCircle01Icon,
-    Loading01Icon,
+    Loading02Icon,
 } from "@hugeicons/core-free-icons";
 
 export type ButtonState = "idle" | "loading" | "success" | "error";
@@ -115,7 +115,7 @@ export const LoaderButton = React.forwardRef<
                             className="w-full flex items-center justify-center gap-2"
                         >
                             {loader ?? (
-                                <span className="w-full h-full flex items-center justify-center gap-1 text-xs opacity-90"><HugeiconsIcon icon={Loading01Icon} className="w-5 h-5 animate-spin" />Processing</span>
+                                <span className="w-full h-full flex items-center justify-center gap-1 text-xs opacity-90"><HugeiconsIcon icon={Loading02Icon} className="w-4 h-4 animate-spin" />Processing</span>
                             )}
                         </motion.div>
                     )}

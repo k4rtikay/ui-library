@@ -13,7 +13,7 @@ import {
     DashboardSquare01Icon,
     File02Icon,
     GithubIcon,
-    Loading01Icon,
+    Loading02Icon,
     LockIcon,
     ListViewIcon,
     Moon02Icon,
@@ -39,7 +39,7 @@ function createIcon(icon: IconProps["icon"]) {
 
 export const CheckCircle2 = createIcon(CheckmarkCircle01Icon);
 export const XCircle = createIcon(CancelCircleIcon);
-export const Loader2 = createIcon(Loading01Icon);
+export const Loader2 = createIcon(Loading02Icon);
 export const Pin = createIcon(PinIcon);
 export const Palette = createIcon(PaletteIcon);
 export const Lock = createIcon(LockIcon);
