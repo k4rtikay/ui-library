@@ -67,7 +67,7 @@ export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
                             value={category.id}
                             className="border-b-0"
                         >
-                            <AccordionTrigger className="rounded-lg p-2 text-sm font-[520] tracking-tight text-muted-foreground/75 hover:no-underline hover:bg-sidebar-accent transition-all duration-150 ease-out">
+                            <AccordionTrigger className="rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-muted-foreground/75 hover:no-underline hover:bg-sidebar-accent transition-all duration-150 ease-out">
                                 <span className="flex items-center gap-2">
                                     <Icon className="size-3.5" />
                                     {category.title}
@@ -83,7 +83,7 @@ export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
                                                 <Link
                                                     href={item.href}
                                                     className={cn(
-                                                        "relative block rounded-lg p-2 text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-accent transition-all duration-150 ease-out",
+                                                        "relative block rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-accent transition-all duration-150 ease-out",
                                                         isActive &&
                                                             "text-sidebar-primary-foreground text-shadow-sm bg-sidebar-primary hover:text-sidebar-primary-foreground hover:bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
                                                     )}
