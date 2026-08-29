@@ -97,7 +97,7 @@ export function FeatureFan() {
                         }
                         className="absolute flex w-[min(18rem,calc(100%-6rem))] flex-col gap-5 rounded-2xl border border-border bg-card p-4 text-card-foreground shadow-md [--feature-rotate:var(--mobile-rotate)] [--feature-x:var(--mobile-x)] [--feature-y:var(--mobile-y)] md:w-44 md:[--feature-rotate:var(--desktop-rotate)] md:[--feature-x:var(--desktop-x)] md:[--feature-y:var(--desktop-y)]"
                     >
-                        <div className="flex size-10 items-center justify-center rounded-full bg-muted text-muted-foreground">
+                        <div className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
                             <HugeiconsIcon icon={feature.icon} size={20} />
                         </div>
 

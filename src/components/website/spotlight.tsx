@@ -144,7 +144,7 @@ export default function Spotlight({ routes }: SpotlightProps) {
                                                     }
                                                     className="group relative flex cursor-pointer select-none items-center rounded-md px-3 py-2 text-sm text-muted-foreground outline-none data-[selected=true]:bg-white/10 data-[selected=true]:text-foreground"
                                                 >
-                                                    <FileText className="mr-2 h-4 w-4 text-foreground group-data-[selected=true]:text-primary" />
+                                                    <FileText className="mr-2 h-4 w-4 text-foreground group-data-[selected=true]:text-primary-foreground" />
                                                     {route.title}
                                                 </Command.Item>
                                             ))}

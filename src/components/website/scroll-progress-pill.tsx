@@ -4,6 +4,7 @@ import { useEffect, useState, type RefObject } from "react";
 import { motion, useScroll } from "motion/react";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowDown01Icon } from "@hugeicons/core-free-icons";
+import { cn } from "@/lib/utils";
 
 import {
   Popover,
@@ -127,7 +128,7 @@ export function ScrollProgressPill({
                 cx="50"
                 cy="50"
                 r="40"
-                className="fill-none stroke-primary"
+                className="fill-none stroke-primary-foreground"
                 strokeWidth="12"
                 strokeLinecap="round"
                 style={{ pathLength: scrollYProgress }}
@@ -158,17 +159,11 @@ export function ScrollProgressPill({
                 type="button"
                 onClick={() => handleScrollTo(section.id)}
                 aria-current={isActive ? "location" : undefined}
-                className="flex w-full items-center rounded-lg px-3 py-2 text-left text-xs font-[520] text-muted-foreground transition-colors hover:bg-sidebar dark:hover:bg-muted-foreground/20 hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none"
+                className={cn("flex w-full items-center rounded-lg px-3 py-2 text-left text-xs font-[520] text-muted-foreground transition-colors hover:bg-sidebar dark:hover:bg-muted-foreground/20 hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:outline-none", {
+                  "text-primary-foreground bg-primary": isActive,
+                })}
               >
-                <span
-                  className={
-                    isActive
-                      ? "text-primary"
-                      : "text-muted-foreground"
-                  }
-                >
-                  {section.label}
-                </span>
+                {section.label}
               </button>
             );
           })}

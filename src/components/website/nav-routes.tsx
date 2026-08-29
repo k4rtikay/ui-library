@@ -85,7 +85,7 @@ export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
                                                     className={cn(
                                                         "relative block rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-accent transition-all duration-150 ease-out",
                                                         isActive &&
-                                                            "text-sidebar-primary-foreground text-shadow-sm bg-sidebar-primary hover:text-sidebar-primary-foreground hover:bg-sidebar-primary shadow-sm inset-shadow-sm inset-shadow-white/20",
+                                                            "text-sidebar-primary-foreground bg-sidebar-primary hover:text-sidebar-primary-foreground hover:bg-sidebar-primary",
                                                     )}
                                                 >
                                                     <span className="relative">
