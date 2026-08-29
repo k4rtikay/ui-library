@@ -1,38 +1,36 @@
+import { FeatureFan } from "../../components/website/info-cards";
+import { MotionComparison } from "../../components/website/motion-comparison";
+
 # Introduction
-Welcome to **Flow-Kit**.
 
-Flow-Kit is a collection of high-quality, animated components built on top of [shadcn/ui](https://ui.shadcn.com).
+Flow-Kit is a collection of complete usage **patterns**, built on top of [shadcn/ui](https://ui.shadcn.com).
 
-While shadcn/ui provides the robust, accessible primitives (buttons, inputs, dialogs), Flow-Kit focuses on the **interactions**—the subtle details, micro-animations, and physics-based transitions that make an interface feel alive.
+A state-machine button, a smooth section transition etc. Built for everything from AI interfaces to dense dashboards.
+
+The interactions you've thought about building, but never had time to get right.
 
 ## Philosophy
 
-Most component libraries focus on *structure*. We focus on *feeling*.
+Most component libraries focus on _structure_. We focus on _behavior_.
 
-We believe that animation shouldn't be an afterthought or a "nice-to-have." It is a core part of the user experience that guides attention, provides feedback, and creates a sense of spatial consistency.
+We believe an interaction isn't finished just because it works. How something responds, when it responds, and what it communicates while it's mid-transition is part of the design, not an extra step after it. Get that right, and the interface feels correct before the user even knows why.
 
-**Flow-Kit is:**
+<FeatureFan />
 
-- **Copy-paste friendly:** Just like shadcn/ui, you own the code.
-- **Built on Framer Motion:** The industry standard for React animation.
-- **Accessible:** Animations respect `prefers-reduced-motion`.
+## Why Motion Matters
 
-## Why Motion?
+Most interactions are functional and nothing else. A button clicks, a list updates. Nothing about that is wrong; it's just incomplete.
 
-In modern web development, we often stop at "functional." A button clicks, a modal opens, a list renders.
+> Every animation is a claim about how something works.
 
-But software is more than functionality; it is an experience. Motion acts as the connective tissue between states:
-* **Context:** Where did this element come from?
-* **Feedback:** Did my action succeed?
-* **Delight:** Does using this tool feel good?
+<MotionComparison />
 
-This library aims to bridge the gap between a static design system and a fluid user experience.
 
 ## Usage
 
-Flow-Kit is not a dependency you install. It is a reference you copy from.
+**Copy the code** directly, or install via the **shadcn CLI**. Both options are on every component's page.
 
-We take standard shadcn components and wrap them with meaningful interactions. You don't need to rebuild your design system; you just upgrade the parts that need to pop.
+Flow-Kit components are built on shadcn/ui, so they slot into your existing setup with no new dependencies or design system to adopt.
 
 ---
 

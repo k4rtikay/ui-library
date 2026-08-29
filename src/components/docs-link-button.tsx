@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight } from "lucide-react";
+import { ChevronRight } from "@/components/hugeicons";
 import { motion, type Variants } from "motion/react";
 
 const chevronWrapperVariants: Variants = {

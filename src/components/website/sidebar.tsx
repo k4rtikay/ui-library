@@ -1,68 +1,51 @@
 "use client";
 
-// import { usePathname } from "next/navigation";
+import { useState } from "react";
 import NavRoutes from "./nav-routes";
+import { Box } from "@/components/hugeicons";
+import SidebarCtaCard from "./sidebar-cta-card";
+import SidebarSearch from "./sidebar-search";
 
-export function Sidebar() {
-    // const pathname = usePathname();
+interface SidebarProps {
+    isCollapsed: boolean;
+}
 
-    // const comps = [
-    //     {
-    //         category: "Getting Started",
-    //         items: [
-    //             {
-    //                 name: "Introduction",
-    //                 href: "/docs",
-    //             },
-    //             {
-    //                 name: "Setup",
-    //                 href: "/docs/setup",
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "Buttons",
-    //         items: [
-    //             {
-    //                 name: "Expanding Pill",
-    //                 href: "/docs/components/expanding-pill",
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "Cards",
-    //         items: [
-    //             {
-    //                 name: "Card Stack",
-    //                 href: "/docs/components/card-stack",
-    //             },
-    //             {
-    //                 name: "Lenticular Card",
-    //                 href: "/docs/components/lenticular-card",
-    //             },
-    //             {
-    //                 name: "FAQ Section",
-    //                 href: "/docs/components/faq-section",
-    //             },
-    //         ],
-    //     },
-    //     {
-    //         category: "Interactive",
-    //         items: [
-    //             {
-    //                 name: "Drag and Drop Accordion",
-    //                 href: "/docs/components/dnd-accordion",
-    //             },
-    //         ],
-    //     },
-    // ];
+export function Sidebar({ isCollapsed }: SidebarProps) {
+    const [searchQuery, setSearchQuery] = useState("");
 
     return (
         <aside
-            className=" sticky top-[58px] h-[calc(100vh-56px)] hidden md:block w-64 shrink-0 border-r-2 overflow-y-auto px-4 pt-8 pb-16 text-sm
-        "
+            id="docs-sidebar"
+            className="bg-sidebar hidden h-dvh w-64 shrink-0 self-start px-4 py-4 text-sm md:sticky md:top-0 md:flex md:flex-col md:gap-4"
+            data-collapsed={isCollapsed}
+            aria-hidden={isCollapsed}
+            inert={isCollapsed}
         >
-            <NavRoutes />
+            <header className="flex flex-col gap-2">
+                <h2 className="mt-6 text-xl font-semibold">Flow-Kit</h2>
+                <div className="w-full flex items-center gap-2 font-mono text-sm text-muted-foreground">
+                    <Box className="size-4" />
+                    <span>
+                        v0.1.0{" "}
+                        <span className="text-xs bg-accent text-accent-foreground rounded-full border-1 border-border py-1 px-2">
+                            Beta
+                        </span>
+                    </span>
+                </div>
+
+                <SidebarSearch
+                    value={searchQuery}
+                    onChange={setSearchQuery}
+                />
+            </header>
+
+            <nav className="min-h-0 flex-1 overflow-y-auto">
+                <NavRoutes searchQuery={searchQuery} />
+            </nav>
+
+            <footer className="shrink-0">
+                <SidebarCtaCard />
+            </footer>
         </aside>
     );
 }

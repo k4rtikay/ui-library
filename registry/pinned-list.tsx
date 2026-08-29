@@ -2,7 +2,8 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
-import { Pin } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { PinIcon as PinSvgIcon } from "@hugeicons/core-free-icons";
 import { motion, useReducedMotion } from "motion/react";
 
 export interface PinnedListItem {
@@ -114,24 +115,11 @@ function PinnedListRow({
                 )}
                 aria-label={item.pinned ? "Unpin" : "Pin"}
             >
-                <motion.div
-                    initial={{ rotate: item.pinned ? 45 : 0 }}
-                    animate={{ rotate: item.pinned ? 45 : 0 }}
-                    transition={{
-                        layout: { type: "spring", stiffness: 280, damping: 25 },
-                        rotate: {
-                            delay: item.pinned && !shouldReduceMotion ? 0.2 : 0,
-                            duration: shouldReduceMotion ? 0 : 0.15,
-                            ease: "easeInOut",
-                        },
-                    }}
-                >
-                    <PinIcon
-                        className="w-4 h-4"
+                <PinIcon
+                    className="w-4 h-4"
                         pinned={item.pinned}
                         shouldReduceMotion={shouldReduceMotion}
                     />
-                </motion.div>
             </button>
         </motion.li>
     );
@@ -164,7 +152,7 @@ function PinIcon({
             }}
             className="p-2 rounded-full"
         >
-            <Pin className={className} />
+            <HugeiconsIcon icon={PinSvgIcon} className={className} />
         </motion.div>
     );
 }

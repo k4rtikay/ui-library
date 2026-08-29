@@ -1,6 +1,6 @@
 "use client";
 
-import { Star } from "lucide-react";
+import { Star } from "@/components/hugeicons";
 import { motion, Variants } from "motion/react";
 
 const starWrapperVariants: Variants = {

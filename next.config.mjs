@@ -7,9 +7,9 @@ import remarkGfm from "remark-gfm";
 const prettyCodeOptions = {
     theme: {
         light: "min-light",
-        dark: "min-dark",
+        dark: "one-dark-pro",
     },
-    keepBackground: false,
+    keepBackground: true,
 };
 
 const withMDX = createMDX({

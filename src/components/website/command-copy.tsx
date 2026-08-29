@@ -4,6 +4,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CopyButton from "./copy-button";
+import ManualInstallationSteps from "./manual-installation-steps";
 
 type PackageManager = "npm" | "pnpm" | "bun" | "yarn";
 
@@ -16,18 +17,23 @@ interface CommandCopyProps {
     };
     className?: string;
     children: React.ReactNode;
+    manualSteps?: boolean;
 }
 
 export function CommandCopy({
     command,
     className,
     children,
+    manualSteps = true,
 }: CommandCopyProps) {
     const [packageManager, setPackageManager] =
         React.useState<PackageManager>("npm");
 
     React.useEffect(() => {
         const saved = localStorage.getItem("package-manager") as PackageManager;
+        //use effect cause reading localstorage must happen after hydration
+        // small scope so compromise has been made
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         if (saved) setPackageManager(saved);
     }, []);
 
@@ -42,7 +48,7 @@ export function CommandCopy({
             <Tabs defaultValue="cli" className="relative w-full">
                 <TabsList
                     variant="line"
-                    className="border-b w-full justify-start px-0"
+                    className="border-b w-full justify-start px-0 mb-1"
                 >
                     <div className="flex items-center gap-2">
                         <TabsTrigger key={"cli"} value="cli">
@@ -60,14 +66,14 @@ export function CommandCopy({
                         onValueChange={updatePreference}
                         className="relative w-full gap-0"
                     >
-                        <div className="flex items-center justify-between bg-zinc-100 dark:bg-zinc-900 rounded-t-lg border border-b-0 p-1">
+                        <div className="flex items-center justify-between bg-muted rounded-t-xl border border-b-0 p-1">
                             <TabsList className="p-0 bg-transparent flex gap-1">
                                 {(["npm", "pnpm", "bun", "yarn"] as const).map(
                                     (pm) => (
                                         <TabsTrigger
                                             key={pm}
                                             value={pm}
-                                            className="p-2 bg-transparent font-semibold"
+                                            className="p-2 bg-transparent rounded-lg text-xs font-mono"
                                         >
                                             {pm}
                                         </TabsTrigger>
@@ -76,7 +82,7 @@ export function CommandCopy({
                             </TabsList>
                         </div>
 
-                        <div className="relative rounded-b-lg border px-4 py-4">
+                        <div className="relative rounded-b-xl border px-4 py-4">
                             <code className="font-mono text-sm">
                                 {command[packageManager]}
                             </code>
@@ -90,13 +96,13 @@ export function CommandCopy({
                 </TabsContent>
 
                 <TabsContent value="manual">
-                    <p>
-                        Copy this code and paste it into a .tsx file.
-                    </p>
-                    <p>Update the imports as needed.</p>
-                    <div className="not-prose w-full px-8 py-4 border rounded-lg">
-                        {children}
-                    </div>
+                    {manualSteps ? (
+                        <ManualInstallationSteps>{children}</ManualInstallationSteps>
+                    ) : (
+                        <div className="py-4 text-sm text-muted-foreground">
+                            {children}
+                        </div>
+                    )}
                 </TabsContent>
             </Tabs>
         </div>

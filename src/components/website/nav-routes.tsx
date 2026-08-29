@@ -1,87 +1,106 @@
 "use client";
 
+import { useMemo } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { docsNavigation } from "@/lib/paths";
+import {
+    Accordion,
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
 
-export default function NavRoutes() {
+interface NavRoutesProps {
+    searchQuery?: string;
+}
+
+function fuzzyMatches(value: string, query: string) {
+    let queryIndex = 0;
+    const normalizedValue = value.toLocaleLowerCase();
+
+    for (const character of normalizedValue) {
+        if (character === query[queryIndex]) {
+            queryIndex += 1;
+        }
+    }
+
+    return queryIndex === query.length;
+}
+
+export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
     const pathname = usePathname();
+    const filteredNavigation = useMemo(() => {
+        const query = searchQuery.trim().toLocaleLowerCase();
 
-    const comps = [
-        {
-            category: "Getting Started",
-            items: [
-                { name: "Introduction", href: "/docs" },
-                { name: "Setup", href: "/docs/setup" },
-            ],
-        },
-        {
-            category: "Buttons",
-            items: [
-                { name: "Loader Button", href: "/docs/components/loader-button" },
-                // { name: "Hello Button", href: "/docs/components/hello-button" },
-            ],
-        },
-        {
-            category: "Cards",
-            items: [
-                { name: "Card Stack", href: "/docs/components/card-stack" },
-            ],
-        },
-        // {
-        //     category: "Menus",
-        //     items: [
-        //         { name: "Shared Menu", href: "/docs/components/shared-menu" },
-        //     ],
-        // },
-        {
-            category: "Animations",
-            items: [
-                // {
-                //     name: "Stagger Reveal",
-                //     href: "/docs/components/stagger-reveal",
-                // },
-                {
-                    name: "Pinned List",
-                    href: "/docs/components/pinned-list",
-                },
-            ],
-        },
-    ];
+        if (!query) {
+            return docsNavigation;
+        }
+
+        return docsNavigation.flatMap((category) => {
+            if (fuzzyMatches(category.title, query)) {
+                return [category];
+            }
+
+            const items = category.items.filter((item) =>
+                fuzzyMatches(item.title, query),
+            );
+
+            return items.length ? [{ ...category, items }] : [];
+        });
+    }, [searchQuery]);
 
     return (
-        <ul className="flex flex-col gap-4">
-            {comps.map((comp) => (
-                <li key={comp.category} className="flex flex-col gap-1">
-                    <p className="font-bold text-xs text-zinc-500 dark:text-zinc-100 uppercase tracking-wider pb-2">
-                        {comp.category}
-                    </p>
-                    <ul className="flex flex-col gap-1 w-[94%] mx-auto border-l border-l-zinc-500 relative">
-                        {comp.items.map((item) => {
-                            const isActive = pathname === item.href;
+        <nav aria-label="Documentation navigation">
+            <Accordion
+                type="multiple"
+                defaultValue={filteredNavigation.map((category) => category.id)}
+                className="flex flex-col gap-2"
+            >
+                {filteredNavigation.map((category) => {
+                    const Icon = category.icon;
 
-                            return (
-                                <li key={item.name} className="relative">
-                                    <Link
-                                        href={item.href}
-                                        className={cn(
-                                            "block px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-r-[15px] [corner-shape:squircle]",
-                                            {
-                                                "bg-linear-to-r from-zinc-200 to-zinc-300 text-zinc-900 dark:from-[#171717] dark:to-zinc-700 dark:text-white":
-                                                    isActive,
-                                                "text-zinc-700 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800":
-                                                    !isActive,
-                                            }
-                                        )}
-                                    >
-                                        {item.name}
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                </li>
-            ))}
-        </ul>
+                    return (
+                        <AccordionItem
+                            key={category.id}
+                            value={category.id}
+                            className="border-b-0"
+                        >
+                            <AccordionTrigger className="rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-muted-foreground/75 hover:no-underline hover:bg-sidebar-accent transition-all duration-150 ease-out">
+                                <span className="flex items-center gap-2">
+                                    <Icon className="size-3.5" />
+                                    {category.title}
+                                </span>
+                            </AccordionTrigger>
+                            <AccordionContent className="mx-1 -my-2 px-2 py-2 pb-2">
+                                <ul className="mt-1 flex flex-col pl-2">
+                                    {category.items.map((item) => {
+                                        const isActive = pathname === item.href;
+
+                                        return (
+                                            <li key={item.href}>
+                                                <Link
+                                                    href={item.href}
+                                                    className={cn(
+                                                        "relative block rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-accent transition-all duration-150 ease-out",
+                                                        isActive &&
+                                                            "text-sidebar-primary-foreground bg-sidebar-primary hover:text-sidebar-primary-foreground hover:bg-sidebar-primary",
+                                                    )}
+                                                >
+                                                    <span className="relative">
+                                                        {item.title}
+                                                    </span>
+                                                </Link>
+                                            </li>
+                                        );
+                                    })}
+                                </ul>
+                            </AccordionContent>
+                        </AccordionItem>
+                    );
+                })}
+            </Accordion>
+        </nav>
     );
 }
