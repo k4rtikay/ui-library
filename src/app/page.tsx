@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 import BgImage from "../../public/waves-green.png";
 import { Instrument_Serif } from "next/font/google";
 import { DocsLinkButton } from "@/components/docs-link-button";
@@ -11,6 +12,8 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export default function Home() {
+    redirect("/docs");
+
     return (
         <div className="w-full px-4 lg:px-0 min-h-screen flex flex-col items-center justify-center">
             <Image
