@@ -14,17 +14,17 @@ export default function SidebarCtaCard() {
                 </p>
             </div>
             <Image
-                src="/upsell-card-light.png"
+                src="/waves-sidebar-cta.png"
                 alt="background illustration of orange tiles against a light background"
                 fill
-                className="object-cover -z-10 dark:hidden"
+                className="object-cover -z-10 dark:hidden opacity-70"
                 aria-hidden="true"
             />
             <Image
-                src="/upsell-card-dark.png"
+                src="/waves-sidebar-cta.png"
                 alt="background illustration of orange tiles against a dark background"
                 fill
-                className="hidden object-cover dark:block -z-10"
+                className="hidden object-cover dark:block -z-10 opacity-30"
                 aria-hidden="true"
             />
             <Button
