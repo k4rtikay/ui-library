@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     description:
         "A collection of free, animated UI components built with React, Tailwind CSS, shadcn/ui, and Motion.",
     icons: {
-        icon: "./flow-kit-icon.png",
+        icon: "/icon.png",
     },
 };
 

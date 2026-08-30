@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import NavRoutes from "./nav-routes";
 import { Box } from "@/components/hugeicons";
@@ -22,8 +23,17 @@ export function Sidebar({ isCollapsed }: SidebarProps) {
             inert={isCollapsed}
         >
             <header className="flex flex-col gap-2">
-                <h2 className="mt-6 text-xl font-semibold">Flow-Kit</h2>
-                <div className="w-full flex items-center gap-2 font-mono text-sm text-muted-foreground">
+                <h2 className="mt-6 flex items-center gap-2 text-xl font-semibold">
+                    <Image
+                        src="/icon.png"
+                        alt="Flow-Kit logo"
+                        width={28}
+                        height={28}
+                        className="size-6 shrink-0 shadow-sm rounded-full"
+                    />
+                    <span>Flow-Kit</span>
+                </h2>
+                <div className="mt-1 w-full flex items-center gap-2 font-mono text-sm text-muted-foreground">
                     <Box className="size-4" />
                     <span>
                         v0.1.0{" "}

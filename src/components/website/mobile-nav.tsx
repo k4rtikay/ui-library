@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Sidebar } from "@/components/hugeicons";
 import {
@@ -32,7 +33,16 @@ export default function MobileNav() {
                 </SheetTrigger>
                 <SheetContent side="left">
                     <SheetHeader>
-                        <SheetTitle className="text-xl">Flow-Kit</SheetTitle>
+                        <SheetTitle className="flex items-center gap-2 text-xl">
+                            <Image
+                                src="/icon.png"
+                                alt="Flow-Kit logo"
+                                width={28}
+                                height={28}
+                                className="size-7 shrink-0"
+                            />
+                            <span>Flow-Kit</span>
+                        </SheetTitle>
                         <div className="mt-1 w-full flex items-center gap-2 font-mono text-base text-muted-foreground">
                             <Box className="size-4" />
                             <span>
