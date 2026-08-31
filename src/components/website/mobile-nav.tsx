@@ -60,7 +60,7 @@ export default function MobileNav() {
                         <div className="flex flex-col items-center justify-center gap-2">
                             <span className="text-sm font-medium">Show support by starring us on Github.</span>
                             <Button variant="default" className="bg-primary w-fit" asChild>
-                                <a href="https://github.com/flowkit-dev/ui-library">
+                                <a href="https://github.com/k4rtikay/ui-library">
                                   <span><Github className="size-4 inline-block font-mono" /> / flow-kit</span>
                                 </a>
                             </Button>

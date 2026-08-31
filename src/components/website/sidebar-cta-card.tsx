@@ -28,12 +28,16 @@ export default function SidebarCtaCard() {
                 aria-hidden="true"
             />
             <Button
+                asChild
                 variant="default"
                 size="sm"
-                className="gap-0 bg-zinc-900 dark:bg-zinc-900 text-white dark:text-white shadow-sm inset-shadow-sm inset-shadow-white/10 dark:hover:bg-zinc-900/90 cursor-pointer"
+                className="gap-0 bg-zinc-900 hover:bg-zinc-900 dark:bg-zinc-900 dark:hover:bg-zinc-900 text-white dark:text-white shadow-sm inset-shadow-sm inset-shadow-white/10 hover:opacity-80 cursor-pointer"
             >
-                <Github className="size-3.5" />
-                <span className="text-xs font-mono">/flow-kit</span>
+                <a href="https://www.github.com/k4rtikay/ui-library" target="_blank" rel="noopner noreferrer">
+                    {" "}
+                    <Github className="size-3.5" />
+                    <span className="text-xs font-mono">/flow-kit</span>
+                </a>
             </Button>
         </div>
     );
