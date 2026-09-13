@@ -18,7 +18,7 @@ const INITIAL_ITEMS: PinnedListItem[] = [
         id: "1",
         content: (
             <>
-                <Palette className="w-4 h-4 shrink-0 text-pink-400" />
+                <Palette className="w-5 h-5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex flex-col">
                     <p className="text-sm font-medium text-foreground truncate">Design System Tokens</p>
                     <p className="text-xs text-muted-foreground truncate">Color, spacing, and typography primitives</p>
@@ -31,7 +31,7 @@ const INITIAL_ITEMS: PinnedListItem[] = [
         id: "2",
         content: (
             <>
-                <Lock className="w-4 h-4 shrink-0 text-amber-400" />
+                <Lock className="w-5 h-5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex flex-col">
                     <p className="text-sm font-medium text-foreground truncate">Auth Flow</p>
                     <p className="text-xs text-muted-foreground tracking-wider truncate">Login, signup, and password reset</p>
@@ -44,7 +44,7 @@ const INITIAL_ITEMS: PinnedListItem[] = [
         id: "3",
         content: (
             <>
-                <LayoutDashboard className="w-4 h-4 shrink-0 text-blue-400" />
+                <LayoutDashboard className="w-5 h-5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex flex-col">
                     <p className="text-sm font-medium text-foreground truncate">Dashboard Layout</p>
                     <p className="text-xs text-muted-foreground truncate">Sidebar navigation with collapsible sections</p>
@@ -57,7 +57,7 @@ const INITIAL_ITEMS: PinnedListItem[] = [
         id: "4",
         content: (
             <>
-                <Gauge className="w-4 h-4 shrink-0 text-red-400" />
+                <Gauge className="w-5 h-5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex flex-col">
                     <p className="text-sm font-medium text-foreground truncate">API Rate Limiter</p>
                     <p className="text-xs text-muted-foreground truncate">Token-bucket middleware for Express</p>
@@ -70,7 +70,7 @@ const INITIAL_ITEMS: PinnedListItem[] = [
         id: "5",
         content: (
             <>
-                <Search className="w-4 h-4 shrink-0 text-violet-400" />
+                <Search className="w-5 h-5 shrink-0 text-muted-foreground" />
                 <div className="min-w-0 flex flex-col">
                     <p className="text-sm font-medium text-foreground truncate">Search Indexer</p>
                     <p className="text-xs text-muted-foreground truncate">Full-text search with fuzzy matching</p>

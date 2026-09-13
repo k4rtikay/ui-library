@@ -95,20 +95,20 @@ function PinnedListRow({
                 opacity: { duration: 0 },
             }}
             className={cn(
-                "relative group flex items-center bg-card border border-border/50 gap-3 rounded-lg px-3 py-2.5 hover:border-border/100 focus-within:border-border/100",
+                "relative group flex items-center bg-card border border-border/50 gap-3 rounded-xl px-3 py-2.5 hover:border-border/100 focus-within:border-border/100",
             )}
         >
             <div className="min-w-0 flex items-center gap-3 flex-1">
                 {item.content}
             </div>
 
-            <button                
+            <button
                 onClick={() => onTogglePin(item.id)}
                 className={cn(
-                    "shrink-0 p-1.5 rounded-full transition-colors outline-none",
+                    "shrink-0 rounded-full transition-colors outline-none",
                     item.pinned
                         ? "text-foreground hover:text-muted-foreground"
-                        : "text-muted-foreground/0 max-sm:text-muted-foreground group-hover:text-muted-foreground group-focus-within:text-muted-foreground",
+                        : "text-muted-foreground/0 max-sm:text-muted-foreground group-hover:text-muted-foreground group-focus-within:text-muted-foreground bg-muted/0 group-hover:bg-muted",
                     item.pinned
                         ? "focus-visible:ring-2 focus-visible:ring-blue-500/50 focus-visible:ring-offset-1 focus-visible:ring-offset-card"
                         : "focus-visible:ring-2 focus-visible:ring-border focus-visible:ring-offset-1 focus-visible:ring-offset-card",
@@ -117,9 +117,9 @@ function PinnedListRow({
             >
                 <PinIcon
                     className="w-4 h-4"
-                        pinned={item.pinned}
-                        shouldReduceMotion={shouldReduceMotion}
-                    />
+                    pinned={item.pinned}
+                    shouldReduceMotion={shouldReduceMotion}
+                />
             </button>
         </motion.li>
     );
@@ -138,12 +138,12 @@ function PinIcon({
         <motion.div
             layout={!shouldReduceMotion ? "position" : false}
             initial={{
-                backgroundColor: pinned ? "var(--primary)" : "rgba(0,0,0,0)",
-                color: pinned ? "var(--primary-foreground)" : "currentColor",
+                backgroundColor: pinned ? "#3B82F6" : "rgba(0,0,0,0)",
+                color: pinned ? "white" : "currentColor",
             }}
             animate={{
-                backgroundColor: pinned ? "var(--primary)" : "rgba(0,0,0,0)",
-                color: pinned ? "var(--primary-foreground)" : "currentColor",
+                backgroundColor: pinned ? "#3B82F6" : "rgba(0,0,0,0)",
+                color: pinned ? "white" : "currentColor",
             }}
             transition={{
                 layout: { type: "spring", stiffness: 280, damping: 25 },
