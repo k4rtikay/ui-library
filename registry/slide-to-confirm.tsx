@@ -1,10 +1,28 @@
 "use client";
 
 import { useRef, useEffect, useState } from "react";
-import { motion, useMotionValue, animate, cubicBezier, useTransform } from "motion/react";
+import {
+    motion,
+    useMotionValue,
+    animate,
+    cubicBezier,
+    useTransform,
+} from "motion/react";
 import { ChevronRight } from "@/components/hugeicons";
 
-export default function SlideToConfirm() {
+interface SlideToConfirmProps {
+    children: React.ReactNode;
+    onConfirm: () => void;
+    className?: string;
+    handle?: React.ReactNode;
+}
+
+export function SlideToConfirm({
+    children,
+    onConfirm,
+    className,
+    handle,
+}: SlideToConfirmProps) {
     const constraintsRef = useRef<HTMLDivElement>(null);
     const handleRef = useRef<HTMLDivElement>(null);
     const x = useMotionValue(0);
@@ -12,11 +30,11 @@ export default function SlideToConfirm() {
 
     useEffect(() => {
         const container = constraintsRef.current;
-        const handle = handleRef.current;
-        if (!container || !handle) return;
+        const handleEl = handleRef.current;
+        if (!container || !handleEl) return;
 
         const containerWidth = container.getBoundingClientRect().width;
-        const handleWidth = handle.getBoundingClientRect().width;
+        const handleWidth = handleEl.getBoundingClientRect().width;
         setMaxTravel(containerWidth - handleWidth);
     }, []);
 
@@ -33,24 +51,26 @@ export default function SlideToConfirm() {
 
     function onDragEnd() {
         const container = constraintsRef.current;
-        const handle = handleRef.current;
-        if (!container || !handle) return;
+        const handleEl = handleRef.current;
+        if (!container || !handleEl) return;
 
         const containerRect = container.getBoundingClientRect();
-        const handleRect = handle.getBoundingClientRect();
+        const handleRect = handleEl.getBoundingClientRect();
 
         const remainingGap = containerRect.right - handleRect.right;
 
         const TOLERANCE = 5;
         if (remainingGap > TOLERANCE) {
             resetPosition();
+        } else {
+            onConfirm();
         }
     }
 
     return (
         <div
             data-slot="slide-to-confirm"
-            className="bg-muted text-foreground text-sm font-medium px-1 py-1 rounded-full border-1 border-border"
+            className={`bg-muted text-foreground text-sm font-medium px-1 py-1 rounded-full border-1 border-border ${className ?? ""}`}
         >
             <motion.div
                 data-slot="track"
@@ -58,7 +78,8 @@ export default function SlideToConfirm() {
                 className="relative flex items-center justify-center gap-4"
             >
                 <motion.div
-                    className="z-10 p-2 w-fit rounded-full bg-white text-red-600 flex items-center justify-center gap-1"
+                    ref={handleRef}
+                    className="z-10 w-fit"
                     aria-hidden="true"
                     drag="x"
                     dragConstraints={constraintsRef}
@@ -68,15 +89,24 @@ export default function SlideToConfirm() {
                     onDragEnd={onDragEnd}
                     dragDirectionLock
                     style={{ x }}
-                    ref={handleRef}
-                    data-slot="handle"
                 >
-                    <ChevronRight />
+                    <SlideHandle>{handle}</SlideHandle>
                 </motion.div>
                 <motion.span style={{ opacity }} className="mr-4">
-                    Slide to Unlock
+                    {children}
                 </motion.span>
             </motion.div>
+        </div>
+    );
+}
+
+export function SlideHandle({ children }: { children?: React.ReactNode }) {
+    return (
+        <div
+            data-slot="handle"
+            className="p-2 rounded-full bg-white text-red-600 flex items-center justify-center gap-1"
+        >
+            {children ?? <ChevronRight />}
         </div>
     );
 }
