@@ -40,13 +40,13 @@ export function SlideToConfirm({
 
     const opacity = useTransform(
         x,
-        [0, maxTravel * 0.2, maxTravel * 0.6],
+        [0, maxTravel * 0.15, maxTravel * 0.6],
         [1, 1, 0],
         { ease: cubicBezier(0.17, 0.67, 0.83, 0.67) },
     );
 
     function resetPosition() {
-        animate(x, 0, { type: "spring", stiffness: 500, damping: 25 });
+        animate(x, 0, { type: "spring", stiffness: 500, damping: 35 });
     }
 
     function onDragEnd() {
@@ -59,7 +59,7 @@ export function SlideToConfirm({
 
         const remainingGap = containerRect.right - handleRect.right;
 
-        const TOLERANCE = 5;
+        const TOLERANCE = 2;
         if (remainingGap > TOLERANCE) {
             resetPosition();
         } else {
