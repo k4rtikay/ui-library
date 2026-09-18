@@ -27,6 +27,7 @@ import {
     StarIcon,
     Sun01Icon,
     Tick01Icon,
+    Delete02Icon,
 } from "@hugeicons/core-free-icons";
 
 type IconProps = ComponentProps<typeof HugeiconsIcon>;
@@ -65,5 +66,6 @@ export const MousePointerClick = createIcon(SquareMousePointerIcon);
 export const PanelsTopLeft = createIcon(Cards01Icon);
 export const Rocket = createIcon(Rocket01Icon);
 export const Rows = createIcon(ListViewIcon);
+export const Delete = createIcon(Delete02Icon);
 
 export type HugeIcon = ReturnType<typeof createIcon>;
