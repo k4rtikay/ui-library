@@ -3,10 +3,11 @@ import ComponentPreview from "@/components/website/component-preview";
 import { CommandCopy } from "@/components/website/command-copy";
 import { TabsContent } from "@/components/ui/tabs";
 import CollapsibleCode from "@/components/website/collapsible-code";
+import { InlineWarning } from "@/components/website/inline-warning";
 
 # Slide to Confirm
 
-A button that transitions through loading, success, and error states with smooth animations. Ideal for form submissions, async actions, and any interaction that needs visual feedback.
+Users drag an interactive handle across the track to confirm an action, with spring physics snapping the handle back if released before completion and smooth label fade-out during dragging.
 
 ## Preview
 
@@ -19,10 +20,15 @@ A button that transitions through loading, success, and error states with smooth
     </TabsContent>
     <TabsContent value="code">
         <CollapsibleCode>
-            ```tsx file=demo.tsx ```
+            ```tsx file=demo.tsx
+            ```
         </CollapsibleCode>
     </TabsContent>
 </ComponentPreview>
+
+<InlineWarning>
+    This component is in beta and is not keyboard accessible yet.
+</InlineWarning>
 
 ## Installation
 
@@ -36,27 +42,18 @@ A button that transitions through loading, success, and error states with smooth
 >
 
 <CollapsibleCode>
-  ```tsx file=../../../../../registry/slide-to-confirm.tsx
-  ```
+    ```tsx file=../../../../../registry/slide-to-confirm.tsx ```
 </CollapsibleCode>
+
 </CommandCopy>
 
 ## API Reference
 
-### LoaderButton
+### SlideToConfirm
 
-| Prop         | Type                                        | Default              | Description                        |
-| ------------ | ------------------------------------------- | -------------------- | ---------------------------------- |
-| state        | "idle" \| "loading" \| "success" \| "error" | Required             | Controls the current button state  |
-| children     | React.ReactNode                             | `"Submit"`           | Content shown in the idle state    |
-| successLabel | React.ReactNode                             | `✓ Success`          | Content shown in the success state |
-| errorLabel   | React.ReactNode                             | `✗ Error`            | Content shown in the error state   |
-| loader       | React.ReactNode                             | `<LoadingSpinner />` | Content shown in the loading state |
-| className    | string                                      | `undefined`          | Additional CSS classes             |
-| disabled     | boolean                                     | `state !== "idle"`   | Override disabled behavior         |
-
-Also accepts all standard `button` HTML attributes via `...props`.
-
-### LoadingSpinner
-
-A standalone animated spinner with four pulsing bars. Can be used independently or as the default loader inside `LoaderButton`.
+| Prop      | Type              | Default     | Description                                                                                        |
+| --------- | ----------------- | ----------- | -------------------------------------------------------------------------------------------------- |
+| children  | `React.ReactNode` | Required    | Content or label displayed inside the track, which smoothly fades out as the handle slides across. |
+| onConfirm | `() => void`      | Required    | Callback function triggered when the handle is successfully dragged to the end of the track.       |
+| className | `string`          | `undefined` | Additional CSS classes for the root container.                                                     |
+| handle    | `React.ReactNode` | `undefined` | Custom handle element. If omitted, defaults to a circular chevron icon.                            |

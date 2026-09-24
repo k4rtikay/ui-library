@@ -6,7 +6,7 @@ import CollapsibleCode from "@/components/website/collapsible-code";
 
 # Hold to Confirm
 
-A button that transitions through loading, success, and error states with smooth animations. Ideal for form submissions, async actions, and any interaction that needs visual feedback.
+A tactile confirmation button that requires users to press and hold for a specified duration before triggering an action. Use for destructive or irreversible actions where a click is too easy to make by accident. Features smooth fill animations and keyboard support (Space / Enter).
 
 ## Preview
 
@@ -19,7 +19,8 @@ A button that transitions through loading, success, and error states with smooth
     </TabsContent>
     <TabsContent value="code">
         <CollapsibleCode>
-            ```tsx file=demo.tsx ```
+            ```tsx file=demo.tsx
+            ```
         </CollapsibleCode>
     </TabsContent>
 </ComponentPreview>
@@ -43,20 +44,14 @@ A button that transitions through loading, success, and error states with smooth
 
 ## API Reference
 
-### LoaderButton
+### HoldToConfirm
 
-| Prop         | Type                                        | Default              | Description                        |
-| ------------ | ------------------------------------------- | -------------------- | ---------------------------------- |
-| state        | "idle" \| "loading" \| "success" \| "error" | Required             | Controls the current button state  |
-| children     | React.ReactNode                             | `"Submit"`           | Content shown in the idle state    |
-| successLabel | React.ReactNode                             | `✓ Success`          | Content shown in the success state |
-| errorLabel   | React.ReactNode                             | `✗ Error`            | Content shown in the error state   |
-| loader       | React.ReactNode                             | `<LoadingSpinner />` | Content shown in the loading state |
-| className    | string                                      | `undefined`          | Additional CSS classes             |
-| disabled     | boolean                                     | `state !== "idle"`   | Override disabled behavior         |
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| children | `React.ReactNode` | Required | Content displayed inside the button and within the animated fill overlay. |
+| onConfirm | `() => void` | Required | Callback function triggered when the hold duration completes. |
+| holdDuration | `number` | `1000` | Duration in milliseconds required to hold before confirmation triggers. |
+| className | `string` | `undefined` | Additional CSS classes for the button container. |
+| fillClassName | `string` | `"bg-red-100 text-red-600 dark:bg-red-800 dark:text-red-50"` | CSS classes for the animated progress fill overlay and text. |
 
-Also accepts all standard `button` HTML attributes via `...props`.
-
-### LoadingSpinner
-
-A standalone animated spinner with four pulsing bars. Can be used independently or as the default loader inside `LoaderButton`.
+Also accepts all standard `button` HTML attributes (except `style`) via `...props`. Supports keyboard interaction (`Space` and `Enter` keys) to hold and confirm, and includes screen reader support via `aria-describedby`.
