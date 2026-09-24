@@ -31,6 +31,7 @@ import {
     InfoIcon as InfoShapeIcon,
     OctagonXIcon as OctagonXShapeIcon,
     TriangleAlertIcon as TriangleAlertShapeIcon,
+    ExclamationMarkBigIcon
 } from "@hugeicons/core-free-icons";
 
 type IconProps = ComponentProps<typeof HugeiconsIcon>;
@@ -78,5 +79,6 @@ export const OctagonXIcon = createIcon(OctagonXShapeIcon);
 export const OctagonX = OctagonXIcon;
 export const CircleCheckIcon = CheckCircle2;
 export const Loader2Icon = Loader2;
+export const ExclamationMarkBig = createIcon(ExclamationMarkBigIcon);
 
 export type HugeIcon = ReturnType<typeof createIcon>;
