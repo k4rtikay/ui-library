@@ -23,7 +23,7 @@ export default function CardStackDemo() {
                                 {plan.description}
                             </p>
 
-                            <Button className="mt-auto text-sm font-semibold bg-linear-to-b from-neutral-700 to-foreground text-background rounded-md hover:bg-foreground/90 dark:hover:bg-foreground/90">
+                            <Button className="mt-auto text-sm font-semibold bg-neutral-800 dark:bg-neutral-100 text-background rounded-md hover:bg-foreground/90 dark:hover:bg-foreground/90">
                                 {plan.ctaText}
                             </Button>
                         </div>
