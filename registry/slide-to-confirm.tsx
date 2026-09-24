@@ -104,9 +104,12 @@ export function SlideHandle({ children }: { children?: React.ReactNode }) {
     return (
         <div
             data-slot="handle"
-            className="p-2 rounded-full bg-background/70 text-foreground flex items-center justify-center gap-1"
         >
-            {children ?? <ChevronRight />}
+            {children ?? (
+                <span className="p-2 rounded-full bg-background/70 text-foreground flex items-center justify-center gap-1">
+                    <ChevronRight />
+                </span>
+            )}
         </div>
     );
 }
