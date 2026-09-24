@@ -1,12 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import { useRef, useState, useId } from "react";
 
-interface HoldToConfirmProps {
+type ButtonPropsWithoutStyle = Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'style'>;
+
+interface HoldToConfirmProps extends ButtonPropsWithoutStyle {
     children: React.ReactNode;
     onConfirm: () => void;
     holdDuration?: number;
     className?: string;
+    fillClassName?: string;
 }
 
 export default function HoldToConfirm({
@@ -14,9 +18,12 @@ export default function HoldToConfirm({
     onConfirm,
     holdDuration = 1000,
     className,
+    fillClassName = "bg-red-100 text-red-600 dark:bg-red-800 dark:text-red-50",
+    ...props
 }: HoldToConfirmProps) {
     const isHolding = useRef(false);
     const [keyHolding, setKeyHolding] = useState(false);
+    const id = useId();
 
     const handlePointerDown = () => {
         isHolding.current = true;
@@ -49,25 +56,30 @@ export default function HoldToConfirm({
 
     return (
         <button
-            className="group relative bg-muted text-foreground font-medium px-4 py-3 rounded-full overflow-hidden flex items-center justify-center active:scale-98 transition-transform duration-150 ease-out"
+            {...props}
+            className={cn("group relative bg-muted text-foreground font-medium px-4 py-3 rounded-full overflow-hidden flex items-center justify-center active:scale-98 transition-transform duration-150 ease-out select-none [-webkit-touch-callout:none]", className)}
             data-holding={keyHolding || undefined}
             onPointerDown={handlePointerDown}
             onPointerUp={handlePointerUp}
             onPointerLeave={handlePointerUp}
+            onPointerCancel={handlePointerUp}
             onKeyDown={handleKeyDown}
             onKeyUp={handleKeyUp}
             onBlur={() => setKeyHolding(false)}
             style={{ ["--hold-duration" as string]: `${holdDuration}ms` }}
+            type="button"
+            aria-describedby={id}
         >
             <div
                 aria-hidden="true"
                 onTransitionEnd={handleTransitionEnd}
-                className="absolute inset-0 bg-red-100 text-red-600 flex items-center justify-center gap-1 [clip-path:inset(0_100%_0_0)] group-active:[clip-path:inset(0px_0px_0px_0px)] data-[holding]:[clip-path:inset(0px_0px_0px_0px)] transition-[clip-path] duration-240 ease-out group-active:duration-[var(--hold-duration)] data-[holding]:duration-[var(--hold-duration)] group-active:ease-linear data-[holding]:ease-linear"
+                className={cn("absolute inset-0 flex items-center justify-center gap-1 [clip-path:inset(0_100%_0_0)] group-active:[clip-path:inset(0px_0px_0px_0px)] data-[holding]:[clip-path:inset(0px_0px_0px_0px)] transition-[clip-path] duration-240 ease-out group-active:duration-[var(--hold-duration)] data-[holding]:duration-[var(--hold-duration)] group-active:ease-linear data-[holding]:ease-linear", fillClassName)}
                 data-holding={keyHolding || undefined}
             >
                 {children}
             </div>
             {children}
+            <span className="hidden" id={id}>Press and hold to confirm</span>
         </button>
     );
 }
