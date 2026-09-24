@@ -1,0 +1,62 @@
+import SlideToConfirmDemo from "./demo";
+import ComponentPreview from "@/components/website/component-preview";
+import { CommandCopy } from "@/components/website/command-copy";
+import { TabsContent } from "@/components/ui/tabs";
+import CollapsibleCode from "@/components/website/collapsible-code";
+
+# Slide to Confirm
+
+A button that transitions through loading, success, and error states with smooth animations. Ideal for form submissions, async actions, and any interaction that needs visual feedback.
+
+## Preview
+
+<ComponentPreview>
+    <TabsContent
+        value="preview"
+        className="relative flex items-center justify-center p-10"
+    >
+        <SlideToConfirmDemo />
+    </TabsContent>
+    <TabsContent value="code">
+        <CollapsibleCode>
+            ```tsx file=demo.tsx ```
+        </CollapsibleCode>
+    </TabsContent>
+</ComponentPreview>
+
+## Installation
+
+<CommandCopy
+  command={{
+    npm: 'npx shadcn@latest add "https://flow-kit-beta.vercel.app/r/slide-to-confirm.json"',
+    pnpm: 'pnpm dlx shadcn@latest add "https://flow-kit-beta.vercel.app/r/slide-to-confirm.json"',
+    bun: 'bunx shadcn@latest add "https://flow-kit-beta.vercel.app/r/slide-to-confirm.json"',
+    yarn: 'yarn dlx shadcn@latest add "https://flow-kit-beta.vercel.app/r/slide-to-confirm.json"'
+  }}
+>
+
+<CollapsibleCode>
+  ```tsx file=../../../../../registry/slide-to-confirm.tsx
+  ```
+</CollapsibleCode>
+</CommandCopy>
+
+## API Reference
+
+### LoaderButton
+
+| Prop         | Type                                        | Default              | Description                        |
+| ------------ | ------------------------------------------- | -------------------- | ---------------------------------- |
+| state        | "idle" \| "loading" \| "success" \| "error" | Required             | Controls the current button state  |
+| children     | React.ReactNode                             | `"Submit"`           | Content shown in the idle state    |
+| successLabel | React.ReactNode                             | `✓ Success`          | Content shown in the success state |
+| errorLabel   | React.ReactNode                             | `✗ Error`            | Content shown in the error state   |
+| loader       | React.ReactNode                             | `<LoadingSpinner />` | Content shown in the loading state |
+| className    | string                                      | `undefined`          | Additional CSS classes             |
+| disabled     | boolean                                     | `state !== "idle"`   | Override disabled behavior         |
+
+Also accepts all standard `button` HTML attributes via `...props`.
+
+### LoadingSpinner
+
+A standalone animated spinner with four pulsing bars. Can be used independently or as the default loader inside `LoaderButton`.
