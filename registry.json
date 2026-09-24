@@ -41,6 +41,32 @@
                 }
             ],
             "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
+        },
+        {
+            "name": "hold-to-confirm",
+            "type": "registry:ui",
+            "title": "Hold to Confirm",
+            "description": "A tactile confirmation button that requires users to press and hold for a specified duration before triggering an action.",
+            "files": [
+                {
+                    "path": "registry/hold-to-confirm.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
+        },
+        {
+            "name": "slide-to-confirm",
+            "type": "registry:ui",
+            "title": "Slide to Confirm",
+            "description": "A swipe-based confirmation button that requires users to slide a handle to confirm an action.",
+            "files": [
+                {
+                    "path": "registry/slide-to-confirm.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
         }
     ]
 }
