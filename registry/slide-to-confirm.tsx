@@ -100,7 +100,7 @@ export function SlideToConfirm({
     );
 }
 
-export function SlideHandle({ children }: { children?: React.ReactNode }) {
+function SlideHandle({ children }: { children?: React.ReactNode }) {
     return (
         <div
             data-slot="handle"
