@@ -28,6 +28,9 @@ import {
     Sun01Icon,
     Tick01Icon,
     Delete02Icon,
+    InfoIcon as InfoShapeIcon,
+    OctagonXIcon as OctagonXShapeIcon,
+    TriangleAlertIcon as TriangleAlertShapeIcon,
 } from "@hugeicons/core-free-icons";
 
 type IconProps = ComponentProps<typeof HugeiconsIcon>;
@@ -67,5 +70,13 @@ export const PanelsTopLeft = createIcon(Cards01Icon);
 export const Rocket = createIcon(Rocket01Icon);
 export const Rows = createIcon(ListViewIcon);
 export const Delete = createIcon(Delete02Icon);
+export const InfoIcon = createIcon(InfoShapeIcon);
+export const Info = InfoIcon;
+export const TriangleAlertIcon = createIcon(TriangleAlertShapeIcon);
+export const TriangleAlert = TriangleAlertIcon;
+export const OctagonXIcon = createIcon(OctagonXShapeIcon);
+export const OctagonX = OctagonXIcon;
+export const CircleCheckIcon = CheckCircle2;
+export const Loader2Icon = Loader2;
 
 export type HugeIcon = ReturnType<typeof createIcon>;

@@ -35,6 +35,14 @@ export const docsNavigation: DocsNavCategory[] = [
                 title: "Loader Button",
                 href: "/docs/components/loader-button",
             },
+            {
+                title: "Hold to Confirm",
+                href: "/docs/components/hold-to-confirm",
+            },
+            {
+                title: "Slide to Confirm",
+                href: "/docs/components/slide-to-confirm",
+            },
         ],
     },
     {
