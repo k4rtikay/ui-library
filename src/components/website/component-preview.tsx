@@ -11,7 +11,7 @@ export default function ComponentPreview({
     className = "",
 }: ComponentPreviewProps) {
     return (
-        <div className={`flex flex-col gap-2 ${className}`}>
+        <div className={`flex flex-col gap-2 ${className}`}>                        
             <Tabs defaultValue="preview" className="relative mr-auto w-full">
                 <div className="flex items-center justify-between pb-3">
                     <TabsList
@@ -24,7 +24,7 @@ export default function ComponentPreview({
                         </div>
                     </TabsList>
                 </div>
-                <div className="relative not-prose rounded-2xl border overflow-hidden">
+                <div className="relative not-prose rounded-2xl border overflow-hidden">                                        
                     {children}
                 </div>
             </Tabs>
