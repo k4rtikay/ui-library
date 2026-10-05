@@ -1,33 +1,86 @@
+import { Indie_Flower } from "next/font/google";
+
+import { Button } from "@/components/ui/button";
 import {
     SquiggleTabs,
     SquiggleTabsContent,
     SquiggleTabsList,
     SquiggleTabsTrigger,
 } from "../../../../../registry/squiggly-tabs";
+import { Flower } from "./flower";
+
+const indieFlower = Indie_Flower({
+    subsets: ["latin"],
+    weight: ["400"],
+});
 
 const tabs = [
-    { value: "overview", label: "Overview" },
-    { value: "analytics", label: "Analytics" },
-    { value: "profile", label: "Profile" },
-    { value: "settings", label: "Settings" },
+    {
+        value: "models",
+        label: "Models",
+        description: "Pick from frontier and open-source models behind one API.",
+        cta: "Browse models",
+    },
+    {
+        value: "agents",
+        label: "Agents",
+        description: "Spin up agents that plan, reason, and get things done.",
+        cta: "Build an agent",
+    },
+    {
+        value: "workflows",
+        label: "Workflows",
+        description: "Chain steps into reliable, repeatable pipelines.",
+        cta: "Create a workflow",
+    },
+    {
+        value: "tools",
+        label: "Tools",
+        description: "Give your agents hands: search, code, files, and APIs.",
+        cta: "Explore tools",
+    },
 ];
 
 export function Demo() {
     return (
-        <div>
-            <SquiggleTabs defaultValue="overview">
-                <SquiggleTabsList variant="line">
+        <div className="w-full max-w-2xl">
+            <SquiggleTabs defaultValue="models" className="gap-4">
+                <SquiggleTabsList>
                     {tabs.map((tab) => (
                         <SquiggleTabsTrigger key={tab.value} value={tab.value}>
                             {tab.label}
                         </SquiggleTabsTrigger>
                     ))}
                 </SquiggleTabsList>
-                {tabs.map((tab) => (
-                    <SquiggleTabsContent key={tab.value} value={tab.value}>
-                        {tab.label} content
-                    </SquiggleTabsContent>
-                ))}
+
+                <div className="flex min-h-64 flex-col items-center gap-6 overflow-hidden rounded-3xl border border-border bg-card p-8 text-card-foreground shadow-sm sm:flex-row">
+                    <div className="w-full flex-1">
+                        {tabs.map((tab) => (
+                            <SquiggleTabsContent
+                                key={tab.value}
+                                value={tab.value}
+                            >
+                                <div className="flex flex-col items-start gap-4">
+                                    <h3
+                                        className={`text-3xl font-semibold ${indieFlower.className}`}
+                                    >
+                                        {tab.label}
+                                    </h3>
+                                    <p className="text-sm text-muted-foreground">
+                                        {tab.description}
+                                    </p>
+                                    <Button className="rounded-full">
+                                        {tab.cta} <span aria-hidden>→</span>
+                                    </Button>
+                                </div>
+                            </SquiggleTabsContent>
+                        ))}
+                    </div>
+
+                    <div className="flex h-56 w-full max-w-48 shrink-0 items-center justify-center">
+                        <Flower />
+                    </div>
+                </div>
             </SquiggleTabs>
         </div>
     );

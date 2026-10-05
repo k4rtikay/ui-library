@@ -1,7 +1,12 @@
 "use client";
 
 import * as React from "react";
-import { AnimatePresence, motion, type Variants } from "motion/react";
+import {
+    AnimatePresence,
+    motion,
+    useReducedMotion,
+    type Variants,
+} from "motion/react";
 import { Indie_Flower } from "next/font/google";
 
 import { cn } from "@/lib/utils";
@@ -57,9 +62,7 @@ const SquiggleTabsContext =
 function useSquiggleTabs() {
     const context = React.useContext(SquiggleTabsContext);
     if (!context) {
-        throw new Error(
-            "SquiggleTabsTrigger must be used within <SquiggleTabs>",
-        );
+        throw new Error("Squiggle tabs parts must be used within <SquiggleTabs>");
     }
     return context;
 }
@@ -171,9 +174,40 @@ function SquiggleTabsTrigger({
     );
 }
 
+function SquiggleTabsList({
+    variant = "line",
+    ...props
+}: React.ComponentProps<typeof TabsList>) {
+    return <TabsList variant={variant} {...props} />;
+}
+
+function SquiggleTabsContent({
+    children,
+    ...props
+}: React.ComponentProps<typeof TabsContent>) {
+    const { direction } = useSquiggleTabs();
+    const reduceMotion = useReducedMotion();
+
+    return (
+        <TabsContent {...props}>
+            <motion.div
+                initial={{
+                    opacity: 0,
+                    x: reduceMotion ? 0 : direction === "right" ? 24 : -24,
+                }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+                {children}
+            </motion.div>
+        </TabsContent>
+    );
+}
+
 export {
     SquiggleTabs,
-    TabsList as SquiggleTabsList,
+    SquiggleTabsList,
     SquiggleTabsTrigger,
-    TabsContent as SquiggleTabsContent,
+    SquiggleTabsContent,
+    useSquiggleTabs,
 };
