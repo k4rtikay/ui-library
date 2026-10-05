@@ -15,12 +15,6 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-const instrumentSerif = Instrument_Serif({
-    variable: "--font-instrument-serif",
-    subsets: ["latin"],
-    weight: ["400"],
-});
-
 export const metadata: Metadata = {
     title: "Flow Kit",
     description:
@@ -38,7 +32,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <ThemeProvider
                     attribute="class"
