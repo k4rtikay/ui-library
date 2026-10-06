@@ -51,9 +51,12 @@ const squiggleVariants = {
     }),
 };
 
+const DEFAULT_SQUIGGLE_COLOR = "#ef4444";
+
 interface SquiggleTabsContextValue {
     activeTab: string;
     direction: Direction;
+    squiggleColor: string;
 }
 
 const SquiggleTabsContext =
@@ -67,12 +70,16 @@ function useSquiggleTabs() {
     return context;
 }
 
-type SquiggleTabsProps = React.ComponentProps<typeof Tabs>;
+interface SquiggleTabsProps extends React.ComponentProps<typeof Tabs> {
+    /** Default squiggle color for every trigger. Any CSS color. */
+    squiggleColor?: string;
+}
 
 function SquiggleTabs({
     value: valueProp,
     defaultValue = "",
     onValueChange,
+    squiggleColor = DEFAULT_SQUIGGLE_COLOR,
     ref,
     ...props
 }: SquiggleTabsProps) {
@@ -112,8 +119,8 @@ function SquiggleTabs({
     };
 
     const context = React.useMemo(
-        () => ({ activeTab, direction }),
-        [activeTab, direction],
+        () => ({ activeTab, direction, squiggleColor }),
+        [activeTab, direction, squiggleColor],
     );
 
     return (
@@ -128,14 +135,23 @@ function SquiggleTabs({
     );
 }
 
+interface SquiggleTabsTriggerProps extends React.ComponentProps<
+    typeof TabsTrigger
+> {
+    /** Overrides the squiggle color set on `SquiggleTabs` for this trigger. */
+    squiggleColor?: string;
+}
+
 function SquiggleTabsTrigger({
     value,
     children,
     className,
+    squiggleColor: squiggleColorProp,
     ...props
-}: React.ComponentProps<typeof TabsTrigger>) {
-    const { activeTab, direction } = useSquiggleTabs();
+}: SquiggleTabsTriggerProps) {
+    const { activeTab, direction, squiggleColor } = useSquiggleTabs();
     const isActive = activeTab === value;
+    const color = squiggleColorProp ?? squiggleColor;
 
     return (
         <TabsTrigger
@@ -160,8 +176,9 @@ function SquiggleTabsTrigger({
                         animate="center"
                         exit="exit"
                         aria-hidden
-                        className="pointer-events-none absolute inset-x-0 -bottom-1 h-[6px] bg-red-500"
+                        className="pointer-events-none absolute inset-x-0 -bottom-1 h-1.5"
                         style={{
+                            backgroundColor: color,
                             maskImage: squiggle,
                             WebkitMaskImage: squiggle,
                             maskRepeat: "repeat-x",

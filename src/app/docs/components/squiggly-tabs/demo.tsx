@@ -20,26 +20,32 @@ const tabs = [
         label: "Models",
         description: "Pick from frontier and open-source models behind one API.",
         cta: "Browse models",
+        color: "#f472b6",
     },
     {
         value: "agents",
         label: "Agents",
         description: "Spin up agents that plan, reason, and get things done.",
         cta: "Build an agent",
+        color: "#fbbf24",
     },
     {
         value: "workflows",
         label: "Workflows",
         description: "Chain steps into reliable, repeatable pipelines.",
         cta: "Create a workflow",
+        color: "#60a5fa",
     },
     {
         value: "tools",
         label: "Tools",
         description: "Give your agents hands: search, code, files, and APIs.",
         cta: "Explore tools",
+        color: "#4ade80",
     },
 ];
+
+const tabColors = Object.fromEntries(tabs.map((tab) => [tab.value, tab.color]));
 
 export function Demo() {
     return (
@@ -47,7 +53,11 @@ export function Demo() {
             <SquiggleTabs defaultValue="models" className="gap-4">
                 <SquiggleTabsList>
                     {tabs.map((tab) => (
-                        <SquiggleTabsTrigger key={tab.value} value={tab.value}>
+                        <SquiggleTabsTrigger
+                            key={tab.value}
+                            value={tab.value}
+                            squiggleColor={tab.color}
+                        >
                             {tab.label}
                         </SquiggleTabsTrigger>
                     ))}
@@ -78,7 +88,7 @@ export function Demo() {
                     </div>
 
                     <div className="flex h-56 w-full max-w-48 shrink-0 items-center justify-center">
-                        <Flower />
+                        <Flower colors={tabColors} />
                     </div>
                 </div>
             </SquiggleTabs>

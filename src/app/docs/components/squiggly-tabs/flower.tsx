@@ -4,14 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 
 import { useSquiggleTabs } from "../../../../../registry/squiggly-tabs";
 
-const FLOWER_COLORS: Record<string, string> = {
-    models: "#f9a8d4",
-    agents: "#fcd34d",
-    workflows: "#93c5fd",
-    tools: "#86efac",
-};
-
-const FALLBACK_COLOR = "#f9a8d4";
+const FALLBACK_COLOR = "#f472b6";
 
 // Each petal differs slightly in shape and angle so the flower looks hand-drawn.
 // Petals start at the flower center (100, 62) and are rotated around it.
@@ -23,10 +16,15 @@ const petals = [
     { rotate: 289, d: "M100 62 C81 47 83 17 102 10 C121 18 119 41 100 62 Z" },
 ];
 
-export function Flower() {
+interface FlowerProps {
+    /** Petal color keyed by tab value. */
+    colors: Record<string, string>;
+}
+
+export function Flower({ colors }: FlowerProps) {
     const { activeTab } = useSquiggleTabs();
     const reduceMotion = useReducedMotion();
-    const color = FLOWER_COLORS[activeTab] ?? FALLBACK_COLOR;
+    const color = colors[activeTab] ?? FALLBACK_COLOR;
 
     return (
         <svg

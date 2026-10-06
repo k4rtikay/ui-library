@@ -30,6 +30,20 @@
             "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
         },
         {
+            "name": "squiggly-tabs",
+            "type": "registry:ui",
+            "title": "Squiggly Tabs",
+            "description": "A direction-aware tabs component with a hand-drawn squiggle underline and side-aware content transitions.",
+            "files": [
+                {
+                    "path": "registry/squiggly-tabs.tsx",
+                    "type": "registry:component"
+                }
+            ],
+            "dependencies": ["motion"],
+            "registryDependencies": ["tabs"]
+        },
+        {
             "name": "loader-button",
             "type": "registry:ui",
             "title": "Loader Button",
