@@ -63,14 +63,14 @@ export function Demo() {
                     ))}
                 </SquiggleTabsList>
 
-                <div className="flex min-h-64 flex-col items-center gap-6 overflow-hidden rounded-3xl border border-border bg-card p-8 text-card-foreground shadow-sm sm:flex-row">
+                <div className="flex min-h-64 flex-col items-center gap-4 overflow-hidden rounded-3xl border border-border bg-card p-8 text-card-foreground shadow-sm sm:flex-row">
                     <div className="w-full flex-1">
                         {tabs.map((tab) => (
                             <SquiggleTabsContent
                                 key={tab.value}
                                 value={tab.value}
                             >
-                                <div className="flex flex-col items-start gap-4">
+                                <div className="flex flex-col items-start gap-2">
                                     <h3
                                         className={`text-3xl font-semibold ${indieFlower.className}`}
                                     >
@@ -79,7 +79,7 @@ export function Demo() {
                                     <p className="text-sm text-muted-foreground">
                                         {tab.description}
                                     </p>
-                                    <Button className="rounded-full">
+                                    <Button className="rounded-full mt-2">
                                         {tab.cta} <span aria-hidden>→</span>
                                     </Button>
                                 </div>

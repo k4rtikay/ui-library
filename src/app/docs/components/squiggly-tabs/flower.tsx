@@ -31,7 +31,7 @@ export function Flower({ colors }: FlowerProps) {
             viewBox="0 0 200 240"
             fill="none"
             aria-hidden
-            className="h-full max-h-56 w-full stroke-foreground"
+            className="h-full max-h-56 w-full stroke-foreground dark:stroke-muted-foreground"
             strokeWidth={2.5}
             strokeLinecap="round"
             strokeLinejoin="round"
