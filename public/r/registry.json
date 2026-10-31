@@ -30,13 +30,13 @@
             "dependencies": ["motion", "@hugeicons/core-free-icons", "@hugeicons/react"]
         },
         {
-            "name": "squiggly-tabs",
+            "name": "squiggle-tabs",
             "type": "registry:ui",
-            "title": "Squiggly Tabs",
+            "title": "Squiggle Tabs",
             "description": "A direction-aware tabs component with a hand-drawn squiggle underline and side-aware content transitions.",
             "files": [
                 {
-                    "path": "registry/squiggly-tabs.tsx",
+                    "path": "registry/squiggle-tabs.tsx",
                     "type": "registry:component"
                 }
             ],

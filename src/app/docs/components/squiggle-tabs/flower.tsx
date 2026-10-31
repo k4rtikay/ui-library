@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 
-import { useSquiggleTabs } from "../../../../../registry/squiggly-tabs";
+import { useSquiggleTabs } from "../../../../../registry/squiggle-tabs";
 
 const FALLBACK_COLOR = "#f472b6";
 

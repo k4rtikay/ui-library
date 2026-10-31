@@ -7,7 +7,6 @@ import {
     useReducedMotion,
     type Variants,
 } from "motion/react";
-import { Indie_Flower } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import {
@@ -18,11 +17,6 @@ import {
 } from "@/components/ui/tabs";
 
 type Direction = "left" | "right";
-
-const indieFlower = Indie_Flower({
-    subsets: ["latin"],
-    weight: ["400"],
-});
 
 const squiggle =
     "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6'%3E%3Cpath d='M0 3 Q3 0 6 3 T12 3' fill='none' stroke='black' stroke-width='1.5'/%3E%3C/svg%3E\")";
@@ -57,12 +51,16 @@ interface SquiggleTabsContextValue {
     activeTab: string;
     direction: Direction;
     squiggleColor: string;
+    /** Scopes trigger lookups to this root so nested tabs don't interfere. */
+    rootId: string;
+    /** False until the active tab has changed at least once. */
+    hasNavigated: boolean;
 }
 
 const SquiggleTabsContext =
     React.createContext<SquiggleTabsContextValue | null>(null);
 
-function useSquiggleTabs() {
+function useSquiggleTabsContext() {
     const context = React.useContext(SquiggleTabsContext);
     if (!context) {
         throw new Error("Squiggle tabs parts must be used within <SquiggleTabs>");
@@ -70,7 +68,16 @@ function useSquiggleTabs() {
     return context;
 }
 
-interface SquiggleTabsProps extends React.ComponentProps<typeof Tabs> {
+/** Reads the active tab and the direction of the last change. */
+function useSquiggleTabs() {
+    const { activeTab, direction, squiggleColor } = useSquiggleTabsContext();
+    return { activeTab, direction, squiggleColor };
+}
+
+interface SquiggleTabsProps extends Omit<
+    React.ComponentProps<typeof Tabs>,
+    "orientation"
+> {
     /** Default squiggle color for every trigger. Any CSS color. */
     squiggleColor?: string;
 }
@@ -83,12 +90,22 @@ function SquiggleTabs({
     ref,
     ...props
 }: SquiggleTabsProps) {
+    const rootId = React.useId();
     const rootRef = React.useRef<HTMLDivElement | null>(null);
     const [internalValue, setInternalValue] = React.useState(defaultValue);
     const [direction, setDirection] = React.useState<Direction>("right");
 
     const isControlled = valueProp !== undefined;
     const activeTab = isControlled ? valueProp : internalValue;
+
+    // Adjust state during render so panels mounting for the new tab already
+    // see `hasNavigated`, whether the change came from a click or from props.
+    const [previousTab, setPreviousTab] = React.useState(activeTab);
+    const [hasNavigated, setHasNavigated] = React.useState(false);
+    if (previousTab !== activeTab) {
+        setPreviousTab(activeTab);
+        setHasNavigated(true);
+    }
 
     const setRefs = React.useCallback(
         (node: HTMLDivElement | null) => {
@@ -101,12 +118,15 @@ function SquiggleTabs({
 
     const handleValueChange = (next: string) => {
         // Derive tab order from the DOM so triggers can be composed freely.
-        const triggers = Array.from(
+        // Only our own attributes are used, so this doesn't depend on the
+        // markup of the installed shadcn `tabs` component.
+        const values = Array.from(
             rootRef.current?.querySelectorAll<HTMLElement>(
-                '[data-slot="tabs-trigger"]',
+                "[data-squiggle-value]",
             ) ?? [],
-        );
-        const values = triggers.map((el) => el.dataset.value);
+        )
+            .filter((el) => el.dataset.squiggleRoot === rootId)
+            .map((el) => el.dataset.squiggleValue);
         const prevIndex = values.indexOf(activeTab);
         const nextIndex = values.indexOf(next);
 
@@ -119,8 +139,8 @@ function SquiggleTabs({
     };
 
     const context = React.useMemo(
-        () => ({ activeTab, direction, squiggleColor }),
-        [activeTab, direction, squiggleColor],
+        () => ({ activeTab, direction, squiggleColor, rootId, hasNavigated }),
+        [activeTab, direction, squiggleColor, rootId, hasNavigated],
     );
 
     return (
@@ -149,20 +169,18 @@ function SquiggleTabsTrigger({
     squiggleColor: squiggleColorProp,
     ...props
 }: SquiggleTabsTriggerProps) {
-    const { activeTab, direction, squiggleColor } = useSquiggleTabs();
+    const { activeTab, direction, squiggleColor, rootId } =
+        useSquiggleTabsContext();
     const isActive = activeTab === value;
     const color = squiggleColorProp ?? squiggleColor;
 
     return (
         <TabsTrigger
             value={value}
-            data-value={value}
-            className={cn(
-                "group relative text-base font-semibold after:hidden data-[state=active]:after:hidden",
-                indieFlower.className,
-                className,
-            )}
+            className={cn("relative after:hidden", className)}
             {...props}
+            data-squiggle-value={value}
+            data-squiggle-root={rootId}
         >
             {children}
 
@@ -200,18 +218,31 @@ function SquiggleTabsList({
 
 function SquiggleTabsContent({
     children,
+    className,
     ...props
 }: React.ComponentProps<typeof TabsContent>) {
-    const { direction } = useSquiggleTabs();
+    const { direction, hasNavigated } = useSquiggleTabsContext();
     const reduceMotion = useReducedMotion();
 
     return (
-        <TabsContent {...props}>
+        // The slide would otherwise overflow the panel horizontally. `clip`
+        // (unlike `hidden`) leaves the vertical axis alone, so focus rings
+        // aren't cut off at the top and bottom.
+        <TabsContent {...props} className="overflow-x-clip">
             <motion.div
-                initial={{
-                    opacity: 0,
-                    x: reduceMotion ? 0 : direction === "right" ? 24 : -24,
-                }}
+                className={className}
+                initial={
+                    hasNavigated
+                        ? {
+                              opacity: 0,
+                              x: reduceMotion
+                                  ? 0
+                                  : direction === "right"
+                                    ? 24
+                                    : -24,
+                          }
+                        : false
+                }
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
             >

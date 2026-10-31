@@ -6,7 +6,7 @@ import {
     SquiggleTabsContent,
     SquiggleTabsList,
     SquiggleTabsTrigger,
-} from "../../../../../registry/squiggly-tabs";
+} from "../../../../../registry/squiggle-tabs";
 import { Flower } from "./flower";
 
 const indieFlower = Indie_Flower({
@@ -57,13 +57,14 @@ export function Demo() {
                             key={tab.value}
                             value={tab.value}
                             squiggleColor={tab.color}
+                            className={`text-base ${indieFlower.className}`}
                         >
                             {tab.label}
                         </SquiggleTabsTrigger>
                     ))}
                 </SquiggleTabsList>
 
-                <div className="flex min-h-64 flex-col items-center gap-4 overflow-hidden rounded-3xl border border-border bg-card p-8 text-card-foreground shadow-sm sm:flex-row">
+                <div className="flex min-h-64 flex-col items-center gap-4 rounded-3xl border border-border bg-card p-8 text-card-foreground shadow-sm sm:flex-row">
                     <div className="w-full flex-1">
                         {tabs.map((tab) => (
                             <SquiggleTabsContent

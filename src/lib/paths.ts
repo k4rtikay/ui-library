@@ -73,8 +73,8 @@ export const docsNavigation: DocsNavCategory[] = [
         icon: PanelsTopLeft,
         items: [
             {
-                title: "Squiggly Tabs",
-                href: "/docs/components/squiggly-tabs",
+                title: "Squiggle Tabs",
+                href: "/docs/components/squiggle-tabs",
             },
         ],
     },

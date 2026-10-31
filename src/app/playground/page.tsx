@@ -1,4 +1,4 @@
-import { Demo } from "../docs/components/squiggly-tabs/demo" 
+import { Demo } from "../docs/components/squiggle-tabs/demo" 
 
 export default function DevRun() {
     return (

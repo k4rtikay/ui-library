@@ -1,18 +1,18 @@
-import { Demo as SquigglyTabsDemo } from "./demo";
+import { Demo as SquiggleTabsDemo } from "./demo";
 import ComponentPreview from "@/components/website/component-preview";
 import { CommandCopy } from "@/components/website/command-copy";
 import { TabsContent } from "@/components/ui/tabs";
 import CollapsibleCode from "@/components/website/collapsible-code";
 
-# Squiggly Tabs
+# Squiggle Tabs
 
-A direction-aware tabs component built on top of shadcn's `Tabs`. A hand-drawn squiggle underline wipes out of the old tab and into the new one, and panels fade in from the side you navigated towards.
+A direction-aware, horizontal tabs component built on top of shadcn's `Tabs`. A hand-drawn squiggle underline wipes out of the old tab and into the new one, and panels fade in from the side you navigated towards.
 
 ## Preview
 
 <ComponentPreview>
   <TabsContent value="preview" className="relative flex items-center justify-center p-10">
-    <SquigglyTabsDemo />
+    <SquiggleTabsDemo />
   </TabsContent>
   <TabsContent value="code">
     <CollapsibleCode>
@@ -28,19 +28,19 @@ A direction-aware tabs component built on top of shadcn's `Tabs`. A hand-drawn s
 
 ## Installation
 
-This component builds on the shadcn `tabs` component, which is installed automatically if you don't have it yet.
+This component builds on the shadcn `tabs` component (the version with the `line` list variant), which is installed automatically if you don't have it yet. If you already have an older `tabs`, update it first.
 
 <CommandCopy
   command={{
-    npm: 'npx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggly-tabs.json"',
-    pnpm: 'pnpm dlx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggly-tabs.json"',
-    bun: 'bunx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggly-tabs.json"',
-    yarn: 'yarn dlx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggly-tabs.json"'
+    npm: 'npx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggle-tabs.json"',
+    pnpm: 'pnpm dlx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggle-tabs.json"',
+    bun: 'bunx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggle-tabs.json"',
+    yarn: 'yarn dlx shadcn@latest add "https://flow-kit-beta.vercel.app/r/squiggle-tabs.json"'
   }}
 >
 
 <CollapsibleCode>
-  ```tsx file=../../../../../registry/squiggly-tabs.tsx
+  ```tsx file=../../../../../registry/squiggle-tabs.tsx
   ```
 </CollapsibleCode>
 </CommandCopy>
@@ -53,7 +53,7 @@ import {
   SquiggleTabsContent,
   SquiggleTabsList,
   SquiggleTabsTrigger,
-} from "@/components/squiggly-tabs";
+} from "@/components/squiggle-tabs";
 
 export function Example() {
   return (
@@ -84,6 +84,20 @@ Set a default color for every trigger on the root, or override it per trigger. E
 </SquiggleTabs>
 ```
 
+### Custom font
+
+The component doesn't ship a font. The demo uses [Indie Flower](https://fonts.google.com/specimen/Indie+Flower) for a hand-drawn feel, applied through the trigger's `className`.
+
+```tsx
+import { Indie_Flower } from "next/font/google";
+
+const indieFlower = Indie_Flower({ subsets: ["latin"], weight: ["400"] });
+
+<SquiggleTabsTrigger value="models" className={`text-base ${indieFlower.className}`}>
+  Models
+</SquiggleTabsTrigger>
+```
+
 ### Reading the active tab
 
 `useSquiggleTabs` returns the active tab and the direction of the last change, so anything inside `<SquiggleTabs>` can react to them. The demo's flower uses it to change its petal color.
@@ -91,7 +105,7 @@ Set a default color for every trigger on the root, or override it per trigger. E
 ```tsx
 "use client";
 
-import { useSquiggleTabs } from "@/components/squiggly-tabs";
+import { useSquiggleTabs } from "@/components/squiggle-tabs";
 
 function ActiveLabel() {
   const { activeTab, direction } = useSquiggleTabs();
@@ -103,12 +117,12 @@ function ActiveLabel() {
 
 ### SquiggleTabs
 
-Owns the active tab and the animation direction, and provides them through context. Accepts every prop of the shadcn `Tabs` root (`value`, `defaultValue`, `onValueChange`, `orientation`, `className`, ...).
+Owns the active tab and the animation direction, and provides them through context. Accepts every prop of the shadcn `Tabs` root except `orientation`: the component is horizontal only.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | value | `string` | `undefined` | Active tab when controlled |
-| defaultValue | `string` | `""` | Initially active tab when uncontrolled |
+| defaultValue | `string` | `""` | Initially active tab when uncontrolled. No tab is active if omitted |
 | onValueChange | `(value: string) => void` | `undefined` | Called when the active tab changes |
 | squiggleColor | `string` | `"#ef4444"` | Default squiggle color for all triggers. Any CSS color |
 | className | `string` | `undefined` | Additional CSS classes |
@@ -134,12 +148,12 @@ A tab trigger that renders the animated squiggle while active. Accepts every pro
 
 ### SquiggleTabsContent
 
-A wrapper around the shadcn `TabsContent` that fades its children in from the left or right depending on the direction of navigation. The slide is skipped when the user prefers reduced motion.
+A wrapper around the shadcn `TabsContent` that fades its children in from the left or right depending on the direction of navigation. The first panel doesn't animate on page load, and the slide is skipped when the user prefers reduced motion. Horizontal overflow is clipped on the panel, so the slide never causes a scrollbar.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
 | value | `string` | — | Value of the trigger this panel belongs to |
-| className | `string` | `undefined` | Additional CSS classes |
+| className | `string` | `undefined` | Additional CSS classes, applied to the animated element that directly wraps your children (use it for `flex`, `grid`, spacing, ...) |
 
 ### useSquiggleTabs
 
@@ -149,4 +163,5 @@ A wrapper around the shadcn `TabsContent` that fades its children in from the le
 | direction | `"left" \| "right"` | Direction of the last change. `"right"` means a later tab was selected |
 | squiggleColor | `string` | Default squiggle color set on the root |
 
-> Direction is worked out from the order of the triggers in the DOM, so you can render them from data, reorder them or add new ones without registering anything. The squiggle uses the Indie Flower font through `next/font/google`.
+> Direction is worked out from the order of the triggers in the DOM, so you can render them from data, reorder them or add new ones without registering anything. Nested `SquiggleTabs` don't affect each other.
+
