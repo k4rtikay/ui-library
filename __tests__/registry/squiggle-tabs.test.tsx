@@ -1,3 +1,4 @@
+import * as React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
@@ -111,6 +112,36 @@ describe("SquiggleTabs", () => {
             "data-state",
             "active",
         );
+    });
+
+    it("updates direction when the parent changes a controlled value", async () => {
+        const user = userEvent.setup();
+        function Controlled() {
+            const [value, setValue] = React.useState("b");
+            return (
+                <>
+                    <button onClick={() => setValue("c")}>go to c</button>
+                    <button onClick={() => setValue("a")}>go to a</button>
+                    <Example value={value} onValueChange={setValue} />
+                </>
+            );
+        }
+        render(<Controlled />);
+
+        await user.click(screen.getByRole("button", { name: "go to a" }));
+        expect(screen.getByTestId("direction")).toHaveTextContent("left");
+        expect(screen.getByText("Panel A").style.opacity).toBe("0");
+
+        await user.click(screen.getByRole("button", { name: "go to c" }));
+        expect(screen.getByTestId("direction")).toHaveTextContent("right");
+    });
+
+    it("keeps direction when a controlled parent rejects the change", async () => {
+        const user = userEvent.setup();
+        render(<Example value="b" onValueChange={() => {}} />);
+
+        await user.click(screen.getByRole("tab", { name: "A" }));
+        expect(screen.getByTestId("direction")).toHaveTextContent("right");
     });
 
     it("does not animate the initially active panel", () => {

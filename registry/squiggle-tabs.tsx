@@ -51,9 +51,7 @@ interface SquiggleTabsContextValue {
     activeTab: string;
     direction: Direction;
     squiggleColor: string;
-    /** Scopes trigger lookups to this root so nested tabs don't interfere. */
     rootId: string;
-    /** False until the active tab has changed at least once. */
     hasNavigated: boolean;
 }
 
@@ -68,10 +66,29 @@ function useSquiggleTabsContext() {
     return context;
 }
 
-/** Reads the active tab and the direction of the last change. */
 function useSquiggleTabs() {
     const { activeTab, direction, squiggleColor } = useSquiggleTabsContext();
     return { activeTab, direction, squiggleColor };
+}
+
+function getDirection(
+    root: HTMLElement | null,
+    rootId: string,
+    from: string,
+    to: string,
+): Direction | null {
+    if (!root) return null;
+
+    const values = Array.from(
+        root.querySelectorAll<HTMLElement>("[data-squiggle-value]"),
+    )
+        .filter((el) => el.dataset.squiggleRoot === rootId)
+        .map((el) => el.dataset.squiggleValue);
+    const fromIndex = values.indexOf(from);
+    const toIndex = values.indexOf(to);
+
+    if (fromIndex === -1 || toIndex === -1) return null;
+    return toIndex < fromIndex ? "left" : "right";
 }
 
 interface SquiggleTabsProps extends Omit<
@@ -91,25 +108,32 @@ function SquiggleTabs({
     ...props
 }: SquiggleTabsProps) {
     const rootId = React.useId();
-    const rootRef = React.useRef<HTMLDivElement | null>(null);
+    const [rootElement, setRootElement] = React.useState<HTMLDivElement | null>(
+        null,
+    );
     const [internalValue, setInternalValue] = React.useState(defaultValue);
     const [direction, setDirection] = React.useState<Direction>("right");
 
     const isControlled = valueProp !== undefined;
     const activeTab = isControlled ? valueProp : internalValue;
 
-    // Adjust state during render so panels mounting for the new tab already
-    // see `hasNavigated`, whether the change came from a click or from props.
     const [previousTab, setPreviousTab] = React.useState(activeTab);
     const [hasNavigated, setHasNavigated] = React.useState(false);
     if (previousTab !== activeTab) {
         setPreviousTab(activeTab);
         setHasNavigated(true);
+        const nextDirection = getDirection(
+            rootElement,
+            rootId,
+            previousTab,
+            activeTab,
+        );
+        if (nextDirection) setDirection(nextDirection);
     }
 
     const setRefs = React.useCallback(
         (node: HTMLDivElement | null) => {
-            rootRef.current = node;
+            setRootElement(node);
             if (typeof ref === "function") ref(node);
             else if (ref) ref.current = node;
         },
@@ -117,23 +141,6 @@ function SquiggleTabs({
     );
 
     const handleValueChange = (next: string) => {
-        // Derive tab order from the DOM so triggers can be composed freely.
-        // Only our own attributes are used, so this doesn't depend on the
-        // markup of the installed shadcn `tabs` component.
-        const values = Array.from(
-            rootRef.current?.querySelectorAll<HTMLElement>(
-                "[data-squiggle-value]",
-            ) ?? [],
-        )
-            .filter((el) => el.dataset.squiggleRoot === rootId)
-            .map((el) => el.dataset.squiggleValue);
-        const prevIndex = values.indexOf(activeTab);
-        const nextIndex = values.indexOf(next);
-
-        if (prevIndex !== -1 && nextIndex !== -1) {
-            setDirection(nextIndex < prevIndex ? "left" : "right");
-        }
-
         if (!isControlled) setInternalValue(next);
         onValueChange?.(next);
     };
@@ -225,9 +232,7 @@ function SquiggleTabsContent({
     const reduceMotion = useReducedMotion();
 
     return (
-        // The slide would otherwise overflow the panel horizontally. `clip`
-        // (unlike `hidden`) leaves the vertical axis alone, so focus rings
-        // aren't cut off at the top and bottom.
+
         <TabsContent {...props} className="overflow-x-clip">
             <motion.div
                 className={className}

@@ -3,6 +3,7 @@ import ComponentPreview from "@/components/website/component-preview";
 import { CommandCopy } from "@/components/website/command-copy";
 import { TabsContent } from "@/components/ui/tabs";
 import CollapsibleCode from "@/components/website/collapsible-code";
+import { CodeSteps, CodeStep } from "@/components/website/code-steps";
 
 # Squiggle Tabs
 
@@ -15,14 +16,20 @@ A direction-aware, horizontal tabs component built on top of shadcn's `Tabs`. A 
     <SquiggleTabsDemo />
   </TabsContent>
   <TabsContent value="code">
-    <CollapsibleCode>
-      ```tsx file=demo.tsx
-      ```
-    </CollapsibleCode>
-    <CollapsibleCode>
-      ```tsx file=flower.tsx
-      ```
-    </CollapsibleCode>
+    <CodeSteps>
+      <CodeStep title="demo.tsx" description="The tabs and panels shown in the preview.">
+        <CollapsibleCode>
+          ```tsx file=demo.tsx
+          ```
+        </CollapsibleCode>
+      </CodeStep>
+      <CodeStep title="flower.tsx" description="The SVG flower that changes color with the active tab, using useSquiggleTabs.">
+        <CollapsibleCode>
+          ```tsx file=flower.tsx
+          ```
+        </CollapsibleCode>
+      </CodeStep>
+    </CodeSteps>
   </TabsContent>
 </ComponentPreview>
 
@@ -44,74 +51,6 @@ This component builds on the shadcn `tabs` component (the version with the `line
   ```
 </CollapsibleCode>
 </CommandCopy>
-
-## Usage
-
-```tsx
-import {
-  SquiggleTabs,
-  SquiggleTabsContent,
-  SquiggleTabsList,
-  SquiggleTabsTrigger,
-} from "@/components/squiggle-tabs";
-
-export function Example() {
-  return (
-    <SquiggleTabs defaultValue="models">
-      <SquiggleTabsList>
-        <SquiggleTabsTrigger value="models">Models</SquiggleTabsTrigger>
-        <SquiggleTabsTrigger value="agents">Agents</SquiggleTabsTrigger>
-      </SquiggleTabsList>
-      <SquiggleTabsContent value="models">Models content</SquiggleTabsContent>
-      <SquiggleTabsContent value="agents">Agents content</SquiggleTabsContent>
-    </SquiggleTabs>
-  );
-}
-```
-
-### Custom squiggle colors
-
-Set a default color for every trigger on the root, or override it per trigger. Each trigger keeps its own color while the squiggle animates out, so you can match the underline to the rest of your UI.
-
-```tsx
-<SquiggleTabs defaultValue="models" squiggleColor="var(--primary)">
-  <SquiggleTabsList>
-    <SquiggleTabsTrigger value="models">Models</SquiggleTabsTrigger>
-    <SquiggleTabsTrigger value="agents" squiggleColor="#fbbf24">
-      Agents
-    </SquiggleTabsTrigger>
-  </SquiggleTabsList>
-</SquiggleTabs>
-```
-
-### Custom font
-
-The component doesn't ship a font. The demo uses [Indie Flower](https://fonts.google.com/specimen/Indie+Flower) for a hand-drawn feel, applied through the trigger's `className`.
-
-```tsx
-import { Indie_Flower } from "next/font/google";
-
-const indieFlower = Indie_Flower({ subsets: ["latin"], weight: ["400"] });
-
-<SquiggleTabsTrigger value="models" className={`text-base ${indieFlower.className}`}>
-  Models
-</SquiggleTabsTrigger>
-```
-
-### Reading the active tab
-
-`useSquiggleTabs` returns the active tab and the direction of the last change, so anything inside `<SquiggleTabs>` can react to them. The demo's flower uses it to change its petal color.
-
-```tsx
-"use client";
-
-import { useSquiggleTabs } from "@/components/squiggle-tabs";
-
-function ActiveLabel() {
-  const { activeTab, direction } = useSquiggleTabs();
-  return <span>{activeTab} ({direction})</span>;
-}
-```
 
 ## API Reference
 
