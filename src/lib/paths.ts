@@ -67,6 +67,17 @@ export const docsNavigation: DocsNavCategory[] = [
             },
         ],
     },
+    {
+        id: "tabs",
+        title: "Tabs",
+        icon: PanelsTopLeft,
+        items: [
+            {
+                title: "Squiggle Tabs",
+                href: "/docs/components/squiggle-tabs",
+            },
+        ],
+    },
 ];
 
 export const paths: RouteItem[] = docsNavigation.flatMap((category) =>
