@@ -90,12 +90,12 @@ export function DocsShell({ children }: DocsShellProps) {
 
                       prose prose-neutral dark:prose-invert text-pretty text-foreground leading-5.5
 
-                      prose-h1:text-3xl prose-h1:font-semibold prose-h1:tracking-tight prose-h1:text-foreground prose-h1:scroll-m-20 prose-h1:mb-4
-                      prose-h2:mt-12 prose-h2:text-xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:text-foreground
+                      prose-h1:text-2xl prose-h1:font-semibold prose-h1:tracking-tight prose-h1:text-foreground prose-h1:scroll-m-20 prose-h1:mb-4
+                      prose-h2:mt-12 prose-h2:text-lg prose-h2:font-semibold prose-h2:tracking-tight prose-h2:text-foreground
                       prose-h3:text-base prose-h3:font-semibold prose-h3:scroll-m-20
                       prose-strong:font-semibold prose-strong:text-foreground
                       prose-table:block prose-table:overflow-y-auto
-                      prose-p:mt-2 prose-p:text-muted-foreground
+                      prose-p:mt-2 prose-p:text-muted-foreground prose-p:text-sm prose-p:tracking-wide prose-p:leading-relaxed
                     "
                     >
                         {children}
