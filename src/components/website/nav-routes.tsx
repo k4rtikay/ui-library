@@ -74,7 +74,7 @@ export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
                                 </span>
                             </AccordionTrigger>
                             <AccordionContent className="mx-1 -my-2 px-2 py-2 pb-2">
-                                <ul className="mt-1 flex flex-col pl-2">
+                                <ul className="mt-1 flex flex-col pl-2 space-y-1">
                                     {category.items.map((item) => {
                                         const isActive = pathname === item.href;
 
@@ -83,7 +83,7 @@ export default function NavRoutes({ searchQuery = "" }: NavRoutesProps) {
                                                 <Link
                                                     href={item.href}
                                                     className={cn(
-                                                        "relative block rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-accent transition-all duration-150 ease-out",
+                                                        "relative block rounded-lg p-2 text-base md:text-sm font-[520] tracking-tight text-foreground hover:bg-sidebar-primary transition-all duration-150 ease-out",
                                                         isActive &&
                                                             "text-sidebar-primary-foreground bg-sidebar-primary hover:text-sidebar-primary-foreground hover:bg-sidebar-primary",
                                                     )}

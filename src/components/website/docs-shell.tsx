@@ -66,7 +66,7 @@ export function DocsShell({ children }: DocsShellProps) {
             >
                 <Sidebar isCollapsed={isSidebarCollapsed} />
             </motion.div>
-            <div className="relative m-3 min-h-0 min-w-0 overflow-hidden rounded-4xl bg-background">
+            <div className="relative m-3 min-h-0 min-w-0 overflow-hidden rounded-4xl bg-background shadow-sm">
                 <DocsHeader
                     key={pathname}
                     isSidebarCollapsed={isSidebarCollapsed}

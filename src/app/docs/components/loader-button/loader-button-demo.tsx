@@ -35,6 +35,7 @@ export default function LoaderButtonDemo() {
     return (
         <div className="flex flex-col min-h-[15rem] w-full items-center justify-center gap-8">
             <LoaderButton
+                className="bg-primary-foreground text-primary"
                 state={buttonState}
                 onClick={() => simulateHandleClick(1500)}
             >
