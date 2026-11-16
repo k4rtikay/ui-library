@@ -115,7 +115,7 @@ export function MotionComparison() {
                         <LoaderButton
                             state={withMotion.state}
                             onClick={withMotion.play}
-                            className="text-sm"
+                            className="text-sm w-30"
                         >
                             Submit
                         </LoaderButton>
