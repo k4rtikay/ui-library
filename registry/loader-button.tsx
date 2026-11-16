@@ -38,11 +38,20 @@ export const LoaderButton = React.forwardRef<
             loader,
             className,
             disabled,
+            onClick,
             ...props
         },
         ref,
     ) => {
-        const isDisabled = disabled ?? state !== "idle";
+        const isDisabled = disabled || state !== "idle";
+
+        const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+            if (isDisabled) {
+                event.preventDefault();
+                return;
+            }
+            onClick?.(event);
+        };
 
         const defaultSuccessLabel = (
             <span className="flex justify-center items-center gap-1">
@@ -63,27 +72,28 @@ export const LoaderButton = React.forwardRef<
                 ref={ref}
                 variants={buttonVariants}
                 animate={state}
-                disabled={isDisabled}
+                layout
+                transition={layoutTransition}
+                aria-disabled={isDisabled}
+                onClick={handleClick}
                 custom={shouldReduceMotion}
                 className={cn(
-                    // Base styles
-                    "relative flex items-center justify-center min-w-[120px] h-12 py-2 px-4 rounded-full font-semibold",
+                    "relative flex items-center justify-center h-12 py-2 px-4 rounded-full font-semibold",
                     "transition-colors duration-300",
                     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-                    isDisabled && "pointer-events-none cursor-not-allowed",
+                    isDisabled && "cursor-not-allowed",
 
-                    // Theme-aware state colors
-                    state === "idle" &&
-                        "bg-primary text-primary-foreground hover:brightness-95",
-                    state === "loading" && "bg-primary text-primary-foreground",
+                    (state === "idle" || state === "loading") &&
+                        "bg-primary text-primary-foreground",
+                    state === "idle" && !isDisabled && "hover:brightness-95",
+                    className,
+
                     state === "success" &&
                         "bg-green-200 text-green-900 dark:bg-green-700 dark:text-green-50",
                     state === "error" &&
-                        "bg-destructive/25 dark:bg-destructive text-destructive-foreground dark:text-white",
-                    className,
+                        "bg-destructive/25 text-destructive dark:bg-destructive dark:text-white",
                 )}
                 aria-busy={state === "loading"}
-                aria-live="polite"
                 {...props}
             >
                 <span className="sr-only" aria-live="polite">
@@ -92,10 +102,12 @@ export const LoaderButton = React.forwardRef<
                     {state === "error" && "Error"}
                 </span>
 
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="popLayout">
                     {state === "idle" && (
                         <motion.div
                             key="idle"
+                            layout="position"
+                            transition={layoutTransition}
                             variants={contentVariants}
                             initial="initial"
                             animate="animate"
@@ -107,21 +119,28 @@ export const LoaderButton = React.forwardRef<
                     {state === "loading" && (
                         <motion.div
                             key="loading"
+                            layout="position"
+                            transition={layoutTransition}
                             variants={contentVariants}
                             initial="initial"
                             animate="animate"
                             exit="exit"
                             aria-hidden="true"
-                            className="w-full flex items-center justify-center gap-2"
+                            className="flex items-center justify-center gap-2"
                         >
                             {loader ?? (
-                                <span className="w-full h-full flex items-center justify-center gap-1 text-xs opacity-90"><HugeiconsIcon icon={Loading02Icon} className="w-4 h-4 animate-spin" />Processing</span>
+                                <span className="flex items-center justify-center gap-1 opacity-90">
+                                    <HugeiconsIcon icon={Loading02Icon} className="w-4 h-4 animate-spin" />
+                                    Processing
+                                </span>
                             )}
                         </motion.div>
                     )}
                     {state === "success" && (
                         <motion.div
                             key="success"
+                            layout="position"
+                            transition={layoutTransition}
                             variants={contentVariants}
                             initial="initial"
                             animate="animate"
@@ -134,6 +153,8 @@ export const LoaderButton = React.forwardRef<
                     {state === "error" && (
                         <motion.div
                             key="error"
+                            layout="position"
+                            transition={layoutTransition}
                             variants={contentVariants}
                             initial="initial"
                             animate="animate"
@@ -157,16 +178,7 @@ const buttonVariants = {
     idle: {
         scale: 1,
     },
-    loading: {
-        scale: 1,
-        transition: {
-            scale: {
-                repeat: Infinity,
-                duration: 1.25,
-                ease: "easeInOut",
-            },
-        } as const,
-    },
+
     success: (shouldReduceMotion: boolean) => {
         return {
             scale: shouldReduceMotion ? 1 : [1, 1.05, 1],
@@ -192,6 +204,13 @@ const buttonVariants = {
     },
 };
 
+const layoutTransition = {
+    layout: {
+        duration: 0.2,
+        ease: "easeInOut",
+    },
+} as const;
+
 const contentVariants = {
     initial: {
         opacity: 0,
@@ -199,7 +218,8 @@ const contentVariants = {
     animate: {
         opacity: 1,
         transition: {
-            duration: 0.1,
+            duration: 0.2,
+            delay: 0.05,
             ease: "easeOut",
         } as const,
     },

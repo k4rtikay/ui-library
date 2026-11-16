@@ -1,27 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     LoaderButton,
     type ButtonState,
 } from "../../../../../registry/loader-button";
-import { motion } from "motion/react";
-
 
 export default function LoaderButtonDemo() {
     const [buttonState, setButtonState] = useState<ButtonState>("idle");
     const [simulateError, setSimulateError] = useState(false);
+    const loadingTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
     const simulateHandleClick = (delay: number = 1500) => {
         setButtonState("loading");
-        setTimeout(() => {
-            if (simulateError) {
-                setButtonState("error");
-            } else {
-                setButtonState("success");
-            }
+        if (loadingTimerRef.current) clearTimeout(loadingTimerRef.current);
+        loadingTimerRef.current = setTimeout(() => {
+            setButtonState(simulateError ? "error" : "success");
         }, delay);
     };
+
+    useEffect(() => {
+        return () => {
+            if (loadingTimerRef.current) clearTimeout(loadingTimerRef.current);
+        };
+    }, []);
 
     useEffect(() => {
         if (buttonState === "error" || buttonState === "success") {
@@ -35,7 +37,7 @@ export default function LoaderButtonDemo() {
     return (
         <div className="flex flex-col min-h-[15rem] w-full items-center justify-center gap-8">
             <LoaderButton
-                className="bg-primary-foreground text-primary"
+                className="bg-primary-foreground text-primary min-w-26"
                 state={buttonState}
                 onClick={() => simulateHandleClick(1500)}
             >
@@ -57,44 +59,3 @@ export default function LoaderButtonDemo() {
         </div>
     );
 }
-
-// --- Loading Spinner ---
-
-export function LoadingSpinner() {
-    return (
-        <div className="flex w-fit p-2 rounded-full h-full items-center justify-center">
-            {[...Array(4)].map((_, i) => (
-                <motion.div
-                    key={i}
-                    variants={loaderVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    custom={i}
-                    className="w-1 h-4 rounded-full mx-0.5 bg-primary-foreground"
-                />
-            ))}
-        </div>
-    );
-}
-
-const loaderVariants = {
-    initial: {
-        opacity: 0,
-    },
-    animate: (i: number) => ({
-        opacity: 1,
-        scale: [0.5, 1, 0.5],
-        transition: {
-            scale: {
-                repeat: Infinity,
-                duration: 0.75,
-                ease: [0.45, 0, 0.55, 1],
-                delay: i * 0.1,
-            },
-        } as const,
-    }),
-    exit: {
-        opacity: 0,
-    },
-};
